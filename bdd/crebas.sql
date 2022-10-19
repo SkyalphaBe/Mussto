@@ -1,9 +1,9 @@
 /*==============================================================*/
 /* Nom de SGBD :  MySQL 4.0                                     */
-/* Date de création :  19/10/2022 08:29:13                      */
+/* Date de crï¿½ation :  19/10/2022 11:09:24                      */
 /*==============================================================*/
 
-
+/*
 drop table if exists ADMIN;
 
 drop index AFFECTER2_FK on AFFECTER;
@@ -82,30 +82,30 @@ drop index RELATIF_A_SONDAGE_FK on SONDAGE;
 
 drop index ENVOYER_SONDAGE_FK on SONDAGE;
 
-drop table if exists SONDAGE;
+drop table if exists SONDAGE;*/
 
 /*==============================================================*/
 /* Table : ADMIN                                                */
 /*==============================================================*/
 create table ADMIN
 (
-   LOGINADMIN                     char(80)                       not null,
-   PASSWORD_HASH                  char(50),
+   LOGINADMIN                     varchar(80)                       not null,
+   PASSWORD_HASH                  varchar(50),
    primary key (LOGINADMIN)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Table : AFFECTER                                             */
 /*==============================================================*/
 create table AFFECTER
 (
-   LOGINETU                       char(50)                       not null,
-   INTITULEGROUPE                 char(10)                       not null,
-   ANNEEGROUPE                    char(10)                       not null,
+   LOGINETU                       varchar(50)                       not null,
+   INTITULEGROUPE                 varchar(10)                       not null,
+   ANNEEGROUPE                    varchar(10)                       not null,
    primary key (LOGINETU, INTITULEGROUPE, ANNEEGROUPE)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Index : AFFECTER_FK                                          */
@@ -130,11 +130,11 @@ create index AFFECTER2_FK on AFFECTER
 create table CONVERSATION_ADMIN
 (
    IDCONV                         int                            not null,
-   LOGINPROF                      char(50)                       not null,
+   LOGINPROF                      varchar(50)                       not null,
    DATEDEBUTCONV                  date,
    primary key (IDCONV)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Index : RELIER_FK                                            */
@@ -149,15 +149,15 @@ create index RELIER_FK on CONVERSATION_ADMIN
 /*==============================================================*/
 create table DEVOIR
 (
-   INTITULEGROUPE                 char(10)                       not null,
-   ANNEEGROUPE                    char(10)                       not null,
-   REFMODULE                      char(10)                       not null,
+   INTITULEGROUPE                 varchar(10)                       not null,
+   ANNEEGROUPE                    varchar(10)                       not null,
+   REFMODULE                      varchar(10)                       not null,
    IDDEVOIR                       int                            not null,
-   CONTENUDEVOIR                  char(50),
+   CONTENUDEVOIR                  varchar(50),
    DATEDEVOIR                     date,
    primary key (INTITULEGROUPE, ANNEEGROUPE, REFMODULE, IDDEVOIR)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Index : EVALUER_FK                                           */
@@ -181,11 +181,11 @@ create index EVALUER_MODULE_FK on DEVOIR
 /*==============================================================*/
 create table ENSEIGNER
 (
-   LOGINPROF                      char(50)                       not null,
-   REFMODULE                      char(10)                       not null,
+   LOGINPROF                      varchar(50)                       not null,
+   REFMODULE                      varchar(10)                       not null,
    primary key (LOGINPROF, REFMODULE)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Index : ENSEIGNER_FK                                         */
@@ -208,24 +208,24 @@ create index ENSEIGNER2_FK on ENSEIGNER
 /*==============================================================*/
 create table ETUDIANT
 (
-   LOGINETU                       char(50)                       not null,
-   PASSWORD_HASH                  char(50),
-   PRENOMETU                      char(50),
-   NOMETU                         char(50),
+   LOGINETU                       varchar(50)                       not null,
+   PASSWORD_HASH                  varchar(50),
+   PRENOMETU                      varchar(50),
+   NOMETU                         varchar(50),
    primary key (LOGINETU)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Table : GROUPE                                               */
 /*==============================================================*/
 create table GROUPE
 (
-   INTITULEGROUPE                 char(10)                       not null,
-   ANNEEGROUPE                    char(10)                       not null,
+   INTITULEGROUPE                 varchar(10)                       not null,
+   ANNEEGROUPE                    varchar(10)                       not null,
    primary key (INTITULEGROUPE, ANNEEGROUPE)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Table : MESSAGE_ADMIN                                        */
@@ -234,15 +234,14 @@ create table MESSAGE_ADMIN
 (
    IDCONV                         int                            not null,
    IDMSGADMIN                     int                            not null,
-   LOGINADMIN                     char(80),
-   LOGINPROF                      char(50),
-   ADM_LOGINADMIN                 char(80),
-   PRO_LOGINPROF                  char(50),
-   CONTENUMSGADMIN                char(500),
+   LOGINADMIN                     varchar(80),
+   LOGINPROF                      varchar(50),
+   ADM_LOGINADMIN                 varchar(80),
+   PRO_LOGINPROF                  varchar(50),
+   CONTENUMSGADMIN                varchar(500),
    DATEMSG                        date,
    primary key (IDCONV, IDMSGADMIN)
-)
-type = InnoDB;
+);
 
 /*==============================================================*/
 /* Index : CORRESPONDRE_FK                                      */
@@ -290,14 +289,14 @@ create index ENVOYER_MESSAGE_ADMIN_FK on MESSAGE_ADMIN
 create table MESSAGE_MODULE
 (
    IDMESSAGE                      int                            not null,
-   LOGINPROF                      char(50)                       not null,
-   REFMODULE                      char(10)                       not null,
+   LOGINPROF                      varchar(50)                       not null,
+   REFMODULE                      varchar(10)                       not null,
    OBJETMESSAGE                   text,
    CONTENUMESSAGE                 text,
    DATEMESSAGE                    date,
    primary key (IDMESSAGE)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Index : ENVOYER_MESSAGE_MODULE_FK                            */
@@ -320,28 +319,28 @@ create index RELATIF_A_MESSAGE_FK on MESSAGE_MODULE
 /*==============================================================*/
 create table MODULE
 (
-   REFMODULE                      char(10)                       not null,
-   NOMMODULE                      char(50),
+   REFMODULE                      varchar(10)                       not null,
+   NOMMODULE                      varchar(50),
    DESCRIPTIONMODULE              text,
    primary key (REFMODULE)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Table : NOTER                                                */
 /*==============================================================*/
 create table NOTER
 (
-   LOGINETU                       char(50)                       not null,
-   INTITULEGROUPE                 char(10)                       not null,
-   ANNEEGROUPE                    char(10)                       not null,
-   REFMODULE                      char(10)                       not null,
+   LOGINETU                       varchar(50)                       not null,
+   INTITULEGROUPE                 varchar(10)                       not null,
+   ANNEEGROUPE                    varchar(10)                       not null,
+   REFMODULE                      varchar(10)                       not null,
    IDDEVOIR                       int                            not null,
    NOTE                           float(5),
-   COMMENTAIRE                    char(50),
+   COMMENTAIRE                    varchar(50),
    primary key (INTITULEGROUPE, ANNEEGROUPE, REFMODULE, LOGINETU, IDDEVOIR)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Index : NOTER_FK                                             */
@@ -367,12 +366,12 @@ create index NOTER2_FK on NOTER
 /*==============================================================*/
 create table PARTICIPER
 (
-   INTITULEGROUPE                 char(10)                       not null,
-   ANNEEGROUPE                    char(10)                       not null,
-   REFMODULE                      char(10)                       not null,
+   INTITULEGROUPE                 varchar(10)                       not null,
+   ANNEEGROUPE                    varchar(10)                       not null,
+   REFMODULE                      varchar(10)                       not null,
    primary key (INTITULEGROUPE, ANNEEGROUPE, REFMODULE)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Index : PARTICIPER_FK                                        */
@@ -396,13 +395,13 @@ create index PARTICIPER2_FK on PARTICIPER
 /*==============================================================*/
 create table PROFESSEUR
 (
-   LOGINPROF                      char(50)                       not null,
-   PASSWORD_HASH                  char(50),
-   PRENOMETU                      char(50),
-   NOMETU                         char(50),
+   LOGINPROF                      varchar(50)                       not null,
+   PASSWORD_HASH                  varchar(50),
+   PRENOMETU                      varchar(50),
+   NOMETU                         varchar(50),
    primary key (LOGINPROF)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Table : RECEVOIR                                             */
@@ -410,11 +409,11 @@ type = InnoDB;
 create table RECEVOIR
 (
    IDMESSAGE                      int                            not null,
-   INTITULEGROUPE                 char(10)                       not null,
-   ANNEEGROUPE                    char(10)                       not null,
+   INTITULEGROUPE                 varchar(10)                       not null,
+   ANNEEGROUPE                    varchar(10)                       not null,
    primary key (IDMESSAGE, INTITULEGROUPE, ANNEEGROUPE)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Index : RECEVOIR_FK                                          */
@@ -438,12 +437,12 @@ create index RECEVOIR2_FK on RECEVOIR
 /*==============================================================*/
 create table REPONDRE
 (
-   LOGINETU                       char(50)                       not null,
+   LOGINETU                       varchar(50)                       not null,
    IDSONDAGE                      int                            not null,
-   CONTENUREPONSE                 JSON500,
+   CONTENUREPONSE                 varchar(500),
    primary key (LOGINETU, IDSONDAGE)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Index : REPONDRE_FK                                          */
@@ -467,12 +466,12 @@ create index REPONDRE2_FK on REPONDRE
 create table SONDAGE
 (
    IDSONDAGE                      int                            not null,
-   REFMODULE                      char(10)                       not null,
-   LOGINPROF                      char(50)                       not null,
-   CONTENUSONDAGE                 JSON500,
+   REFMODULE                      varchar(10)                       not null,
+   LOGINPROF                      varchar(50)                       not null,
+   CONTENUSONDAGE                 varchar(500),
    primary key (IDSONDAGE)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Index : ENVOYER_SONDAGE_FK                                   */
