@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: rgb(174,214,183);
+    font-family: 'Roboto', sans-serif;
+}
+h1{
+    color: white;
+}
+
+h2{
+    padding: 2%;
+}
+#oTitre{
+    color:rgb(29,161,58) ;
+}
+
+.connexionBox{
+    border-radius: 15px;
+    background-color: white;
+    width: 35%;
+
+}
+
+.titleBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(34,37,30);
+    border-radius:15px 15px 0 0;
+    padding: 0.2em;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+}
+form input[type="text"]{
+    border-radius: 15px;
+    background-color: rgb(217, 217, 217);
+    border: None;
+    padding:1em;
+    width: calc(100% - 3em);
+}
+
+#okButton{
+    background-color: rgb(29,161,58);
+    border-radius: 15px;
+    color: white;
+    border: None;
+    padding: 1em 4em;
+
+}
