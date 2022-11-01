@@ -1,7 +1,7 @@
 <?php 
 
 // Accès base de données
-const BD_HOST = '10.8.0.1';
+const BD_HOST = 'tassageb.fr';
 const BD_DBNAME = 'mussto';
 const BD_USER = 'mussto';
 const BD_PWD = 'sae-mussto';
@@ -11,6 +11,7 @@ define('PATH_CONTROLLERS','./controllers/c_');
 define('PATH_ASSETS','./assets/');
 define('PATH_MODELS','./models/');
 define('PATH_VIEWS','./views/v_');
+define('PATH_VIEW_COMPONENT','./views/component/');
 
 //passerelle temporaire
 define('PATH_TMP',"./code_temp/");

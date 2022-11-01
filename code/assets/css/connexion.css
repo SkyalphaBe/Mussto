@@ -55,5 +55,6 @@ form input[type="text"]{
     color: white;
     border: None;
     padding: 1em 4em;
+    margin-bottom: 16px;
 
 }

@@ -4,7 +4,6 @@ class LoginDAO extends DAO
 {
     public function verifyUser(String $login, String $password){
         $result = false;
-
         ###On essaye les étudiants en premier
         $res = $this->queryRow('SELECT loginEtu, password_hash FROM ETUDIANT WHERE loginEtu = ?', [$login]);
         if ($res){
@@ -28,7 +27,6 @@ class LoginDAO extends DAO
                 }
             }
         }
-
         return $result;
     }
 }

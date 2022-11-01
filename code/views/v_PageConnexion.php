@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style/connexion.css">
-    <title>Page Connexion</title>
+    <link rel="stylesheet" href="../assets/css/connexion.css">
+    <title>Page_Connexion</title>
 </head>
 <body>
     <section class="connexionBox">
@@ -13,9 +13,9 @@
 
         </div>
         <h2>Se connecter</h2>
-        <form action="" method="post">
-            <input type="text" name="ID" placeholder="Identifiant">
-            <input type="text" name="MDP" placeholder="Mot de passe">
+        <form method="post">
+            <input type="text" name="login" placeholder="Identifiant">
+            <input type="text" name="pswd" placeholder="Mot de passe">
             <input type="submit" value="OK" id="okButton">
         </form>
     </section>

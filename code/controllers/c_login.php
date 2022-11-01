@@ -15,11 +15,5 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && array_key_exists('login', $_POST) &
         ##Appel de l'erreur : Authentification a échoué
     }
 }
-
+    require_once(PATH_VIEWS.'PageConnexion.php');
 ?>
-
-<form method="post">
-    <input type="text" name="login" placeholder="login"/>
-    <input type="password" name="pswd" placeholder="pswd"/>
-    <input type="submit">
-</form>
