@@ -15,10 +15,10 @@ define('PATH_VIEW_COMPONENT','./views/component/');
 
 //passerelle temporaire
 define('PATH_TMP',"./code_temp/");
-define('PATH_TMP_CSS', PATH_TMP.'style/');
+define('PATH_TMP_CSS', PATH_TMP.'css/');
 define('PATH_TMP_SCRIPTS',PATH_TMP.'scripts/');
 
 //sous dossiers
-define('PATH_CSS', PATH_ASSETS.'style/');
+define('PATH_CSS', PATH_ASSETS.'css/');
 define('PATH_IMAGES', PATH_ASSETS.'images/');
 define('PATH_SCRIPTS',PATH_ASSETS.'scripts/');
