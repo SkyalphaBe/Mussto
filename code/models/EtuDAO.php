@@ -18,4 +18,27 @@ class EtuDAO extends UserDAO
 
         return $result;
     }
+
+    public function getDS(){
+        $result = [];
+        $groups = $this->getGroups();
+        foreach ($groups as $group){
+            $result[] = $this->queryRow("SELECT DATEDEVOIR, NOMMODULE 
+            FROM DEVOIR JOIN MODULE USING(REFMODULE)
+            WHERE intitulegroupe = ? AND anneegroupe = ?", [$group['intitulegroupe'], $group['anneegroupe']]);
+        }
+        return $result;
+    }
+
+    public function getSondage(){
+
+    }
+
+    public function getNotes($login){
+        $result = [];
+        $result[] = $this->queryRow("SELECT NOTE, NOMMODULE 
+        FROM NOTER JOIN MODULE USING(REFMODULE)
+        WHERE LOGINETU = ?",[$this->_username]);
+        return $result;
+    }
 }
