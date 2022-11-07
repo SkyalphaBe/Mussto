@@ -1,35 +1,98 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 body{
     font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
 }
-.titre{
-    display: flex;
-    align-items: center;
-}
-.topBox{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-#oTitre{
-    color:rgb(29,161,58) ;
-}
+
 .sideBarre{
     display: flex;
     flex-direction: column;
-    /*justify-content:center;*/
+    justify-content: space-between;
     height: 100%;
-    width: 175px;
+    width: 190px;
     position: fixed;
     z-index:1;
     top: 0;
     left: 0;
     background-color: #222528;
+    /*overflow-x: hidden;*/
 }
 
+/*css lié a la class Top box (haut de la side barre)*/
+
+.titleBox{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 5%;
+}
+
+.titleBox h2{
+    margin: 0;
+    color: white;
+    font-size: 1em
+}
+
+.titre{
+    display: flex;
+    align-items: center;
+}
+
+.titre h1{
+    margin: 0;
+    padding-top: 10%;
+    color: #FFFFFF;
+}
+#oTitre{
+    color:rgb(29,161,58) ;
+}
+/*------------------------------------------------*/
+/*css lié au menu (centre de la page)*/
+
+.ligneSep{
+    background-color: #515A62;
+    width: 75%;
+    height: 2px;
+    margin: 10%;
+}
 .menu{
     display: flex;
     flex-direction: column;
+    color: #515A62;
+    /*padding-left: 10%;*/
+    margin: 0;
+}
+.menu h3{
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 5%;
+    margin: 0;
+    font-size: 0.8em;
+}
+.menu a{
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 5%;
+    font-size: 0.9em;
+}
+/*classe css pour tout ce qui touche a la Botbox*/
+.botBox{
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.botBox h3{
+    font-size: 0.9em;
+    color: #515A62;
+    padding-left: 10%;
+    margin: 0;
+}
+.account{
+    color: #515A62;
+    display: flex;
+    justify-content: space-around;
+    padding: 5%;
 }
 
 .person{
@@ -41,11 +104,6 @@ body{
 .person p{
     margin: 0;
 }
-
-.account{
-    display: flex;
-
-}
 .box{
     display: flex;
     justify-content: center;
@@ -56,5 +114,18 @@ body{
     width: 35px;
     height: 35px;
     border-radius: 15px;
+}
 
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.decoButton{
+    width: 60%;
+    border-radius: 10px;
+    border: None;
+    background-color: #2f3235;
+    color: white;
 }
