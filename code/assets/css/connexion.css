@@ -19,6 +19,12 @@ h2{
     color:rgb(29,161,58) ;
 }
 
+.error{
+    text-align: center;
+    font-weight: lighter;
+    color: #d92525;
+}
+
 .connexionBox{
     border-radius: 15px;
     background-color: white;
