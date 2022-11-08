@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="<?php echo PATH_CSS ?>sideBarre.css">
     <link rel="stylesheet" href="<?php echo PATH_CSS ?>accueilEtu.css">
     <link rel="stylesheet" href="<?php echo PATH_CSS ?>accueilEtuGrid.css">
+    <script src="https://kit.fontawesome.com/36631c7287.js" crossorigin="anonymous"></script>
     <title>Page accueil</title>
 </head>
 <body>

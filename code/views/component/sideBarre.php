@@ -10,8 +10,8 @@
         <div class="ligneSep"></div>
         <div class="menu">
             <h3>Menu</h3>
-            <a href="">Acceuil</a>
-            <a href="">Mes modules</a>
+            <a href=""><i class="fa-solid fa-house"></i> Acceuil</a>
+            <a href=""><i class="fa-solid fa-book"></i> Mes modules</a>
         </div>
     </div>
     <div class="botBox">
@@ -19,15 +19,15 @@
         <h3>Profil</h3>
         <div class="account">
             <div class="box">
-                <div class="circle"></div>
+                <div class="circle"><i class="fa-solid fa-user"></i></div>
             </div>
             <div class="person">
-                <p>Name</p>
-                <p>Last Name</p>
+                <p><?= $_SESSION["name"]?></p>
+                <!--<p>Last Name</p>-->
             </div>
         </div>
         <div class="button">
-            <button class="decoButton">Deconnexion</button>
+            <a href="" class="decoButton"><i class="fa-solid fa-right-from-bracket"></i> Deconnexion</a>
         </div>
     </div>
 </div>

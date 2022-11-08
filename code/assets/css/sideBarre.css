@@ -72,8 +72,18 @@ body{
 .menu a{
     padding-left: 10%;
     padding-right: 10%;
+    padding-top: 5%;
     padding-bottom: 5%;
     font-size: 0.9em;
+    text-decoration: none;
+    color: #FFFFFF;
+    width: 75%;
+    transition: 0.3s;
+}
+
+.menu a:hover{
+    background-color: #1DA13A;
+    border-radius: 0px 10px 10px 0px;
 }
 /*classe css pour tout ce qui touche a la Botbox*/
 .botBox{
@@ -99,6 +109,7 @@ body{
     display: flex;
     flex-direction: column;
     text-align: right;
+    color: #FFFFFF;
 }
 
 .person p{
@@ -108,12 +119,16 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 .circle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgb(29,161,58);
     width: 35px;
     height: 35px;
-    border-radius: 15px;
+    border-radius: 50%;
 }
 
 .button{
@@ -123,9 +138,17 @@ body{
 }
 
 .decoButton{
-    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    width: 75%;
     border-radius: 10px;
     border: None;
     background-color: #2f3235;
     color: white;
+    padding:5%;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.button a:hover{
+    background-color: #d92525;
 }
