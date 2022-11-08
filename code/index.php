@@ -18,13 +18,16 @@ $router->map("GET", "/disconnect", "disconnect", "disconnect");*/
 if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
     if ($_SESSION['logged'] === 'etu'){
         ##Routes pour les étudiants
+        $router->map("GET", "/", "homeEtu", "home");
     } else if ($_SESSION['logged'] === 'prof'){
         ##Routes pour les professeurs
+        $router->map("GET", "/", "homeProf", "home");
     } else if ($_SESSION['logged'] === 'admin'){
         ##Routes pour les admins
+        $router->map("GET", "/", "homeAdmin", "home");
     }
     ##Route test home (temporaire)
-    $router->map("GET", "/", "home", "home");
+    
 
     ##Route de deconnection
     $router->map("GET", "/disconnect", "disconnect", "disconnect");

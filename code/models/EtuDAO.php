@@ -2,6 +2,11 @@
 require_once (PATH_MODELS.'UserDAO.php');
 class EtuDAO extends UserDAO
 {
+    public function getNames(){
+        $res = $this->queryRow("SELECT PRENOMETU, NOMETU FROM ETUDIANT WHERE loginetu = ?",  [$this->_username]);
+        return $res;
+    }
+
     public function getGroups(){
         $res = $this->queryRow("SELECT intitulegroupe, anneegroupe FROM AFFECTER WHERE loginetu = ?",  [$this->_username]);
         return $res;

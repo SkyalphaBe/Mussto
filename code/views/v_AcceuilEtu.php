@@ -16,7 +16,7 @@
         <div class="welcome">
             <img id="student" src="assets/images/etudiant.png">
             <div class="msg">
-                <h2>Bonjour <?= $_SESSION["name"]?> !</h2>
+                <h2>Bonjour <?= $_SESSION["firstname"]?> !</h2>
                 <p>Tu as des nouvelles fraîches</p>
             </div>
         </div>
