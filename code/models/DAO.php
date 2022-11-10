@@ -35,7 +35,7 @@ abstract class DAO
         try
         {
             $pdos = $this->_requete($sql, $args);
-            $res = $pdos->fetch();
+            $res = $pdos->fetch(PDO::FETCH_ASSOC);
             $pdos->closeCursor();
         }
         catch(PDOException $e)
@@ -53,7 +53,7 @@ abstract class DAO
         try
         {
             $pdos = $this->_requete($sql, $args);
-            $res = $pdos->fetchAll();
+            $res = $pdos->fetchAll(PDO::FETCH_ASSOC);
             $pdos->closeCursor();
         }
         catch(PDOException $e)

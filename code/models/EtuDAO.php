@@ -8,7 +8,7 @@ class EtuDAO extends UserDAO
     }
 
     public function getGroups(){
-        $res = $this->queryRow("SELECT intitulegroupe, anneegroupe FROM AFFECTER WHERE loginetu = ?",  [$this->_username]);
+        $res = $this->queryAll("SELECT intitulegroupe, anneegroupe FROM AFFECTER WHERE loginetu = ?",  [$this->_username]);
         return $res;
     }
 
@@ -16,9 +16,12 @@ class EtuDAO extends UserDAO
         $result = [];
         $groups = $this->getGroups();
         foreach ($groups as $group){
-            $result[] = $this->queryRow("SELECT REFMODULE, NOMMODULE, DESCRIPTIONMODULE 
+            $data = $this->queryAll("SELECT MODULE.REFMODULE, NOMMODULE, DESCRIPTIONMODULE 
             FROM MODULE JOIN PARTICIPER ON MODULE.REFMODULE = PARTICIPER.REFMODULE 
             WHERE PARTICIPER.intitulegroupe = ? AND PARTICIPER.anneegroupe = ?", [$group['intitulegroupe'], $group['anneegroupe']]);
+            if ($data){
+                $result = array_merge($result, $data);
+            }
         }
 
         return $result;
@@ -28,9 +31,12 @@ class EtuDAO extends UserDAO
         $result = [];
         $groups = $this->getGroups();
         foreach ($groups as $group){
-            $result[] = $this->queryRow("SELECT DATEDEVOIR, NOMMODULE 
+            $data = $this->queryAll("SELECT IDDEVOIR, NOMMODULE, CONTENUDEVOIR, SALLE, DATE_FORMAT(DATEDEVOIR, '%d/%m/%Y') as DATEDEVOIR
             FROM DEVOIR JOIN MODULE USING(REFMODULE)
-            WHERE intitulegroupe = ? AND anneegroupe = ?", [$group['intitulegroupe'], $group['anneegroupe']]);
+            WHERE intitulegroupe = ? AND anneegroupe = ? AND CURRENT_DATE() < DATEDEVOIR", [$group['intitulegroupe'], $group['anneegroupe']]);
+            if ($data){
+                $result = array_merge($result, $data);
+            }
         }
         return $result;
     }

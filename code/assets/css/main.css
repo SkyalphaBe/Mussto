@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+body{
+    background: #ececec;
+    font-family: 'Roboto', sans-serif;
+    padding: 8px;
+    font-size: 100%;
+    /*transition: all .5s;*/
+}
+
+@media screen and (max-width: 1050px){
+    body{
+        font-size: 70%;
+    }
+}

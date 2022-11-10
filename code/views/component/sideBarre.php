@@ -1,3 +1,4 @@
+
 <div class="sideBarre">
     <div class="topBox">
         <div class="titleBox">
@@ -30,4 +31,6 @@
             <a href= <?= $router->generate('disconnect') ?> class="decoButton"><i class="fa-solid fa-right-from-bracket"></i> Deconnexion</a>
         </div>
     </div>
+</div>
+<div id="menuButton" onclick="document.body.classList.toggle('hide-side')">
 </div>

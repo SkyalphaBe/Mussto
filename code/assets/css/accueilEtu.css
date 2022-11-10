@@ -1,10 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-body{
-    background: #ececec;
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-}
-
 .welcome{
     display: flex;
     align-items: center;
@@ -43,9 +36,29 @@ h2{
     align-items: center;
     background-color: #FFFFFF;
     border-radius: 15px;
+
+    padding: 15px;
+    gap: 7.5px;
 }
 
-.content{
-    margin-left: 190px;
-    padding:8px;
+
+#DS .devoir{
+    width: calc(100% - 30px);
+
+    border-radius: 15px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    color: white;
+}
+
+#DS .devoir * {
+    margin : 0;
+}
+
+#DS .devoir .devoir-salle{
+    align-self: flex-end;
 }

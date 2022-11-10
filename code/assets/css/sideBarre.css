@@ -1,7 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+:root{
+    --sidebar-size : 250px;
+}
+
+@media (max-width: 1050px){
+    :root{
+        --sidebar-size : 170px;
+    }
+}
+
 body{
-    font-family: 'Roboto', sans-serif;
-    min-height: 100vh;
+    margin: 0 0 0 var(--sidebar-size);
+    transition: margin .5s;
+}
+
+body.hide-side{
+    margin-left: 0;
+}
+
+body.hide-side .sideBarre{
+    transform: translateX( calc(var(--sidebar-size) * -1));
+}
+
+#menuButton{
+    position: fixed;
+    left: -18px;
+    top: 18px;
+
+    height: 36px;
+    width: 36px;
+    border-radius: 100%;
+
+    background-color: #2b2e31;
+    transition: background-color .3s;
+
+    z-index: 10;
+}
+
+#menuButton:hover{
+    background-color: #373b3d;
+    cursor: pointer;
+
 }
 
 .sideBarre{
@@ -9,13 +48,18 @@ body{
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    width: 190px;
+    width: var(--sidebar-size);
     position: fixed;
     z-index:1;
     top: 0;
     left: 0;
     background-color: #222528;
-    /*overflow-x: hidden;*/
+
+
+    overflow-y: auto;
+    /*overflow: visible;*/
+
+    transition: width .5s, transform .5s;
 }
 
 /*css lié a la class Top box (haut de la side barre)*/
