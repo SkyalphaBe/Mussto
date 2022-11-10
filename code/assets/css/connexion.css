@@ -47,7 +47,7 @@ form{
     width: 100%;
     align-items: center;
 }
-form input[type="text"]{
+form input:is([type="text"],[type="password"]){
     border-radius: 15px;
     background-color: rgb(217, 217, 217);
     border: None;
