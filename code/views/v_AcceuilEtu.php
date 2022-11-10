@@ -1,9 +1,12 @@
 <?php
+//Tableau des fichiers CSS nécessaire
 $style = ["sideBarre.css", "main.css", "accueilEtu.css", "accueilEtuGrid.css"];
+
+//Appel de l'header
 require_once(PATH_VIEW_COMPONENT.'header.php');
-?>
-<?php
-    require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
+
+//Appel du composant SideBarre
+require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
 <div class="welcome">
     <img id="student" src="assets/images/etudiant.png">
@@ -35,8 +38,8 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
         </div>
     <div id="DS" class="info">
         <h2>DS à venir</h2>
-        <?php if (isset($devoir_coming) && $devoir_coming){
-            foreach($devoir_coming as $devoir) { ?>
+        <?php if (isset($devoir_coming) && $devoir_coming){ //Si il a des devoirs
+            foreach($devoir_coming as $devoir) {            //On boucle sur tous les devoirs pour créer la div?>
                 <div style="background-color: hsl(<?=hexdec(substr(bin2hex($devoir['NOMMODULE']), 0, 16))%360?>, 66%, 41%)" class="devoir">
                     <h3 class="devoir-module-name"><?=$devoir['NOMMODULE']?></h3>
                     <p class="devoir-date"><?=$devoir['DATEDEVOIR']?></p>
@@ -50,5 +53,6 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
 </div>
 
 <?php
+//Appel du footer
 require_once(PATH_VIEW_COMPONENT.'footer.php');
 ?>

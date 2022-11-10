@@ -7,11 +7,17 @@ class EtuDAO extends UserDAO
         return $res;
     }
 
+    /**
+     * @return array|false|null
+     */
     public function getGroups(){
         $res = $this->queryAll("SELECT intitulegroupe, anneegroupe FROM AFFECTER WHERE loginetu = ?",  [$this->_username]);
         return $res;
     }
 
+    /**
+     * @return array Listes des Modules suivi par l'étudiant (suivi par les groupes dans lequel l'étudiant est) Le tableau est vide si il n'y a pas de modules
+     */
     public function getModules(){
         $result = [];
         $groups = $this->getGroups();
@@ -27,6 +33,9 @@ class EtuDAO extends UserDAO
         return $result;
     }
 
+    /**
+     * @return array Liste des Devoir à venir pour l'étudiant (les devoirs passés ne sont pas retournées) Le tableau est vide si il n'y a pas de DS
+     */
     public function getDS(){
         $result = [];
         $groups = $this->getGroups();

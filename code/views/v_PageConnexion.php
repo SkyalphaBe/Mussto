@@ -1,5 +1,8 @@
 <?php
+//Tableau des fichiers CSS nécessaire
 $style = ["connexion.css"];
+
+//Appel de l'header
 require_once(PATH_VIEW_COMPONENT.'header.php');
 ?>
 
@@ -21,5 +24,6 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
 </section>
 
 <?php
+//Appel du footer
 require_once(PATH_VIEW_COMPONENT.'footer.php');
 ?>
