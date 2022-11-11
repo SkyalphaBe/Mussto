@@ -62,3 +62,30 @@ h2{
 #DS .devoir .devoir-salle{
     align-self: flex-end;
 }
+
+#othersMarks .note{
+    width: calc(100% - 30px);
+
+    background-color: #8BC398;
+
+    border-radius: 15px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+
+    color: #FFFFFF;
+}
+
+#othersMarks h3{
+    text-align: center;
+}
+
+#othersMarks .note *{
+    margin : 0;
+}
+
+#othersMarks .note .note-number{
+    align-self: flex-end;
+}

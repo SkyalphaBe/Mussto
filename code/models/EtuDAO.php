@@ -47,9 +47,11 @@ class EtuDAO extends UserDAO
 
     public function getNotes($login){
         $result = [];
-        $result[] = $this->queryRow("SELECT NOTE, NOMMODULE 
-        FROM NOTER JOIN MODULE USING(REFMODULE)
+        $result[] = $this->queryAll("SELECT NOTE, NOMMODULE,DATE_FORMAT(DATEDEVOIR, '%d septembre %Y') as DATEDEVOIR
+        FROM NOTER 
+        JOIN DEVOIR USING(IDDEVOIR)
+        JOIN MODULE using(REFMODULE)
         WHERE LOGINETU = ?",[$this->_username]);
-        return $result;
+        return $result[0];
     }
 }

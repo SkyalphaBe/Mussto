@@ -21,7 +21,18 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
     </div>
     <div id="othersMarks" class="info">
         <h2>Autres notes</h2>
-    </div>
+            <?php
+            if (isset($other_devoir) && $other_devoir){
+                foreach ($other_devoir as $notes){?>
+                    <div class="note">
+                        <h3 class="note-name"><?=$notes['NOMMODULE']?></h3>
+                        <p class="note-date"><?=$notes['DATEDEVOIR']?></p>
+                        <p class="note-number"><?=$notes['NOTE']?>/20</p>
+                    </div>
+                <?php } } else { ?>
+                <p>Aucune notes pour le moment</p>
+            <?php } ?>
+        </div>
     <div id="DS" class="info">
         <h2>DS à venir</h2>
         <?php if (isset($devoir_coming) && $devoir_coming){
@@ -35,7 +46,6 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
         <?php } } else { ?>
             <p>Aucun devoir en prévision</p>
         <?php } ?>
-
     </div>
 </div>
 
