@@ -18,6 +18,15 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 <div class="informationEleve">
     <div id="lastMark" class="info">
         <h2>Dernière note</h2>
+        <?php
+            if (isset($last_devoir) && $last_devoir){?>
+                <div class="last">
+                    <h3 class="last-name"><?=$last_devoir['NOMMODULE']?></h3>
+                    <p class="last-note"><?=$last_devoir['NOTE']?>/20</p>
+                </div>
+        <?php } else { ?>
+            <p>Aucune notes pour le moment</p>
+        <?php } ?>
     </div>
     <div id="sondage" class="info">
         <h2>Sondages</h2>
@@ -30,7 +39,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                     <div class="note">
                         <h3 class="note-name"><?=$notes['NOMMODULE']?></h3>
                         <p class="note-date"><?=$notes['DATEDEVOIR']?></p>
-                        <p class="note-number"><?=$notes['NOTE']?>/20</p>
+                        <p class="note-number">Note : <?=$notes['NOTE']?>/20</p>
                     </div>
                 <?php } } else { ?>
                 <p>Aucune notes pour le moment</p>

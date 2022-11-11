@@ -54,7 +54,7 @@ class EtuDAO extends UserDAO
 
     }
 
-    public function getNotes($login){
+    public function getNotes(){
         $result = [];
         $result[] = $this->queryAll("SELECT NOTE, NOMMODULE,DATE_FORMAT(DATEDEVOIR, '%d septembre %Y') as DATEDEVOIR
         FROM NOTER 
@@ -62,5 +62,15 @@ class EtuDAO extends UserDAO
         JOIN MODULE using(REFMODULE)
         WHERE LOGINETU = ?",[$this->_username]);
         return $result[0];
+    }
+
+    public function getLastNotes(){
+        $result = [];
+        $result = $this->queryRow("SELECT NOTE, NOMMODULE, MAX(IDDEVOIR)
+        FROM NOTER 
+        JOIN DEVOIR USING(IDDEVOIR)
+        JOIN MODULE using(REFMODULE)
+        WHERE LOGINETU = ?",[$this->_username]);
+        return $result;
     }
 }

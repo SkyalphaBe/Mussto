@@ -41,32 +41,10 @@ h2{
     gap: 7.5px;
 }
 
-
-#DS .devoir{
-    width: calc(100% - 30px);
-
-    border-radius: 15px;
-    padding: 10px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    color: white;
-}
-
-#DS .devoir * {
-    margin : 0;
-}
-
-#DS .devoir .devoir-salle{
-    align-self: flex-end;
-}
-
 #othersMarks .note{
     width: calc(100% - 30px);
 
-    background-color: #8BC398;
+    background-color: rgb(174,214,183);
 
     border-radius: 15px;
     padding: 10px;
@@ -89,3 +67,45 @@ h2{
 #othersMarks .note .note-number{
     align-self: flex-end;
 }
+
+#DS .devoir{
+    width: calc(100% - 30px);
+
+    border-radius: 15px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    color: white;
+}
+
+#DS .devoir * {
+    margin : 0;
+}
+
+#DS .devoir .devoir-salle{
+    align-self: flex-end;
+}
+
+#lastMark .last{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#lastMark .last-note{
+    font-size: 1.75em;
+    font-weight: bold;
+}
+
+#lastMark .last *{
+    margin: 0;
+}
+
+#lastMark .last h3{
+    font-size: 1.75em;
+}
+
