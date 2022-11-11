@@ -23,8 +23,8 @@
                 <div class="circle"><i class="fa-solid fa-user"></i></div>
             </div>
             <div class="person">
-                <p><?= $_SESSION["firstname"]?> <?= $_SESSION['lastname']?></p>
-                <!--<p>Last Name</p>-->
+                <p><?= $_SESSION["firstname"]?></p>
+                <p><?= $_SESSION['lastname']?></p>
             </div>
         </div>
         <div class="button">
