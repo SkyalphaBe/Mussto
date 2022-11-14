@@ -1,6 +1,6 @@
 <?php 
 //Tableau des fichiers CSS nécessaire
-$style = ["sideBarre.css", "main.css"];
+$style = ["sideBarre.css", "main.css", "moduleEtu.css"];
 
 //Appel de l'header
 require_once(PATH_VIEW_COMPONENT.'header.php');
@@ -20,14 +20,20 @@ echo '</pre>'; */
 <div class="modules">
     <?php 
     if (isset($mes_modules) && $mes_modules){
-        foreach($mes_modules as $module){
+        for($i=0;$i<3;$i++){
+            foreach($mes_modules as $module){
             ?>
-            <div>
-                <p class="module"> <?= $module['NOMMODULE'] ?></p>
-                <p>Dernière note :</p>
+            <div class="module">
+                <h1> <?= $module['NOMMODULE'] ?></h1>
+                <p>Dernière note : </p>
+                <h1><?= $module['NOTE'] ?></h1>
+                <p>Date : <?= $module['DATE'] ?></p>
                 <button> Détails du module</button>
             </div><?php 
-        }
+            }
+            
+        
+        }  
     }?>
 </div>
 

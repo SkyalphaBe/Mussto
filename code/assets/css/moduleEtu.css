@@ -1,0 +1,39 @@
+body > div.modules{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+body > div.modules > div.module{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 1.5%;
+    background-color: darkblue;
+    border-radius: 20px;
+    color: white;
+    font-size: 1.4em;
+    align-items: center;
+}
+
+body > div.modules > div.module > h1{
+    font-size: 1.6em;
+}
+
+body > div.modules > div.module > p{
+    margin: 2%;
+}
+
+body > div.modules > div.module > p:first-of-type{
+    align-self: flex-start;
+}
+
+body > div.modules > div.module > button{
+    border-radius: 20px;
+    border: None;
+    background-color: white;
+    color: #2f3235;
+    padding:3%;
+    margin-bottom: 5%;
+    font-size: 1em;
+}
