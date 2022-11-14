@@ -62,5 +62,9 @@ form input:is([type="text"],[type="password"]){
     border: None;
     padding: 1em 4em;
     margin-bottom: 16px;
+    transition: 0.3s;
 
+}
+#okButton:hover{
+    background-color: rgb(37, 203, 79);
 }
