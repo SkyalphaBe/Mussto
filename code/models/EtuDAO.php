@@ -34,6 +34,24 @@ class EtuDAO extends UserDAO
     }
 
     /**
+     * @param $ref Reference du module
+     * @return array Renvoie les informations sur un module uniquement si il est suivi par l'étudiant
+     */
+    public function getModule($ref){
+        $result = [];
+        $groups = $this->getGroups();foreach ($groups as $group){
+            $data = $this->queryRow("SELECT MODULE.REFMODULE, NOMMODULE, DESCRIPTIONMODULE 
+            FROM MODULE JOIN PARTICIPER ON MODULE.REFMODULE = PARTICIPER.REFMODULE 
+            WHERE PARTICIPER.intitulegroupe = ? AND PARTICIPER.anneegroupe = ? AND MODULE.REFMODULE = ?", [$group['intitulegroupe'], $group['anneegroupe'], $ref]);
+            if ($data){
+                $result = array_merge($result, $data);
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * @return array Liste des Devoir à venir pour l'étudiant (les devoirs passés ne sont pas retournées) Le tableau est vide si il n'y a pas de DS
      */
     public function getDS(){
@@ -49,6 +67,8 @@ class EtuDAO extends UserDAO
         }
         return $result;
     }
+
+
 
     public function getSondage(){
 

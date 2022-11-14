@@ -1,0 +1,26 @@
+body{
+    padding: 3%;
+}
+
+.module-detail{
+    color: white;
+
+    background-color: rebeccapurple;
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
+
+    border-radius: 25px;
+
+    padding: 25px;
+}
+
+.module-detail h1{
+
+    margin: 0;
+
+}
+
+.module-detail .content{
+    display: flex;
+    flex-direction: row;
+}
