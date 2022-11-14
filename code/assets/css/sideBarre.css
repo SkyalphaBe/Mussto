@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 :root{
     --sidebar-size : 250px;
+
 }
 
 @media (max-width: 1050px){
@@ -8,6 +9,8 @@
         --sidebar-size : 170px;
     }
 }
+
+
 
 body{
     margin: 0 0 0 var(--sidebar-size);
@@ -24,11 +27,11 @@ body.hide-side .sideBarre{
 
 #menuButton{
     position: fixed;
-    left: -18px;
-    top: 18px;
+    left: -2vh;
+    top: 2vh;
 
-    height: 36px;
-    width: 36px;
+    height: 4vh;
+    width: 4vh;
     border-radius: 100%;
 
     background-color: #2b2e31;
@@ -62,6 +65,18 @@ body.hide-side .sideBarre{
     transition: width .5s, transform .5s;
 }
 
+.sideBarre.etu{
+    --sidebar-color : rgb(29,161,58);
+}
+
+.sideBarre.prof{
+    --sidebar-color : rgb(161, 29, 60);
+}
+
+.sideBarre.admin{
+    --sidebar-color : rgb(161, 29, 60);
+}
+
 /*css lié a la class Top box (haut de la side barre)*/
 
 .titleBox{
@@ -74,7 +89,19 @@ body.hide-side .sideBarre{
 .titleBox h2{
     margin: 0;
     color: white;
-    font-size: 1em
+    font-size: 1em;
+}
+
+.sideBarre.etu .titleBox h2:after{
+    content: "Etudiant";
+}
+
+.sideBarre.prof .titleBox h2:after{
+    content: "Professeur";
+}
+
+.sideBarre.admin .titleBox h2:after{
+    content: "Admin";
 }
 
 .titre{
@@ -88,7 +115,7 @@ body.hide-side .sideBarre{
     color: #FFFFFF;
 }
 #oTitre{
-    color:rgb(29,161,58) ;
+    color:var(--sidebar-color) ;
 }
 /*------------------------------------------------*/
 /*css lié au menu (centre de la page)*/
@@ -125,8 +152,12 @@ body.hide-side .sideBarre{
     transition: 0.3s;
 }
 
+.menu a i{
+    margin-right: 1em;
+}
+
 .menu a:hover{
-    background-color: #1DA13A;
+    background-color: var(--sidebar-color);
     border-radius: 0px 10px 10px 0px;
 }
 /*classe css pour tout ce qui touche a la Botbox*/
@@ -169,7 +200,7 @@ body.hide-side .sideBarre{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(29,161,58);
+    background-color: var(--sidebar-color);
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -195,4 +226,21 @@ body.hide-side .sideBarre{
 }
 .button a:hover{
     background-color: #d92525;
+}
+
+
+@media (orientation: portrait) {
+    body{
+        margin: 0;
+
+    }
+
+    .sideBarre{
+        width: 100%;
+        font-size: 250%;
+    }
+
+    body.hide-side .sideBarre{
+        transform: translateX(-100%);
+    }
 }

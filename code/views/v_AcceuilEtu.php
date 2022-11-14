@@ -1,11 +1,16 @@
 <?php
 //Tableau des fichiers CSS nécessaire
-$style = ["sideBarre.css", "main.css", "accueilEtu.css", "accueilEtuGrid.css"];
+$style = ["main.css", "sideBarre.css", "accueilEtu.css", "accueilEtuGrid.css"];
 
 //Appel de l'header
 require_once(PATH_VIEW_COMPONENT.'header.php');
 
+
 //Appel du composant SideBarre
+//Définition du contenu de la sideBar
+$menu = [
+    [ 'href' => "", 'name' => "Mes Modules" ]
+];
 require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
 <div class="welcome">

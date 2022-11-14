@@ -1,18 +1,24 @@
-
-<div class="sideBarre">
+<div class="sideBarre <?=$_SESSION['logged']?>">
     <div class="topBox">
         <div class="titleBox">
             <div class="titre">
                 <h1>musst</h1>
                 <h1 id="oTitre">o</h1>
             </div>
-            <h2>Etudiant</h2>
+            <h2></h2>
         </div>
         <div class="ligneSep"></div>
         <div class="menu">
             <h3>Menu</h3>
-            <a href=""><i class="fa-solid fa-house"></i> Acceuil</a>
-            <a href=""><i class="fa-solid fa-book"></i> Mes modules</a>
+            <a href=""><i class="fa-solid fa-house"></i>Acceuil</a>
+            <?php
+                if (isset($menu)){
+                    foreach ($menu as $line){ ?>
+                        <a href=""><i class="fa-solid fa-book"></i><?=$line["name"]?></a>
+                    <?php
+                    }
+                }
+            ?>
         </div>
     </div>
     <div class="botBox">

@@ -3,6 +3,7 @@
     grid-template-columns: 25% repeat(2,37.5%);
     grid-template-rows: repeat(4, auto);
     gap: 20px 10px;
+    width: calc(100% - 20px);
 }
 #lastMark{
     grid-column-start: 1;
