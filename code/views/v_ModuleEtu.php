@@ -20,20 +20,16 @@ echo '</pre>'; */
 <div class="modules">
     <?php 
     if (isset($mes_modules) && $mes_modules){
-        for($i=0;$i<3;$i++){
-            foreach($mes_modules as $module){
-            ?>
-            <div class="module">
-                <h1> <?= $module['NOMMODULE'] ?></h1>
-                <p>Dernière note : </p>
-                <h1><?= $module['NOTE'] ?></h1>
-                <p>Date : <?= $module['DATE'] ?></p>
-                <button> Détails du module</button>
-            </div><?php 
-            }
-            
-        
-        }  
+        foreach($mes_modules as $module){
+        ?>
+        <div class="module" style="background-color : <?=CSScolorByName($module['NOMMODULE'])?>">
+            <h1> <?= $module['NOMMODULE'] ?></h1>
+            <p>Dernière note : </p>
+            <h1><?= $module['NOTE'] ?> / 20</h1>
+            <p>Date : <?= $module['DATE'] ?></p>
+            <button> Détails du module</button>
+        </div><?php 
+        }
     }?>
 </div>
 
