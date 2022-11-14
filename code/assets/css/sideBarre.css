@@ -158,15 +158,17 @@ body.hide-side .sideBarre{
     margin-right: 1em;
 }
 
+.menu a.active{
+    background-color: #2a2e2f;
+    border-radius: 0px 10px 10px 0px;
+}
+
 .menu a:hover{
     background-color: var(--sidebar-color);
     border-radius: 0px 10px 10px 0px;
 }
 
-.menu a.active{
-    background-color: #2a2e2f;
-    border-radius: 0px 10px 10px 0px;
-}
+
 /*classe css pour tout ce qui touche a la Botbox*/
 .botBox{
     padding: 5%;
