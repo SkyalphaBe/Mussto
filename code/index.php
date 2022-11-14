@@ -17,8 +17,16 @@ $router->map("GET", "/disconnect", "disconnect", "disconnect");*/
 
 if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
     if ($_SESSION['logged'] === 'etu'){
+
+
         ##Routes pour les étudiants
         $router->map("GET", "/", "homeEtu", "home");
+        $router->map("GET", "/modules", "moduleEtu", "module");
+
+        ##Définition des élements dans le menu
+        $menu = [
+            [ 'href' => $router->generate("module"), 'name' => "Mes Modules" ]
+        ];
     } else if ($_SESSION['logged'] === 'prof'){
         ##Routes pour les professeurs
         $router->map("GET", "/", "homeProf", "home");

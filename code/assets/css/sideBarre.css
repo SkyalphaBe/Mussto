@@ -132,6 +132,8 @@ body.hide-side .sideBarre{
     color: #515A62;
     /*padding-left: 10%;*/
     margin: 0;
+
+    gap: 5px;
 }
 .menu h3{
     padding-left: 10%;
@@ -158,6 +160,11 @@ body.hide-side .sideBarre{
 
 .menu a:hover{
     background-color: var(--sidebar-color);
+    border-radius: 0px 10px 10px 0px;
+}
+
+.menu a.active{
+    background-color: #2a2e2f;
     border-radius: 0px 10px 10px 0px;
 }
 /*classe css pour tout ce qui touche a la Botbox*/

@@ -10,11 +10,11 @@
         <div class="ligneSep"></div>
         <div class="menu">
             <h3>Menu</h3>
-            <a href=""><i class="fa-solid fa-house"></i>Acceuil</a>
+            <a href="<?=$router->generate("home")?>" class="<?php if ($router->generate("home") == $_SERVER['REQUEST_URI']) echo 'active'; ?>"><i class="fa-solid fa-house"></i>Acceuil</a>
             <?php
                 if (isset($menu)){
                     foreach ($menu as $line){ ?>
-                        <a href=""><i class="fa-solid fa-book"></i><?=$line["name"]?></a>
+                        <a href="<?=$line['href']?>" class="<?php if ($line['href'] == $_SERVER['REQUEST_URI']) echo 'active'; ?>"><i class="fa-solid fa-book"></i><?=$line["name"]?></a>
                     <?php
                     }
                 }

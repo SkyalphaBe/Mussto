@@ -55,13 +55,13 @@ class EtuDAO extends UserDAO
     }
 
     public function getNote($module){
-        $result = [];
-        $result[] $this->queryRow("SELECT NOTE, max(IDDEVOIR) as id 
+        /*$result = [];
+        $result[] = $this->queryRow("SELECT NOTE, max(IDDEVOIR) as id
         FROM NOTER 
         JOIN DEVOIR USING (IDDEVOIR) 
         JOIN MODULE USING (REFMODULE) 
         WHERE LOGINETU = " ,[$this->_username] "AND NOMMODULE = ",[$module]);
-        return $result;
+        return $result;*/
     }
 
     public function getNotes($login){
