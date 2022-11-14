@@ -7,10 +7,7 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
 
 
 //Appel du composant SideBarre
-//Définition du contenu de la sideBar
-$menu = [
-    [ 'href' => "", 'name' => "Contact" ]
-];
+
 require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
 
