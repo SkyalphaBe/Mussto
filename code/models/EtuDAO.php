@@ -2,6 +2,9 @@
 require_once (PATH_MODELS.'UserDAO.php');
 class EtuDAO extends UserDAO
 {
+    /**
+     * @return false|mixed|null Renvoie le nom de l'étudiant
+     */
     public function getNames(){
         $res = $this->queryRow("SELECT PRENOMETU, NOMETU FROM ETUDIANT WHERE loginetu = ?",  [$this->_username]);
         return $res;
@@ -74,15 +77,33 @@ class EtuDAO extends UserDAO
 
     }
 
-    public function getNote($module){
-        $result = $this->queryRow("SELECT NOTE, DATE_ENVOIE, max(IDDEVOIR) as id
-        FROM NOTER 
-        JOIN DEVOIR USING (IDDEVOIR) 
-        JOIN MODULE USING (REFMODULE) 
-        WHERE LOGINETU = ? AND NOMMODULE = ?", [$this->_username, $module]);
+    /**
+     * @param $module
+     * @return array|false|null renvoie la liste des nom-prenoms + login qui enseigne un module
+     */
+    public function getProfsForModule($module){
+        $result = $this->queryAll("SELECT LOGINPROF, PRENOMPROF, NOMEPROF FROM PROFESSEUR NATURAL JOIN ENSEIGNER WHERE REFMODULE = ?", [$module]);
         return $result;
     }
 
+    public function getGroupsForModule($module){
+        $result = $this->queryAll("SELECT ");
+    }
+
+    /*
+    public function getNote($module){
+        $result = [];
+        $result[] = $this->queryRow("SELECT NOTE, max(IDDEVOIR) as id
+        FROM NOTER 
+        JOIN DEVOIR USING (IDDEVOIR) 
+        JOIN MODULE USING (REFMODULE) 
+        WHERE LOGINETU = " ,[$this->_username] "AND NOMMODULE = ",[$module]);
+        return $result;
+    }*/
+
+    /**
+     * @return array|false|null Renvoie toutes les notes d'un élève
+     */
     public function getNotes(){
         $result = $this->queryAll("SELECT NOTE, NOMMODULE,DATE_FORMAT(DATEDEVOIR, '%d septembre %Y') as DATEDEVOIR
         FROM NOTER 
@@ -92,6 +113,9 @@ class EtuDAO extends UserDAO
         return $result;
     }
 
+    /**
+     * @return false|mixed|null Renvoie la dernière note de l'élève
+     */
     public function getLastNotes(){
         $result = $this->queryRow("SELECT NOTE, NOMMODULE, MAX(IDDEVOIR)
         FROM NOTER 

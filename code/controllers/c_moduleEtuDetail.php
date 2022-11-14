@@ -7,6 +7,7 @@ require_once(PATH_MODELS.'EtuDAO.php');
 $dao = new EtuDAO(true, $_SESSION['login']);
 
 $module = $dao->getModule($match['params']['ue']);
+$enseignants = $dao->getProfsForModule($module['REFMODULE']);
 
 
 echo '</pre>';

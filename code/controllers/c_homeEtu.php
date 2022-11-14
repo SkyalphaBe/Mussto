@@ -1,13 +1,11 @@
 <?php
-    echo '<pre>';
+    /*echo '<pre>';
     print_r($_SESSION);
     print_r($_SERVER);
     print_r($match);
-    echo '</pre>';
+    echo '</pre>';*/
 
 
-            /*<?php print_r($match)?>
-            <?php print_r($_SERVER)?>*/
     require_once(PATH_MODELS.'EtuDAO.php');
     $dao = new EtuDAO(true, $_SESSION['login']);
 

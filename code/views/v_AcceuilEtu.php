@@ -52,7 +52,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <h2>DS à venir</h2>
         <?php if (isset($devoir_coming) && $devoir_coming){ //Si il a des devoirs
             foreach($devoir_coming as $devoir) {            //On boucle sur tous les devoirs pour créer la div?>
-                <div style="background-color: hsl(<?=hexdec(substr(bin2hex($devoir['NOMMODULE']), 0, 16))%360?>, 66%, 41%)" class="devoir">
+                <div style="background-color: <?=CSScolorByName($devoir['NOMMODULE'])?>" class="devoir">
                     <h3 class="devoir-module-name"><?=$devoir['NOMMODULE']?></h3>
                     <p class="devoir-date"><?=$devoir['DATEDEVOIR']?></p>
                     <p class="devoir-salle">SALLE <?=$devoir['SALLE']?></p>

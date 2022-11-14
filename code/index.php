@@ -4,6 +4,7 @@ session_start();
 
 require_once('./config/configuration.php');
 require_once('./lib/AltoRouter.php');
+require_once('./lib/color.php');
 
 $router = new AltoRouter();
 
