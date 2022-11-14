@@ -1,7 +1,7 @@
 <?php 
 
 // Accès base de données
-const BD_HOST = '10.8.0.1';
+const BD_HOST = 'tassageb.fr';
 const BD_DBNAME = 'mussto';
 const BD_USER = 'mussto';
 const BD_PWD = 'sae-mussto';
