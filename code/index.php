@@ -23,7 +23,7 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         ##Routes pour les étudiants
         $router->map("GET", "/", "homeEtu", "home");
         $router->map("GET", "/modules", "moduleEtu", "module");
-        $router->map("GET", "/modules/detail-[:ue]", "moduleEtuDetail");
+        $router->map("GET", "/modules/detail-[:ue]", "moduleEtuDetail", "moduleDetail");
 
         ##Définition des élements dans le menu
         $menu = [

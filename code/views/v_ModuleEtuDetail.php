@@ -12,7 +12,10 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
 
 <div style="background-color: <?=CSScolorByName($module['NOMMODULE'])?>" class="module-detail">
-    <h1><?=$module['REFMODULE']?> - <?=$module['NOMMODULE']?></h1>
+    <div class="header">
+        <h1><?=$module['REFMODULE']?> - <?=$module['NOMMODULE']?></h1>
+        <a class="button" href="<?=$router->generate('module')?>">Retour à la liste des modules</a>
+    </div>
     <p class="desc"><?=$module['DESCRIPTIONMODULE']?></p>
     <div class="content">
         <div class="prof">

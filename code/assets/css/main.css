@@ -9,8 +9,35 @@ body{
     /*transition: all .5s;*/
 }
 
+
 @media (orientation: landscape) and (max-width: 1050px){
     body{
         font-size: 70%;
     }
+}
+
+
+a.button{
+    border-radius: 20px;
+    border: None;
+    background-color: white;
+    color: #2f3235;
+    padding:15px;
+    font-size: 1em;
+
+    text-decoration: none;
+
+    transition: all 0.1s;
+}
+
+a.button:hover{
+    background-color: #e5e5e5;
+
+    font-weight: bolder;
+    transform: scale(1.02);
+}
+
+a.button:active{
+    background-color: #d3d3d3;
+    transform: scale(0.95);
 }

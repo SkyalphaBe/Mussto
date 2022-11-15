@@ -27,7 +27,7 @@ echo '</pre>'; */
             <p>Dernière note : </p>
             <h1><?= $module['NOTE'] ?> / 20</h1>
             <p>Date : <?= $module['DATE'] ?></p>
-            <a> Détails du module</a>
+            <a class="button" href="<?=$router->generate("moduleDetail", ['ue' => $module['REFMODULE']])?>"> Détails du module</a>
         </div><?php 
         }
     }?>

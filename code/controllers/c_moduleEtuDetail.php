@@ -10,7 +10,7 @@ $module = $dao->getModule($match['params']['ue']);
 $enseignants = $dao->getProfsForModule($module['REFMODULE']);
 $notes = $dao->getNotesForModule($module['REFMODULE']);
 
-print_r($notes);
+//print_r($notes);
 
 echo '</pre>';
 
