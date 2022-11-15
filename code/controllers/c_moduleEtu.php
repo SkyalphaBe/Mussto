@@ -7,8 +7,8 @@
 
     $i = 0;
     foreach($mes_modules as $module){
-        $mes_modules[$i]["NOTE"] = $dao->getNote($module["NOMMODULE"])["NOTE"];
-        $mes_modules[$i]["DATE"] = $dao->getNote($module["NOMMODULE"])["DATE_ENVOIE"];
+        $mes_modules[$i]["NOTE"] = $dao->getLastNoteForModule($module["NOMMODULE"])["NOTE"];
+        $mes_modules[$i]["DATE"] = $dao->getLastNoteForModule($module["NOMMODULE"])["DATE_ENVOIE"];
         $i += 1;
     }
     

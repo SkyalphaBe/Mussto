@@ -8,7 +8,9 @@ $dao = new EtuDAO(true, $_SESSION['login']);
 
 $module = $dao->getModule($match['params']['ue']);
 $enseignants = $dao->getProfsForModule($module['REFMODULE']);
+$notes = $dao->getNotesForModule($module['REFMODULE']);
 
+print_r($notes);
 
 echo '</pre>';
 
