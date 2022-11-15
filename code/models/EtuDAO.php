@@ -71,11 +71,10 @@ class EtuDAO extends UserDAO
         return $result;
     }
 
-
-
+    /*
     public function getSondage(){
 
-    }
+    }*/
 
     /**
      * @param $module
@@ -86,12 +85,27 @@ class EtuDAO extends UserDAO
         return $result;
     }
 
+    /*
     public function getGroupsForModule($module){
         $result = $this->queryAll("SELECT ");
+    }*/
+
+    /**
+     * @param $module
+     * @return array|false|null renvoie les notes pour un module
+     */
+    public function getNotesForModule($module){
+        $result = $this->queryAll("SELECT IDDEVOIR, DATEDEVOIR, DATE_ENVOIE, COMMENTAIRE, CONTENUDEVOIR, NOTE, COEF
+        FROM NOTER NATURAL JOIN DEVOIR NATURAL JOIN MODULE
+        WHERE LOGINETU = ? AND REFMODULE = ?" , [$this->_username, $module]);
+        return $result;
     }
 
-    
-    public function getNote($module){
+    /**
+     * @param $module
+     * @return false|mixed|null renvoie la dernière note relative à un module
+     */
+    public function getLastNoteForModule($module){
         $result = $this->queryRow("SELECT NOTE, DATE_ENVOIE, max(IDDEVOIR) as id
         FROM NOTER 
         JOIN DEVOIR USING (IDDEVOIR) 
