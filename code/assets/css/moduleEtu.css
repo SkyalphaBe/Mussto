@@ -28,7 +28,7 @@ body > div.modules > div.module > p:first-of-type{
     align-self: flex-start;
 }
 
-body > div.modules > div.module > button{
+body > div.modules > div.module > a{
     border-radius: 20px;
     border: None;
     background-color: white;

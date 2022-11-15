@@ -27,7 +27,7 @@ echo '</pre>'; */
             <p>Dernière note : </p>
             <h1><?= $module['NOTE'] ?> / 20</h1>
             <p>Date : <?= $module['DATE'] ?></p>
-            <button> Détails du module</button>
+            <a> Détails du module</a>
         </div><?php 
         }
     }?>
