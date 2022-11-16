@@ -1,0 +1,48 @@
+.modulesP{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    color: #FFFFFF;
+    padding: 1.5em;
+    margin: 10px;
+}
+
+.modulesP-classe{
+    display: flex;
+}
+
+.modulesP-titre{
+    font-size: 1.8em;
+}
+
+.modulesP-classe{
+    font-size: 1em;
+}
+
+.modulesP-classe h3{
+    padding-right: 20px;
+    margin: 0;
+}
+
+.modulesP-classe p{
+    padding-bottom: 5px;
+    margin: 0;
+}
+
+.modulesP a{
+    text-decoration: none;
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 15px;
+    padding: 1%;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.modulesP a:hover{
+    /*background-color: #A11D3CFF;
+    color: #FFFFFF;*/
+    padding: 1.2%;
+    margin: 8px;
+}
