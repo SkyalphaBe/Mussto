@@ -32,6 +32,7 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
     } else if ($_SESSION['logged'] === 'prof'){
         ##Routes pour les professeurs
         $router->map("GET", "/", "homeProf", "home");
+        $router->map("GET", "/modules/detail-[:ue]", "moduleProfDetail", "moduleDetail");
         //Définition du contenu de la sideBar
         $menu = [
             [ 'href' => "", 'name' => "Contact" ]

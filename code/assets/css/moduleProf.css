@@ -1,0 +1,42 @@
+body{
+    padding: 3vh;
+    height: 94vh;
+}
+
+.module-detail{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    color: white;
+
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
+
+    border-radius: 25px;
+
+    padding: 25px;
+}
+
+.module-detail > .top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+
+
+.module-detail > .bottom{
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.module-detail > .bottom > a{
+    width: 30%;
+}
