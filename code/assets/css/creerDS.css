@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    padding: 0% 0% 0% 15%;
+    margin: 0;
+}
+
+.creationDS label{
+    font-weight: lighter;
+    color: white;
+}
+
+.creationDS h1{
+    color: white;
+    padding-top: 1%;
+    text-align: center;
+}
+
+.creationDS{
+    border-radius: 15px;
+    background-color: #2F7aea;
+    width: 60%;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 5% 10% 5% 10%;
+}
+
+form input:is([name="ressource"],[name="date"],[name="sujet"]){
+    border-radius: 15px;
+    background-color: white;
+    border: none;
+    padding:0.75em;
+    width: calc(100% - 4em);
+}
+
+form select:is([name="groupe"]){
+    border-radius: 15px;
+    background-color: white;
+    border: none;
+    padding:0.75em;
+    width: calc(100% - 2.4em);
+    text-align: center;
+}
+
+
+#valideButton{
+    background-color: rgb(29,161,58);
+    border-radius: 15px;
+    color: white;
+    border: None;
+    width: 40%;
+    padding: 1%;
+    transition: 0.3s;
+    
+    
+}
+#valideButton:hover{
+    background-color: rgb(37, 203, 79);
+}
+
+#annuleButton{
+    background-color: #f15d5d;
+    border-radius: 15px;
+    color: white;
+    border: None;
+    width: 40%;
+    padding: 1%;
+    transition: 0.3s;
+    
+    
+}
+#annuleButton:hover{
+    background-color: #ed7d7d;
+}
