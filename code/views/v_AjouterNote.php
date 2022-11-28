@@ -12,15 +12,17 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
 
 <section class="ajoutNote">
-    <h1>Ajouter une Note</h1>
+    <h1><?= $match['params']['ue']?> : Ajouter une Note</h1>
 
     <form method="post">
-        <label>Ressource</label>
-        <input type="text" name="ressource">
+        <label>Sujet</label>
+        <input type="text" name="sujet" required>
         <label>Numéro de l'étudiant</label>
-        <input type="text" name="etudiant">
+        <input type="text" name="etudiant" required>
         <label>Note</label>
-        <input type="text" name="note" pattern="[0-9]{1,2}+[.]{0,1}+[0-9]{0,2}">
+        <input type="text" name="note" pattern="^[0-9]{1,2}[.]{1}[0-9]{0,2}$" required>
+        <label>Commentaire</label>
+        <input type="text" name="commentaire">
         <input type="submit" value="Valider" id="valideButton">
     </form>
 </section>

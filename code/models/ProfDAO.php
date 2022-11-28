@@ -39,5 +39,19 @@ class ProfDAO extends UserDAO
         }
         return $result;
     }
+
+    public function getDevoir($sujet){
+        $data = $this->queryRow("SELECT IDDEVOIR FROM DEVOIR
+        WHERE CONTENUDEVOIR = ?", [$sujet]);
+        return $data;
+    }
+
+    public function insertDS($argument){
+        $res = $this->insertRow("INSERT INTO `DEVOIR`(`INTITULEGROUPE`, `ANNEEGROUPE`, `REFMODULE`, `CONTENUDEVOIR`, `COEF`, `DATEDEVOIR`, `SALLE`) VALUES (?,YEAR(NOW()),?,?,?,?,?);",$argument);
+    }
+
+    public function insertNote($argument){
+        $res = $this->insertRow("INSERT INTO `NOTER` (`LOGINETU`,`IDDEVOIR`,`NOTE`,`DATE_ENVOIE`,`COMMENTAIRE`) VALUES (?,?,?,NOW(),?)",$argument);
+    }
 }
 ?>

@@ -34,7 +34,7 @@ form{
     padding: 5% 10% 5% 10%;
 }
 
-form input:is([name="ressource"],[name="etudiant"]){
+form input:is([name="commentaire"],[name="etudiant"],[name="sujet"]){
     border-radius: 15px;
     background-color: white;
     border: none;

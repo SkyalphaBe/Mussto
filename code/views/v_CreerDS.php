@@ -12,15 +12,34 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
 
 <section class="creationDS">
-    <h1>Créer un DS</h1>
+    <h1><?= $match['params']['ue']?> : Créer un DS</h1>
 
     <form method="post">
-        <label>Ressource</label>
-        <input type="text" name="ressource">
         <label>Sujet</label>
-        <input type="text" name="sujet">
+        <input type="text" name="sujet" required>
         <label>Date du DS</label>
-        <input type="text" name="date">
+        <input type="text" name="date" required>
+        <label>Coefficient</label>
+        <input type="text" name="coef" pattern="[0-5]" required>
+        <select name="salle">
+            <option value="Amphi1">Amphi1</option>
+            <option value="Amphi2">Amphi2</option>
+            <option value="S01">S01</option>
+            <option value="S03">S03</option>
+            <option value="S10">S10</option>
+            <option value="S12">S12</option>
+            <option value="S13">S13</option>
+            <option value="S14">S14</option>
+            <option value="S15">S15</option>
+            <option value="S16">S16</option>
+            <option value="S17">S17</option>
+            <option value="S22">S22</option>
+            <option value="S24">S24</option>
+            <option value="S26">S26</option>
+            <option value="040">040</option>
+            <option value="026">026</option>
+            <option value="028">028</option>
+        </select>
         <select name="groupe">
             <option value="G1S1">G1S1</option>
             <option value="G2S1">G2S1</option>
@@ -48,8 +67,11 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
             <option value="G4S5">G4S5</option>
             <option value="G5S5">G5S5</option>
         </select>
-        <input type="submit" value="Valider" id="valideButton">
-        <input type="submit" value="Annuler" id="annuleButton">
+        <div class="bouton">
+            <input type="submit" value="Valider" id="valideButton">
+            <input type="submit" value="Annuler" id="annuleButton">
+        </div>
+        
     </form>
 </section>
 

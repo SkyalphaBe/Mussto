@@ -42,8 +42,8 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("GET", "/", "homeAdmin", "home");
     }
     ##Route test home (temporaire)
-    
-
+    $router->map("GET", "/AjouterNote-[:ue]", "AjouterNote", "AjouterNote");
+    $router->map("GET", "/CreerDS-[:ue]", "CreerDS", "CreerDS");
     ##Route de deconnection
     $router->map("GET", "/disconnect", "disconnect", "disconnect");
 } else {

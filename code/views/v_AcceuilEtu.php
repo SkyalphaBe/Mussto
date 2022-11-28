@@ -6,8 +6,8 @@ $style = ["main.css", "sideBarre.css", "accueilEtu.css", "accueilEtuGrid.css"];
 require_once(PATH_VIEW_COMPONENT.'header.php');
 
 
-//Appel du composant SideBarre
-//Définition du contenu de la sideBar
+// Appel du composant SideBarre
+// Définition du contenu de la sideBar
 
 require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
