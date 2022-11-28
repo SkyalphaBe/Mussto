@@ -95,7 +95,7 @@ class EtuDAO extends UserDAO
      * @return array|false|null renvoie les notes pour un module
      */
     public function getNotesForModule($module){
-        $result = $this->queryAll("SELECT IDDEVOIR, DATEDEVOIR, DATE_ENVOIE, COMMENTAIRE, CONTENUDEVOIR, NOTE, COEF
+        $result = $this->queryAll("SELECT IDDEVOIR, DATE_FORMAT(DATEDEVOIR, '%d/%m/%Y') as DATEDEVOIR, DATE_FORMAT(DATE_ENVOIE, '%d/%m/%Y') as DATE_ENVOIE, COMMENTAIRE, CONTENUDEVOIR, NOTE, COEF
         FROM NOTER NATURAL JOIN DEVOIR NATURAL JOIN MODULE
         WHERE LOGINETU = ? AND REFMODULE = ?" , [$this->_username, $module]);
         return $result;
@@ -112,6 +112,27 @@ class EtuDAO extends UserDAO
         JOIN MODULE USING (REFMODULE) 
         WHERE LOGINETU = ? AND NOMMODULE = ?", [$this->_username, $module]);
         return $result;
+    }
+
+    /**
+     * @param $module
+     * @return float|int|null renvoie la moyenne pour un module
+     */
+    public function getAverageForModule($module){
+        $avg = null;
+        $result = $this->queryAll("SELECT NOTE, COEF FROM NOTER NATURAL JOIN DEVOIR NATURAL JOIN MODULE WHERE LOGINETU = ? AND REFMODULE = ?", [$this->_username, $module]);
+        if ($result){
+            $sum = 0;
+            $sum_coef = 0;
+            foreach ($result as $note){
+                $sum = $sum + ($note['NOTE'] * $note['COEF']);
+                $sum_coef = $sum_coef + $note['COEF'];
+            }
+
+            $avg = $sum / $sum_coef;
+        }
+
+        return $avg;
     }
 
     /**

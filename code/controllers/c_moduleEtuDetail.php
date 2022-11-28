@@ -1,18 +1,15 @@
 
 <?php
 
-echo '<pre>';
 //print_r($match['params']['ue']);
 require_once(PATH_MODELS.'EtuDAO.php');
 $dao = new EtuDAO(true, $_SESSION['login']);
 
 $module = $dao->getModule($match['params']['ue']);
+
 $enseignants = $dao->getProfsForModule($module['REFMODULE']);
 $notes = $dao->getNotesForModule($module['REFMODULE']);
-
-print_r($notes);
-
-echo '</pre>';
+$avg = $dao->getAverageForModule($module['REFMODULE']);
 
 
 if ($module){

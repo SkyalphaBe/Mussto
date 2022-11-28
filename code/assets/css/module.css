@@ -1,5 +1,6 @@
 body{
-    padding: 3%;
+    padding: 3vh;
+    height: 94vh;
 }
 
 body > div.modules{
@@ -11,6 +12,7 @@ body > div.modules{
 body > div.modules > div.module{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 30%;
     margin: 1.5%;
     background-color: darkblue;
@@ -42,7 +44,6 @@ body > div.modules > div.module > a{
     flex-direction: column;
     gap: 20px;
 
-    color: white;
 
     width: calc(100% - 50px);
     height: calc(100% - 50px);
@@ -51,7 +52,11 @@ body > div.modules > div.module > a{
 
     padding: 25px;
 
+    background-color: #f8f8f8;
 
+    box-shadow: 0px 0px 15px rgba(47, 50, 53, 0.25);
+
+    color : #2f3235;
 }
 
 .module-detail .header{
@@ -64,7 +69,8 @@ body > div.modules > div.module > a{
 
 
 .module-detail h1{
-
+    color: hsl(var(--color), 66%, 41%, 1);
+    text-shadow: 0px 0px 5px hsl(var(--color), 66%, 41%, 0.3);
     margin: 0;
 
 }
@@ -87,7 +93,7 @@ body > div.modules > div.module > a{
     grid-column: 2 / 2;
 
     margin : 25% 0;
-    border-left: solid 3px white;
+    border-left: solid 3px #2f3235;
 }
 
 .module-detail .prof{
@@ -117,9 +123,9 @@ body > div.modules > div.module > a{
     padding: 0px 10px 0px 0px
 }
 
-.module-detail .notes .note{
-    background-color: white;
-    color: black;
+.module-detail .notes .note-elt{
+    background-color: hsl(var(--color), 66%, 41%, 0.5);
+    color: hsl(var(--color), 66%, 41%, 1);
     border-radius: 10px;
     padding: 15px;
 
@@ -127,28 +133,64 @@ body > div.modules > div.module > a{
     flex-direction: column;
     align-items: flex-start;
 
+    gap: 4px;
 
 }
 
-.module-detail .notes .note *{
+.module-detail .notes .note-elt *{
     margin : 0;
 }
 
-.module-detail .notes .note > p{
-    opacity: 0;
-    transition: opacity 0.5s;
+.module-detail .notes .note-elt > p{
+    display: none;
 }
 
 
-.module-detail .notes .note:hover > p{
-    opacity: 1;
+.module-detail .notes .note-elt:hover > p{
+    display : block
 }
 
-.module-detail .notes .note > div{
+.module-detail .notes .note-elt > div{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
 }
 
+.note{
+    padding: 6px;
+    background-color: rgba(255, 255, 255, 0.75);
+
+    border-radius: 5px;
+    color: hsl(var(--color), 66%, 41%, 1);
+}
+
+.note-elt p.coef{
+    margin-top: 3px;
+    font-size: 75%;
+    opacity: .7;
+}
+
+.note-elt .ds-content{
+
+}
+
+.module-detail .moyenne{
+    background-color: hsl(var(--color), 66%, 41%, 0.5);
+    color: #2f3235;
+
+    padding: 0 3%;
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.module-detail .moyenne h2{
+    color: hsl(var(--color), 66%, 41%, 1);
+}
