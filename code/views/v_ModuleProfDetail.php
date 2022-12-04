@@ -5,7 +5,6 @@ $style = ["main.css", "sideBarre.css", "moduleProf.css"];
 //Appel de l'header
 require_once(PATH_VIEW_COMPONENT.'header.php');
 
-
 //Appel du composant SideBarre
 
 require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
@@ -16,7 +15,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <a class="button" href="<?=$router->generate('home')?>">Retour à la liste des modules</a>
     </div>
     <div class="bottom">
-        <a class="button" href="<?=$router->generate('home')?>">Créer un DS</a>
+        <a class="button" href="<?=$router->generate('CreerDSProf', ['ue' => $module['REFMODULE']])?>">Créer un DS</a>
         <a class="button" href="<?=$router->generate('home')?>">Liste des DS</a>
         <a class="button" href="<?=$router->generate('home')?>">Entrer une note</a>
     </div>

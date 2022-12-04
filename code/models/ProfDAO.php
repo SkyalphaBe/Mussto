@@ -7,9 +7,10 @@ class ProfDAO extends UserDAO
         return $res;
     }
     public function getModule($ref){
-        $data = $this->queryRow("SELECT NOMMODULE 
-        FROM MODULE JOIN ENSEIGNER ON MODULE.REFMODULE = ENSEIGNER.REFMODULE
-        WHERE LOGINPROF = ? AND MODULE.REFMODULE = ?", [$this->_username, $ref]);
+        $data = $this->queryRow("SELECT NOMMODULE, REFMODULE
+        FROM MODULE
+        JOIN ENSEIGNER USING(REFMODULE)
+        WHERE LOGINPROF = ? AND REFMODULE = ?", [$this->_username, $ref]);
         return $data;
     }
 

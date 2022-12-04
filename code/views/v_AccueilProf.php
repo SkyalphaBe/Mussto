@@ -27,7 +27,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                         <?php }?>
                     </div>
                 </div>
-                <a href="" class="modulesP-detail">detail</a>
+                <a href="<?=$router->generate("moduleDetail", ['ue' => $allmodules['REFMODULE']])?>" class="modulesP-detail">detail</a>
             </div>
         <?php } } else { ?>
         <p>Aucune modules pour le moment</p>

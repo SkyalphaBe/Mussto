@@ -8,7 +8,7 @@
         require_once (PATH_VIEWS."ModuleProfDetail.php");
     } else {
         if (isset($router)){
-            header('Location: '.$router->generate('module'));
+            header('Location: '.$router->generate('home'));
         } else {
             header('Location: ./');
         }

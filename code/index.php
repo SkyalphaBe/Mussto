@@ -33,7 +33,9 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         ##Routes pour les professeurs
         $router->map("GET", "/", "homeProf", "home");
         $router->map("GET", "/modules/detail-[:ue]", "moduleProfDetail", "moduleDetail");
-        //Définition du contenu de la sideBar
+        $router->map("GET", "/AjouterNote-[:ue]", "AjouterNote", "AjouterNote");
+        $router->map("GET", "/CreerDS-[:ue]", "CreerDS", "CreerDSProf");
+        //Définition du contenu de la sideBarx
         $menu = [
             [ 'href' => "", 'name' => "Contact" ]
         ];
@@ -42,8 +44,7 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("GET", "/", "homeAdmin", "home");
     }
     ##Route test home (temporaire)
-    $router->map("GET", "/AjouterNote-[:ue]", "AjouterNote", "AjouterNote");
-    $router->map("GET", "/CreerDS-[:ue]", "CreerDS", "CreerDS");
+
     ##Route de deconnection
     $router->map("GET", "/disconnect", "disconnect", "disconnect");
 } else {
