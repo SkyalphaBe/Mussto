@@ -1,4 +1,7 @@
 body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 3vh;
     height: 94vh;
 }
@@ -10,8 +13,8 @@ body{
 
     color: white;
 
-    width: calc(100% - 50px);
-    height: calc(100% - 50px);
+    width: calc(80% - 50px);
+    height: calc(80% - 50px);
 
     border-radius: 25px;
 
@@ -38,5 +41,6 @@ body{
 }
 
 .module-detail > .bottom > a{
+    font-size: 2em;
     width: 30%;
 }

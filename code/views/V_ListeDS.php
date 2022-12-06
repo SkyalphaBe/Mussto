@@ -1,7 +1,7 @@
 <?php
 
     //Tableau des fichiers CSS nécessaire
-    $style = ["main.css", "sideBarre.css", "moduleProf.css","listeDS.css"];
+    $style = ["main.css", "sideBarre.css","listeDS.css"];
 
     //Appel de l'header
     require_once(PATH_VIEW_COMPONENT.'header.php');
