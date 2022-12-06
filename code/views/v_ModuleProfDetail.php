@@ -20,3 +20,5 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
     </div>
 </div>
 
+<?php
+require_once (PATH_VIEW_COMPONENT.'footer.php');
