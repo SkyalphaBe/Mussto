@@ -3,9 +3,9 @@
     $dao = new ProfDAO(true, $_SESSION["login"]);
 
     $devoirs = $dao->getDevoirs($match['params']['ue']);
-    echo '<pre>';
+    /*echo '<pre>';
         print_r($devoirs);
-    echo '</pre>';
+    echo '</pre>';*/
 
     if ($devoirs){
         require_once (PATH_VIEWS."ListeDS.php");
