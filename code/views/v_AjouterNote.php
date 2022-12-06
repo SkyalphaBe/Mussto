@@ -11,18 +11,12 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
 require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
 
-<section class="ajoutNote">
-    <h1><?= $match['params']['ue']?> : Ajouter une Note</h1>
-
+<section style="background-color: <?=CSScolorByName($module['NOMMODULE'])?>" class="ajoutNote">
+    <h1><?= $module['NOMMODULE']?> : Ajouter une Note</h1>
+    <a id="download" href="<?=$router->generate('download')?>">Télécharger l'Excel</a>
     <form method="post">
-        <label>Sujet</label>
-        <input type="text" name="sujet" required>
-        <label>Numéro de l'étudiant</label>
-        <input type="text" name="etudiant" required>
-        <label>Note</label>
-        <input type="text" name="note" pattern="^[0-9]{1,2}[.]{1}[0-9]{0,2}$" required>
-        <label>Commentaire</label>
-        <input type="text" name="commentaire">
+        <label for="file">Choisir fichier :</label>
+        <input id="file" type="file" name="file" accept="xls" class="form-control">
         <input type="submit" value="Valider" id="valideButton">
     </form>
 </section>
