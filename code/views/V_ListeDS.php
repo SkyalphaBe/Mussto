@@ -30,3 +30,6 @@
         <p>Aucune DS pour le moment</p>
     <?php } ?>
          </div>
+
+<?php
+require_once (PATH_VIEW_COMPONENT.'footer.php');
