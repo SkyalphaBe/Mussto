@@ -4,10 +4,17 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    font-family: 'Roboto', sans-serif;
-    padding: 0% 0% 0% 15%;
-    margin: 0;
+}
+
+.ajoutNote{
+    border-radius: 15px;
+    width: 90%;
+    height: 90%;
+}
+
+.ajoutNote h1{
+     color: white;
+     font-size: 2em;
 }
 
 .ajoutNote label{
@@ -15,54 +22,103 @@ body{
     color: white;
 }
 
-.ajoutNote h1{
-    color: white;
-    padding-left: 15%;
-    padding-top: 1%;
+#title{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.ajoutNote{
+.buttonTopBox{
+    display: flex;
+    width: 70%;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+}
+
+.buttonTopBox a:hover{
+    padding: 1.7%;
+    margin: 8px;
+}
+
+.buttonFormFile{
+    text-decoration: None;
+    text-align: center;
     border-radius: 15px;
-    background-color: #2F7aea;
-    width: 50%;
+    border: None;
+    background-color: #FFFFFF;
+    color: black;
+    height: 20px;
+    width: 30%;
+    padding: 1.5%;
+    transition: 0.3s;
+    margin: 10px;
 }
 
 form{
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
+    padding:4% ;
+}
+
+.formContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     gap: 20px;
-    padding: 5% 10% 5% 10%;
+    margin: 10px;
+    width: 100%;
 }
 
-form input:is([name="commentaire"],[name="etudiant"],[name="sujet"]){
-    border-radius: 15px;
-    background-color: white;
-    border: none;
-    padding:0.75em;
-    width: calc(100% - 4em);
+#file{
+    color: #FFFFFF;
+    font-size: medium;
 }
 
-form input:is([name="note"]){
+input::file-selector-button{
     border-radius: 15px;
-    background-color: white;
-    border: none;
-    padding:0.75em;
+    font-size: medium;
+    border: None;
     width: 20%;
+    padding: 1%;
 }
 
 
 #valideButton{
     background-color: rgb(29,161,58);
+    font-size: medium;
     border-radius: 15px;
     color: white;
     border: None;
     width: 40%;
     padding: 1%;
     transition: 0.3s;
-    position: relative;
-    left: 60%;
-    
+    margin-top: 4%;
 }
 #valideButton:hover{
     background-color: rgb(37, 203, 79);
+}
+
+@media (max-width: 1558px) {
+    #title{
+        flex-direction: column;
+
+    }
+    .formContent{
+        align-items: center;
+    }
+    #file{
+        font-size: small;
+    }
+    input::file-selector-button{
+        font-size: small;
+        width: 50%;
+    }
+}
+@media (max-width: 903px){
+    .buttonFormFile {
+        font-size: 60%;
+    }
 }

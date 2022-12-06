@@ -50,7 +50,7 @@ form input:is([name="coef"]){
     width: 20%;
 }
 
-form select:is([name="groupe"], [name="salle"]){
+form select:is([name="groupe"],[name="salle"],[name="typeSalle"],[name="semestre"]){
     border-radius: 15px;
     background-color: white;
     border: none;
@@ -83,6 +83,13 @@ form select:is([name="groupe"], [name="salle"]){
 }
 
 #annuleButton{
+    text-decoration: None;
+    text-align: center;
+    border: None;
+    width: 20%;
+    padding: 1%;
+    transition: 0.3s;
+    border-radius: 15px;
     background-color: #f15d5d;
     color: white;   
 }
