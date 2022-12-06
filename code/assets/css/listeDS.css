@@ -1,0 +1,36 @@
+.devoirModuleProf{
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+
+}
+
+.moduleProfTitle{
+    color: #FFFFFF;
+}
+
+.topBoxProf{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px 0px 10px;
+
+}
+
+.topBoxProf a{
+    height: 1em;
+}
+
+.devoirProf{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin:0px 10px 10px 10px;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+}
+
+.devoirProf a{
+    color: #FFFFFF;
+}
