@@ -16,7 +16,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <h1><?= $module['NOMMODULE']?> : Ajouter une Note</h1>
         <div class="buttonTopBox">
             <a class="buttonFormFile" href="<?=$router->generate('download')?>">Télécharger l'Excel</a>
-            <a class="buttonFormFile" href="<?=$router->generate('moduleDetail',['ue' => $module['REFMODULE']])?>">Retour</a>
+            <a class="buttonFormFile" href="<?=$router->generate('listeDsUe',['ue' => $module['REFMODULE']])?>">Retour</a>
         </div>
 
     </div>

@@ -50,7 +50,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         </div>
         <div class="bouton">
             <input type="submit" value="Valider" id="valideButton">
-            <a href="<?=$router->generate('moduleDetail',['ue' => $module['REFMODULE']])?>" id="annuleButton">Annuler</a>
+            <a href="<?=$router->generate('listeDsUe',['ue' => $module['REFMODULE']])?>" id="annuleButton">Annuler</a>
         </div>
         
     </form>
