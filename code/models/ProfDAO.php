@@ -14,6 +14,24 @@ class ProfDAO extends UserDAO
         return $data;
     }
 
+    /**
+     * @param $ref ID du module
+     * @return array|false|null Renvoie tous les étudiants pour lesquels le prof enseigne le module
+     */
+    public function getAllEtuForModule($ref){
+        $data = $this->queryAll("SELECT PRENOMETU, NOMETU FROM MODULE NATURAL JOIN ENSEIGNER NATURAL JOIN PARTICIPER NATURAL JOIN AFFECTER NATURAL JOIN ETUDIANT WHERE LOGINPROF = ? AND REFMODULE = ?", [$this->_username, $ref] );
+        return $data;
+    }
+
+    /**
+     * @param $id Id du devoir
+     * @return array|false|null Renvoie la liste des résultat pour chaque éleve de ce DS (Si l'élève n'as pas encore de notes, sa note est null)
+     */
+    public function getResultsForDS($id){
+        $data = $this->queryAll("SELECT PRENOMETU, NOMETU, NOTE, DATE_ENVOIE, COMMENTAIRE FROM NOTER RIGHT OUTER JOIN ( SELECT LOGINETU, IDDEVOIR FROM DEVOIR NATURAL JOIN EVALUER NATURAL JOIN AFFECTER WHERE IDDEVOIR = ? AND LOGINPROF = ? ) as ELEVE USING (LOGINETU, IDDEVOIR) NATURAL JOIN ETUDIANT", [ $id, $this->_username] );
+        return $data;
+    }
+
     public function getGroups($UE){
         $data = [];
         $result=$this->queryAll("select INTITULEGROUPE
