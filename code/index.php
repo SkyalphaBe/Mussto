@@ -35,6 +35,7 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("GET", "/modules/detail-[:ue]", "moduleProfDetail", "moduleDetail");
         $router->map("GET", "/AjouterNote-[:ue]", "AjouterNote", "AjouterNote");
         $router->map("GET", "/CreerDS-[:ue]", "CreerDS", "CreerDSProf");
+        $router->map("GET", "/download", "download", "download");
         $router->map("GET", "/ListeDS-[:ue]", "ListeDS", "listeDsUe");
 
         //Définition du contenu de la sideBarx

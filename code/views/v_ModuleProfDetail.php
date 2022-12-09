@@ -17,6 +17,9 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
     <div class="bottom">
         <a class="button" href="<?=$router->generate('CreerDSProf', ['ue' => $module['REFMODULE']])?>">Créer un DS</a>
         <a class="button" href="<?=$router->generate('listeDsUe', ['ue' => $module['REFMODULE']])?>">Liste des DS</a>
+
     </div>
 </div>
 
+<?php
+require_once (PATH_VIEW_COMPONENT.'footer.php');

@@ -15,7 +15,8 @@
         <div style="background-color: <?=CSScolorByName($devoirs[0]['NOMMODULE'])?>" class="devoirModuleProf">
             <div class="topBoxProf">
                 <h1 class="moduleProfTitle"><?=$devoirs[0]['NOMMODULE']?></h1>
-                <a class="button" href="<?=$router->generate("moduleDetail", ['ue' => $devoirs[0]['REFMODULE']])?>">Retour</a>
+                <a class="button" href="<?=$router->generate("CreerDSProf", ['ue' => $devoirs[0]['REFMODULE']])?>">Créer un DS</a>
+                <a class="button" href="<?=$router->generate("home")?>">Retour</a>
             </div>
         <?php foreach ($devoirs as $allDevoirs){$nbDevoir++?>
                 <div class="devoirProf">
@@ -29,3 +30,6 @@
         <p>Aucune DS pour le moment</p>
     <?php } ?>
          </div>
+
+<?php
+require_once (PATH_VIEW_COMPONENT.'footer.php');
