@@ -2,7 +2,7 @@
     require_once(PATH_MODELS."ProfDAO.php");
     $dao = new ProfDAO(true, $_SESSION["login"]);
 
-    $devoirs = $dao->getDevoirs($match['params']['ue']);
+    $devoirs = $dao->getDSForModule($match['params']['ue']);
     /*echo '<pre>';
         print_r($devoirs);
     echo '</pre>';*/
