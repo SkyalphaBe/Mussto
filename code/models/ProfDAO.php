@@ -59,11 +59,11 @@ class ProfDAO extends UserDAO
         return $result;
     }
 
-    public function getDevoirs($UE){
-        $data = $this->queryAll("SELECT NOMMODULE,IDDEVOIR,CONTENUDEVOIR,DATEDEVOIR,REFMODULE,INTITULEGROUPE
+    public function getDSForModule($ref){
+        $data = $this->queryAll("SELECT NOMMODULE,IDDEVOIR,CONTENUDEVOIR,DATEDEVOIR,REFMODULE
         FROM DEVOIR
         join MODULE using(REFMODULE)
-        WHERE LOGINPROF = ? AND REFMODULE = ?", [$this->_username, $UE]);
+        WHERE LOGINPROF = ? AND REFMODULE = ?", [$this->_username, $ref]);
         return $data;
     }
 
