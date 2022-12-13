@@ -68,11 +68,17 @@ class ProfDAO extends UserDAO
     }
 
     public function insertDS($argument){
-        $res = $this->insertRow("INSERT INTO `DEVOIR`(`INTITULEGROUPE`, `ANNEEGROUPE`, `REFMODULE`, `CONTENUDEVOIR`, `COEF`, `DATEDEVOIR`, `SALLE`) VALUES (?,YEAR(NOW()),?,?,?,?,?);",$argument);
+        $res = $this->insertRow("INSERT INTO DEVOIR
+        (REFMODULE, CONTENUDEVOIR, COEF, DATEDEVOIR, SALLE,LOGINPROF)
+        VALUES (?,?,?,?,?,?);",$argument);
+
+        return $res;
     }
 
     public function insertNote($argument){
-        $res = $this->insertRow("INSERT INTO `NOTER` (`LOGINETU`,`IDDEVOIR`,`NOTE`,`DATE_ENVOIE`,`COMMENTAIRE`) VALUES (?,?,?,NOW(),?)",$argument);
+        $res = $this->insertRow("INSERT INTO NOTER 
+        (LOGINETU,IDDEVOIR,NOTE,DATE_ENVOIE,COMMENTAIRE) 
+        VALUES (?,?,?,NOW(),?)",$argument);
     }
 }
 ?>
