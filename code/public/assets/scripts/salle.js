@@ -12,7 +12,7 @@ function createSelectSalle(evt){
     newLabel.textContent = 'Salle';
     newLabel.id = 'salle'
     newSelect.name='salle';
-    typeSalle.parentNode.insertBefore(newSelect,document.getElementsByClassName('groupe')[0]);
+    typeSalle.parentNode.insertBefore(newSelect,document.getElementsByClassName('bouton')[0]);
     typeSalle.parentNode.insertBefore(newLabel,newSelect);
 
     let newOption;
