@@ -74,7 +74,7 @@ body.hide-side .sideBarre{
 }
 
 .sideBarre.admin{
-    --sidebar-color : rgb(161, 29, 60);
+    --sidebar-color : #4e2f83;
 }
 
 /*css lié a la class Top box (haut de la side barre)*/
@@ -204,6 +204,9 @@ body.hide-side .sideBarre{
     justify-content: center;
     align-items: center;
 
+}
+.box i{
+    color: #FFFFFF;
 }
 .circle{
     display: flex;
