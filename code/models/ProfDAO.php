@@ -6,6 +6,11 @@ class ProfDAO extends UserDAO
         $res = $this->queryRow("SELECT PRENOMPROF FROM PROFESSEUR WHERE loginprof = ?",  [$this->_username]);
         return $res;
     }
+
+    /**
+     * @param $ref Id du module
+     * @return array|false|null
+     */
     public function getModule($ref){
         $data = $this->queryRow("SELECT NOMMODULE, REFMODULE
         FROM MODULE

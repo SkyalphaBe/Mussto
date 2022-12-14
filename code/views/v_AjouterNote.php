@@ -9,9 +9,11 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
 //Définition du contenu de la sideBar
 
 require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
-?>
 
-<section style="background-color: <?=CSScolorByName($module['NOMMODULE'])?>" class="ajoutNote">
+?>
+<script src="/assets/scripts/gestionnotes.js"></script>
+
+<div style="background-color: <?=CSScolorByName($module['NOMMODULE'])?>" class="ajoutNote" id="ajoutNote">
     <div id="title">
         <h1><?= $module['NOMMODULE']?> : Ajouter une Note</h1>
         <div class="buttonTopBox">
@@ -20,15 +22,21 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         </div>
 
     </div>
+    <script>
+        notes(<?=$match['params']['id']?> ,"ajoutNote");
+    </script>
 
-    <form method="post">
+
+    <!-- <form method="post">
         <div class="formContent">
             <label id="labelfile" for="file">Déposer un fichier :</label>
             <input id="file" type="file" name="file" accept="xls" class="form-control">
         </div>
         <input type="submit" value="Valider" id="valideButton">
-    </form>
-</section>
+    </form> -->
+
+
+</div>
 
 <?php 
     //Appel du footer

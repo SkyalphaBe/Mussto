@@ -86,6 +86,10 @@ input::file-selector-button{
 }
 
 
+input:invalid{
+    background-color: lightpink;
+}
+
 #valideButton{
     background-color: rgb(29,161,58);
     font-size: medium;

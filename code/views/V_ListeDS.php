@@ -18,13 +18,13 @@
                 <a class="button" href="<?=$router->generate("CreerDSProf", ['ue' => $devoirs[0]['REFMODULE']])?>">Créer un DS</a>
                 <a class="button" href="<?=$router->generate("home")?>">Retour</a>
             </div>
-        <?php foreach ($devoirs as $allDevoirs){$nbDevoir++?>
+        <?php foreach ($devoirs as $devoir){$nbDevoir++?>
                 <div class="devoirProf">
                     <h2 class="devoirProf-nb">DS : <?=$nbDevoir?></h2>
-                    <p class="devoirProf-titre"><?=$allDevoirs['CONTENUDEVOIR']?></p>
-                    <p class="devoirProf-group">Groupe : <?=$allDevoirs['INTITULEGROUPE']?></p>
-                    <p class="devoirProf-date">Date : <?=$allDevoirs['DATEDEVOIR']?></p>
-                    <a class="button" href="<?=$router->generate("AjouterNote", ['ue' => $devoirs[0]['REFMODULE']])?>" style="background-color: <?=CSScolorByName($devoirs[0]['NOMMODULE'])?>">Ajouter notes</a>
+                    <p class="devoirProf-titre"><?=$devoir['CONTENUDEVOIR']?></p>
+                    <p class="devoirProf-group">Groupe : <?=$devoir['INTITULEGROUPE']?></p>
+                    <p class="devoirProf-date">Date : <?=$devoir['DATEDEVOIR']?></p>
+                    <a class="button" href="<?=$router->generate("AjouterNote", ['ue' => $match['params']['ue'], 'id' => $devoir['IDDEVOIR']])?>" style="background-color: <?=CSScolorByName($devoirs[0]['NOMMODULE'])?>">Ajouter notes</a>
                 </div>
         <?php } } else { ?>
         <p>Aucune DS pour le moment</p>
