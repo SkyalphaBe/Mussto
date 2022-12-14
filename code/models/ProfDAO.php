@@ -25,6 +25,18 @@ class ProfDAO extends UserDAO
      */
     public function getAllEtuForModule($ref){
         $data = $this->queryAll("SELECT PRENOMETU, NOMETU FROM MODULE NATURAL JOIN ENSEIGNER NATURAL JOIN PARTICIPER NATURAL JOIN AFFECTER NATURAL JOIN ETUDIANT WHERE LOGINPROF = ? AND REFMODULE = ?", [$this->_username, $ref] );
+        
+        return $data;
+    }
+    /**
+     * @param $id Id du devoir
+     * @param $ref Id du module
+     */
+    public function getDS($id){
+        $data = $this->queryRow("SELECT * FROM DEVOIR NATURAL JOIN ORGANISER_DEVOIR WHERE IDDEVOIR = ? AND LOGINPROF = ?", [$id, $this->_username]);
+        if ($data){
+            $data['GROUPES'] = $this->getGroupsForDS($data['IDDEVOIR']);
+        }
         return $data;
     }
 
@@ -33,8 +45,8 @@ class ProfDAO extends UserDAO
      * @param $ref Id du module
      * @return array|false|null Renvoie la liste des résultat pour chaque éleve de ce DS (Si l'élève n'as pas encore de notes, sa note est null)
      */
-    public function getResultsForDS($id, $ref){
-        $data = $this->queryAll("SELECT LOGINETU, PRENOMETU, NOMETU, NOTE, DATE_ENVOIE, COMMENTAIRE FROM NOTER RIGHT OUTER JOIN ( SELECT LOGINETU, IDDEVOIR FROM DEVOIR NATURAL JOIN EVALUER NATURAL JOIN AFFECTER WHERE IDDEVOIR = ? AND LOGINPROF = ? ) as ELEVE USING (LOGINETU, IDDEVOIR) NATURAL JOIN ETUDIANT", [ $id, $this->_username] );
+    public function getResultsForDS($id){
+        $data = $this->queryAll("SELECT LOGINETU, PRENOMETU, NOMETU, NOTE, DATE_ENVOIE, COMMENTAIRE FROM NOTER RIGHT OUTER JOIN ( SELECT LOGINETU, IDDEVOIR FROM DEVOIR NATURAL JOIN EVALUER NATURAL JOIN AFFECTER WHERE IDDEVOIR = ? ) as ELEVE USING (LOGINETU, IDDEVOIR) NATURAL JOIN ETUDIANT", [ $id] );
         return $data;
     }
 
@@ -44,10 +56,19 @@ class ProfDAO extends UserDAO
      */
     public function getGroups($ref){  ///A CORRIGER !!!!!! (PEUT RENVOYER QUELQUE CHOSE SI LE PROF N'ENSEIGNE PAS LE MODULE)
         $data = [];
-        $result=$this->queryAll("select INTITULEGROUPE
+        $result=$this->queryAll("select *
         from GROUPE
-        join PARTICIPER using(INTITULEGROUPE)
+        natural join PARTICIPER
         where REFMODULE = ?",[$ref]);
+        foreach ($result as $line){
+            $data[] = $line['INTITULEGROUPE'];
+        }
+        return $data;
+    }
+
+    public function getGroupsForDS($id){
+        $data = [];
+        $result = $this->queryAll("SELECT * FROM DEVOIR NATURAL JOIN EVALUER WHERE IDDEVOIR = ?", [$id]);
         foreach ($result as $line){
             $data[] = $line['INTITULEGROUPE'];
         }
@@ -77,11 +98,16 @@ class ProfDAO extends UserDAO
      * @param $ref id du module
      * @return array Renvoie la liste des DS pour un module
      */
-    public function getDSForModule($ref){
+    public function getAllDSForModule($ref){
         $data = $this->queryAll("SELECT NOMMODULE,IDDEVOIR,CONTENUDEVOIR,DATEDEVOIR,REFMODULE
-        FROM DEVOIR
+        FROM DEVOIR NATURAL JOIN ORGANISER_DEVOIR
         join MODULE using(REFMODULE)
-        WHERE LOGINPROF = ? AND REFMODULE = ?", [$this->_username, $ref]);
+        WHERE REFMODULE = ? AND LOGINPROF = ?", [$ref, $this->_username]);
+        if ($data){
+            for ($i = 0; $i < count($data); $i++){
+                $data[$i]['GROUPES'] = $this->getGroupsForDS($data[$i]['IDDEVOIR']);
+            }
+        }
         return $data;
     }
 

@@ -6,3 +6,4 @@ if (isset($match) && array_key_exists( 'id', $match['params'])){
     $data = json_decode(file_get_contents('php://input'), true);
     print_r($data);
 }
+

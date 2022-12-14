@@ -4,8 +4,7 @@
 
     $module = $dao->getModule($match['params']['ue']);
     if ($module){
-        $devoirs = $dao->getDSForModule($match['params']['ue']);
-    
+        $devoirs = $dao->getAllDSForModule($match['params']['ue']);
         
         require_once (PATH_VIEWS."ListeDS.php");
     }  else {

@@ -1,4 +1,4 @@
-(() => {
+function gestion_notes(root_id){
 
     ///Importation librairie SheetJS
     let js = document.createElement("script");
@@ -81,7 +81,8 @@
 
     var data = {};
 
-    var root = document.getElementById("ajout-note-table");
+    var root = document.getElementById(root_id);
+    root.innerHTML = "";
 
     var send = () => {
         var header = {
@@ -92,7 +93,7 @@
             body : JSON.stringify(Object.values(data).map(elt => elt.getData()))
         }
 
-        fetch("/api/modules-"+  ref + "/update-notes-ds-"+id, header).then(res => res.text()).then(text => {console.log(text)});
+        fetch("/api/devoir/update-notes-ds-"+id, header).then(res => res.text()).then(text => {console.log(text)});
     }
 
     var download = () => {
@@ -166,7 +167,7 @@
         loadingTitle.innerText = "Chargement";
         root.appendChild(loadingTitle);
 
-        fetch("/api/modules-"+ref+"/get-notes-ds-"+id).then(res => {
+        fetch("/api/devoir/get-notes-ds-"+id).then(res => {
             if (res.ok){
                 return res.json();
             } else {
@@ -187,4 +188,98 @@
     }
 
     load();
-})();
+};
+
+function gestion_info(){
+    const inputs = document.querySelectorAll("input.devoir-info-input, select.devoir-info-input");
+    const submitButton = document.querySelector("button#devoir-info-submit");
+    
+    groups_selected.sort();
+
+    const initialValue = {groups : [...groups_selected]};
+    inputs.forEach(elt => {
+        initialValue[elt.name] = elt.value;
+    });
+
+    const getData = () => {
+        const data = {groups : groups_selected};
+        inputs.forEach(elt => {
+            data[elt.name] = elt.value;
+        });
+
+        return data;
+    }
+
+    const checkChange = () => {
+        if (JSON.stringify(getData()) === JSON.stringify(initialValue)){
+            submitButton.setAttribute("disabled", "");
+            return false;
+        } else {
+            submitButton.removeAttribute("disabled");
+            return true;
+        };
+    }
+    inputs.forEach(elt => {
+        elt.onchange = checkChange;
+    })
+
+    const submit = () => {
+        if (checkChange()){
+            var header = {
+                method : 'POST', 
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body : JSON.stringify(getData())
+            }
+    
+            fetch("/api/devoir/update-infos-ds-"+id, header).then(res => res.text()).then(text => {console.log(text)});
+        }
+    }
+
+    submitButton.onclick = submit;
+
+    const groupsDiv = document.getElementById("devoir-group");
+    const updateGroupsDiv = () => {
+        checkChange();
+        groupsDiv.innerHTML = "<p>Groupes : </p>";
+
+        var listElt = document.createElement("ul");
+        groups_selected.forEach((elt) => {
+            let item = document.createElement("li");
+            item.innerText = elt;
+            item.onclick = () => {
+                let index = groups_selected.indexOf(elt)
+                groups_selected.splice(index, 1);
+                groups_selected.sort();
+                updateGroupsDiv();
+            }
+            listElt.appendChild(item);
+        })
+        groupsDiv.appendChild(listElt);
+
+        var selectElt = document.createElement("select");
+        var groups_not_selected = groups_available.filter(elt => !(groups_selected.includes(elt)))
+        selectElt.add(new Option("--", null));
+        groups_not_selected.forEach(elt => {
+            selectElt.add(new Option(elt));
+        })
+        groupsDiv.appendChild(selectElt);
+
+        var buttonElt = document.createElement("button");
+        buttonElt.innerText = "Ajouter";
+        buttonElt.onclick = () => {
+            let val = selectElt.value;
+            if (val !== "null"){
+                groups_selected.push(val);
+                groups_selected.sort();
+                updateGroupsDiv();
+            }
+        }
+        groupsDiv.appendChild(buttonElt);
+
+    }
+
+    updateGroupsDiv();
+    submitButton.setAttribute("disabled", "");
+}
