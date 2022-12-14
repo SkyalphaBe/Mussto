@@ -1,4 +1,5 @@
-function notes(id, rootid){
+(() => {
+
     ///Importation librairie SheetJS
     let js = document.createElement("script");
     js.src = "https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js";
@@ -6,7 +7,13 @@ function notes(id, rootid){
     document.body.appendChild(js);
 
     class Note{
+        static id = 0;
+        static getId(){
+            return id++;
+        }
+
         constructor(json){
+            this.login = json.LOGINETU; 
             this.nom = json.NOMETU;
             this.prenom = json.PRENOMETU;
             this.date = json.DATE_ENVOIE;
@@ -15,6 +22,16 @@ function notes(id, rootid){
 
             this.input_comment;
             this.input_note;
+        }
+
+        setComment(comment){
+            this.input_comment.value = comment;
+            this.comment = comment;
+        }
+
+        setNote(note){
+            this.input_note.value = note;
+            this.note = note;
         }
 
         updateComment(e){
@@ -34,7 +51,7 @@ function notes(id, rootid){
         }
 
         getData(){
-            return {nom : this.nom, prenom : this.prenom, comment : this.comment, note : this.note}
+            return {loginetu : this.login, nom : this.nom, prenom : this.prenom, comment : this.comment, note : this.note}
         }
 
         getDOMElt(){
@@ -62,20 +79,27 @@ function notes(id, rootid){
         }
     }
 
-    var data = [];
+    var data = {};
 
-    var appRoot = document.getElementById(rootid);
-    var root = document.createElement("div");
-
-    appRoot.appendChild(root);
+    var root = document.getElementById("ajout-note-table");
 
     var send = () => {
-        console.log(data);
+        var header = {
+            method : 'POST', 
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body : JSON.stringify(Object.values(data).map(elt => elt.getData()))
+        }
+
+        fetch("/api/modules-"+  ref + "/update-notes-ds-"+id, header).then(res => res.text()).then(text => {console.log(text)});
     }
 
     var download = () => {
-        if (data.length > 0){
-            let rows = data.map((elt) => elt.getData());
+
+        if (data){
+            console.log(data);
+            let rows = Object.values(data).map((elt) => elt.getData());
             let worksheet = XLSX.utils.json_to_sheet(rows);
             let workbook = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(workbook, worksheet, "NOTES");
@@ -90,7 +114,23 @@ function notes(id, rootid){
             let reader = new FileReader();
             reader.onload = function(e) {
                 var workbook = XLSX.read(e.target.result);
-                console.log(workbook);
+                var dataimport = XLSX.utils.sheet_to_json(workbook.Sheets.NOTES);
+                console.log(dataimport);
+                if (data){
+                    dataimport.forEach((row) => {
+                        let target = data[row.loginetu]
+                        if (target){
+                            if (row.note){
+                                target.setNote(row.note)
+                            }
+                            if (row.comment){
+                                target.setComment(row.comment);
+                            }
+                        }
+                    });
+                }
+                
+
             };
             reader.readAsArrayBuffer(filelist[0]);
         }
@@ -99,7 +139,7 @@ function notes(id, rootid){
     var load = () => {
         root.innerHTML = "";
 
-        data = [];
+        data = {};
 
         var table = document.createElement("table");
         table.innerHTML = "<thead><th>Nom</th><th>Prenom</th><th>Date Envoie</th><th>Commentaires</th><th>Notes</th></thead>";
@@ -126,7 +166,7 @@ function notes(id, rootid){
         loadingTitle.innerText = "Chargement";
         root.appendChild(loadingTitle);
 
-        fetch("/api/modules/notes-ds-"+id).then(res => {
+        fetch("/api/modules-"+ref+"/get-notes-ds-"+id).then(res => {
             if (res.ok){
                 return res.json();
             } else {
@@ -136,7 +176,7 @@ function notes(id, rootid){
             json.forEach(elt => {
                 let line = new Note(elt);
                 tbody.appendChild(line.getDOMElt());
-                data.push(line);
+                data[line.login] = line
             })
             root.removeChild(loadingTitle);
             root.appendChild(table);
@@ -147,4 +187,4 @@ function notes(id, rootid){
     }
 
     load();
-}
+})();

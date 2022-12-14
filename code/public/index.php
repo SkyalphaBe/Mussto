@@ -37,7 +37,8 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("GET", "/creerDS-[:ue]", "CreerDS", "CreerDSProf");
         $router->map("GET", "/download", "download", "download");
 
-        $router->map("GET", "/api/modules/notes-ds-[:id]", "notesDS");
+        $router->map("GET", "/api/modules-[:ue]/get-notes-ds-[:id]", "getNotesDS");
+        $router->map("POST", "/api/modules-[:ue]/update-notes-ds-[:id]", "updateNotesDS");
         $router->map("GET", "/api/modules-[:ue]/alletu", "alletu");
 
 
@@ -66,5 +67,6 @@ if ($match){
         require_once (PATH_CONTROLLERS.$match['target'].'.php');
     }
 } else {
+    http_response_code(404);
     echo '404'; #A modifier
 }

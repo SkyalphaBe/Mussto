@@ -2,18 +2,19 @@
     require_once(PATH_MODELS."ProfDAO.php");
     $dao = new ProfDAO(true, $_SESSION["login"]);
 
-    $devoirs = $dao->getDSForModule($match['params']['ue']);
-    /*echo '<pre>';
-        print_r($devoirs);
-    echo '</pre>';*/
-
-    if ($devoirs){
+    $module = $dao->getModule($match['params']['ue']);
+    if ($module){
+        $devoirs = $dao->getDSForModule($match['params']['ue']);
+    
+        
         require_once (PATH_VIEWS."ListeDS.php");
-    } else {
+    }  else {
         if (isset($router)){
             header('Location: '.$router->generate('home'));
         } else {
             header('Location: ./');
         }
     }
+
+    
 ?>

@@ -30,24 +30,33 @@ class ProfDAO extends UserDAO
 
     /**
      * @param $id Id du devoir
+     * @param $ref Id du module
      * @return array|false|null Renvoie la liste des résultat pour chaque éleve de ce DS (Si l'élève n'as pas encore de notes, sa note est null)
      */
-    public function getResultsForDS($id){
-        $data = $this->queryAll("SELECT PRENOMETU, NOMETU, NOTE, DATE_ENVOIE, COMMENTAIRE FROM NOTER RIGHT OUTER JOIN ( SELECT LOGINETU, IDDEVOIR FROM DEVOIR NATURAL JOIN EVALUER NATURAL JOIN AFFECTER WHERE IDDEVOIR = ? AND LOGINPROF = ? ) as ELEVE USING (LOGINETU, IDDEVOIR) NATURAL JOIN ETUDIANT", [ $id, $this->_username] );
+    public function getResultsForDS($id, $ref){
+        $data = $this->queryAll("SELECT LOGINETU, PRENOMETU, NOMETU, NOTE, DATE_ENVOIE, COMMENTAIRE FROM NOTER RIGHT OUTER JOIN ( SELECT LOGINETU, IDDEVOIR FROM DEVOIR NATURAL JOIN EVALUER NATURAL JOIN AFFECTER WHERE IDDEVOIR = ? AND LOGINPROF = ? ) as ELEVE USING (LOGINETU, IDDEVOIR) NATURAL JOIN ETUDIANT", [ $id, $this->_username] );
         return $data;
     }
 
-    public function getGroups($UE){
+    /**
+     *  @param $ref id du module
+     *  @return array Renvoie tout les groupes concerné par un module
+     */
+    public function getGroups($ref){  ///A CORRIGER !!!!!! (PEUT RENVOYER QUELQUE CHOSE SI LE PROF N'ENSEIGNE PAS LE MODULE)
         $data = [];
         $result=$this->queryAll("select INTITULEGROUPE
         from GROUPE
         join PARTICIPER using(INTITULEGROUPE)
-        where REFMODULE = ?",[$UE]);
+        where REFMODULE = ?",[$ref]);
         foreach ($result as $line){
             $data[] = $line['INTITULEGROUPE'];
         }
         return $data;
     }
+
+    /**
+     * @return array Renvoie la liste des modules ensigner par le prof
+     */
     public function getModules(){
         $result = $this->queryAll("select NOMMODULE,REFMODULE
         from MODULE
@@ -64,6 +73,10 @@ class ProfDAO extends UserDAO
         return $result;
     }
 
+    /**
+     * @param $ref id du module
+     * @return array Renvoie la liste des DS pour un module
+     */
     public function getDSForModule($ref){
         $data = $this->queryAll("SELECT NOMMODULE,IDDEVOIR,CONTENUDEVOIR,DATEDEVOIR,REFMODULE
         FROM DEVOIR
