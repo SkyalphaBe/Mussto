@@ -1,7 +1,7 @@
 <?php
 
 //Tableau des fichiers CSS nécessaire
-$style = ["main.css", "sideBarre.css","gererUtilisateur.css"];
+$style = ["main.css", "sideBarre.css","gererAdmin.css"];
 
 //Appel de l'header
 require_once(PATH_VIEW_COMPONENT.'header.php');
@@ -20,6 +20,6 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
     <button>Créer un compte</button>
 </div>
 <div class="content"></div>
-<script type="module" src="<?php echo PATH_SCRIPTS?>listeUtilisateur.js"></script>
+<script type="module" src="<?php echo PATH_SCRIPTS?>gestionAdmin.js"></script>
 
 <?php require_once (PATH_VIEW_COMPONENT.'footer.php');?>

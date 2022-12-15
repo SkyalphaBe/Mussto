@@ -33,6 +33,12 @@ class AdminDAO extends UserDAO
         }
     }
 
+    public function getGroupes($semesters){
+        $res =  $this->queryAll("SELECT ANNEEGROUPE, INTITULEGROUPE FROM GROUPE
+                WHERE INSTR(INTITULEGROUPE,?) != 0 or INSTR(INTITULEGROUPE,?) != 0",$semesters);
+        return $res;
+    }
+
     public function createGroupe($intituleGroupe,$anneGroupe){
         $this->insertRow("insert into GROUPE values (?,?)",[$intituleGroupe,$anneGroupe]);
     }
