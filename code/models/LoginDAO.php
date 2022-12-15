@@ -34,7 +34,9 @@ class LoginDAO extends DAO
                     if (password_verify($password, $res['PASSWORD_HASH'])) {
                         $result = [
                             'logged' => 'admin',
-                            'login' => $login
+                            'login' => $login,
+                            'firstname' => "",
+                            'lastname' => ""
                         ];
                     }
                 }

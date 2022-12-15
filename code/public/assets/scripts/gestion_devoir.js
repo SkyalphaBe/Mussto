@@ -191,95 +191,89 @@ function gestion_notes(root_id){
 };
 
 function gestion_info(){
-    const inputs = document.querySelectorAll("input.devoir-info-input, select.devoir-info-input");
-    const submitButton = document.querySelector("button#devoir-info-submit");
-    
-    groups_selected.sort();
 
-    const initialValue = {groups : [...groups_selected]};
-    inputs.forEach(elt => {
-        initialValue[elt.name] = elt.value;
-    });
+    ///Importation du selecteur
+    let js = document.createElement("script");
+    js.src = "/assets/scripts/selecteur.js";
+    js.type = "text/javascript";
+    js.onload = () => {
+        groups_selected.sort();
+        profs_selected.sort();
 
-    const getData = () => {
-        const data = {groups : groups_selected};
+        //Recuperation des div pour les selecteurs
+        const groupsDiv = document.getElementById("devoir-group");
+        const orgaDiv = document.getElementById("devoir-orga");
+
+        //Création des selecteur et affectation
+        groupsDiv.innerHTML = "<p>Groupes : </p>";
+        groupsDiv.appendChild(selecteur("groups", groups_selected, groups_available, (selected) => {
+            groups_selected = selected;
+        }));
+
+        orgaDiv.innerHTML = "<p>Organisateur : </p>";
+        profs_available.forEach(elt => {elt.val = elt.PRENOMPROF + " " + elt.NOMEPROF});
+        profs_selected.forEach(elt => {elt.val = elt.PRENOMPROF + " " + elt.NOMEPROF});
+        orgaDiv.appendChild(selecteur("orga", profs_selected, profs_available, (selected) => {
+            profs_selected = selected;
+        }))
+
+
+        //Gestion des inputs
+        const inputs = [...document.querySelectorAll("input.devoir-info-input, select.devoir-info-input, div.devoir-info-input")]; //Les selecteurs sont gérés comme les inputs
+        const submitButton = document.querySelector("button#devoir-info-submit");
+        
+        //Création de l'objets des valeurs initiales
+        const initialValue = {iddevoir : id};
         inputs.forEach(elt => {
-            data[elt.name] = elt.value;
+            initialValue[elt.name] = elt.value;
         });
 
-        return data;
-    }
+        //Méthode de récupération des valuers actuelles
+        const getData = () => {
+            const data = {iddevoir : id};
+            inputs.forEach(elt => {
+                data[elt.name] = elt.value;
+            });
 
-    const checkChange = () => {
-        if (JSON.stringify(getData()) === JSON.stringify(initialValue)){
-            submitButton.setAttribute("disabled", "");
-            return false;
-        } else {
-            submitButton.removeAttribute("disabled");
-            return true;
-        };
-    }
-    inputs.forEach(elt => {
-        elt.onchange = checkChange;
-    })
+            return data;
+        }
 
-    const submit = () => {
-        if (checkChange()){
-            var header = {
-                method : 'POST', 
-                headers: {
-                'Content-Type': 'application/json'
-                },
-                body : JSON.stringify(getData())
+        //Méthode de vérification de changement (valeur initial != valeur actuelle)
+        const checkChange = () => {
+            if (JSON.stringify(getData()) === JSON.stringify(initialValue)){
+                submitButton.setAttribute("disabled", "");
+                return false;
+            } else {
+                submitButton.removeAttribute("disabled");
+                return true;
+            };
+        }
+
+        //Chaque changement des inputs engendre un checkChange
+        inputs.forEach(elt => {
+            elt.onchange = checkChange;
+        })
+
+        const submit = () => {
+            console.log(getData());
+            if (checkChange()){
+                var header = {
+                    method : 'POST', 
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body : JSON.stringify(getData())
+                }
+        
+                fetch("/api/devoir/update-infos-ds-"+id, header).then(res => res.text()).then(text => {console.log(text)});
             }
+        }
+
+        submitButton.onclick = submit;
+        submitButton.setAttribute("disabled", "");
+    }
+    document.body.appendChild(js);
+
+
     
-            fetch("/api/devoir/update-infos-ds-"+id, header).then(res => res.text()).then(text => {console.log(text)});
-        }
-    }
-
-    submitButton.onclick = submit;
-
-    const groupsDiv = document.getElementById("devoir-group");
-    const updateGroupsDiv = () => {
-        checkChange();
-        groupsDiv.innerHTML = "<p>Groupes : </p>";
-
-        var listElt = document.createElement("ul");
-        groups_selected.forEach((elt) => {
-            let item = document.createElement("li");
-            item.innerText = elt;
-            item.onclick = () => {
-                let index = groups_selected.indexOf(elt)
-                groups_selected.splice(index, 1);
-                groups_selected.sort();
-                updateGroupsDiv();
-            }
-            listElt.appendChild(item);
-        })
-        groupsDiv.appendChild(listElt);
-
-        var selectElt = document.createElement("select");
-        var groups_not_selected = groups_available.filter(elt => !(groups_selected.includes(elt)))
-        selectElt.add(new Option("--", null));
-        groups_not_selected.forEach(elt => {
-            selectElt.add(new Option(elt));
-        })
-        groupsDiv.appendChild(selectElt);
-
-        var buttonElt = document.createElement("button");
-        buttonElt.innerText = "Ajouter";
-        buttonElt.onclick = () => {
-            let val = selectElt.value;
-            if (val !== "null"){
-                groups_selected.push(val);
-                groups_selected.sort();
-                updateGroupsDiv();
-            }
-        }
-        groupsDiv.appendChild(buttonElt);
-
-    }
-
-    updateGroupsDiv();
-    submitButton.setAttribute("disabled", "");
 }
