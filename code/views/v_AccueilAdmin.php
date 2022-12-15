@@ -13,7 +13,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 <div class="gestionAdmin">
     <a href="">Gérer les modules</a>
     <a href="<?=$router->generate('gererUtilisateurAdmin')?>">Gérer les utilisateurs</a>
-    <a href="">Gérer les groupes</a>
+    <a href="<?=$router->generate('GestionGroupes')?>">Gérer les groupes</a>
 </div>
 
 <?php
