@@ -22,7 +22,6 @@
                 <div class="devoirProf">
                     <h2 class="devoirProf-nb">DS : <?=$nbDevoir?></h2>
                     <p class="devoirProf-titre"><?=$allDevoirs['CONTENUDEVOIR']?></p>
-                    <p class="devoirProf-group">Groupe : <?=$allDevoirs['INTITULEGROUPE']?></p>
                     <p class="devoirProf-date">Date : <?=$allDevoirs['DATEDEVOIR']?></p>
                     <a class="button" href="<?=$router->generate("AjouterNote", ['ue' => $devoirs[0]['REFMODULE']])?>" style="background-color: <?=CSScolorByName($devoirs[0]['NOMMODULE'])?>">Ajouter notes</a>
                 </div>
