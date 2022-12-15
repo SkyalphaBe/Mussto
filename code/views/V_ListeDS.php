@@ -1,5 +1,4 @@
 <?php
-
     //Tableau des fichiers CSS nécessaire
     $style = ["main.css", "sideBarre.css","listeDS.css"];
 
@@ -7,28 +6,28 @@
     require_once(PATH_VIEW_COMPONENT.'header.php');
 
     //Appel du composant SideBarre
-
     require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
     $nbDevoir = 0;
 ?>
+    
+    <div style="background-color: <?=CSScolorByName($module['NOMMODULE'])?>" class="devoirModuleProf">
+        <div class="topBoxProf">
+            <h1 class="moduleProfTitle"><?=$module['NOMMODULE']?></h1>
+            <a class="button" href="<?=$router->generate("CreerDSProf", ['ue' => $devoirs[0]['REFMODULE']])?>">Créer un DS</a>
+            <a class="button" href="<?=$router->generate("home")?>">Retour</a>
+        </div>
     <?php if (isset($devoirs)&& $devoirs){?>
-        <div style="background-color: <?=CSScolorByName($devoirs[0]['NOMMODULE'])?>" class="devoirModuleProf">
-            <div class="topBoxProf">
-                <h1 class="moduleProfTitle"><?=$devoirs[0]['NOMMODULE']?></h1>
-                <a class="button" href="<?=$router->generate("CreerDSProf", ['ue' => $devoirs[0]['REFMODULE']])?>">Créer un DS</a>
-                <a class="button" href="<?=$router->generate("home")?>">Retour</a>
-            </div>
-        <?php foreach ($devoirs as $allDevoirs){$nbDevoir++?>
+        <?php foreach ($devoirs as $devoir){$nbDevoir++?>
                 <div class="devoirProf">
-                    <h2 class="devoirProf-nb">DS : <?=$nbDevoir?></h2>
-                    <p class="devoirProf-titre"><?=$allDevoirs['CONTENUDEVOIR']?></p>
-                    <p class="devoirProf-date">Date : <?=$allDevoirs['DATEDEVOIR']?></p>
-                    <a class="button" href="<?=$router->generate("AjouterNote", ['ue' => $devoirs[0]['REFMODULE']])?>" style="background-color: <?=CSScolorByName($devoirs[0]['NOMMODULE'])?>">Ajouter notes</a>
+                    <p class="devoirProf-titre"><?=$devoir['CONTENUDEVOIR']?></p>
+                    <p class="devoirProf-group">Groupe : <?php foreach($devoir['GROUPES'] as $grp){ echo $grp." "; }?></p>
+                    <p class="devoirProf-date">Date : <?=$devoir['DATEDEVOIR']?></p>
+                    <a class="button" href="<?=$router->generate("AjouterNote", ['ue' => $match['params']['ue'], 'id' => $devoir['IDDEVOIR']])?>" style="background-color: <?=CSScolorByName($module['NOMMODULE'])?>">Gérer</a>
                 </div>
         <?php } } else { ?>
         <p>Aucune DS pour le moment</p>
     <?php } ?>
-         </div>
+    </div>
 
 <?php
 require_once (PATH_VIEW_COMPONENT.'footer.php');

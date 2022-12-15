@@ -31,16 +31,19 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
     } else if ($_SESSION['logged'] === 'prof'){
         ##Routes pour les professeurs
         $router->map("GET", "/", "homeProf", "home");
-        $router->map("GET", "/modules/detail-[:ue]", "moduleProfDetail", "moduleDetail");
-        $router->map("GET|POST", "/AjouterNote-[:ue]", "AjouterNote", "AjouterNote");
-        $router->map("GET|POST", "/CreerDS-[:ue]", "CreerDS", "CreerDSProf");
+        #$router->map("GET", "/modules/detail-[:ue]", "moduleProfDetail", "moduleDetail");
+        $router->map("GET", "/modules/detail-[:ue]", "ListeDS", "listeDsUe");
+        $router->map("GET", "/devoir/ds-[:id]", "AjouterNote", "AjouterNote");
+        $router->map("GET", "/creerDS-[:ue]", "CreerDS", "CreerDSProf");
         $router->map("GET", "/download", "download", "download");
-        $router->map("GET", "/ListeDS-[:ue]", "ListeDS", "listeDsUe");
 
-        $router->map("GET", "/api/modules/notes-ds-[:id]", "notesDS");
+        $router->map("GET", "/api/devoir/get-notes-ds-[:id]", "getNotesDS");
+        $router->map("POST", "/api/devoir/update-notes-ds-[:id]", "updateNotesDS");
+        $router->map("POST", "/api/devoir/update-infos-ds-[:id]", "updateInfoDS");
+        $router->map("GET", "/api/modules-[:ue]/alletu", "alletu");
 
 
-        //Définition du contenu de la sideBarx
+        //Définition du contenu de la sideBar
         $menu = [
             [ 'href' => "", 'name' => "Contact" ]
         ];
@@ -69,5 +72,6 @@ if ($match){
         require_once (PATH_CONTROLLERS.$match['target'].'.php');
     }
 } else {
+    http_response_code(404);
     echo '404'; #A modifier
 }
