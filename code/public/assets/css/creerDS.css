@@ -21,6 +21,12 @@ body{
     text-align: center;
 }
 
+.error{
+    text-align: center;
+    font-weight: lighter;
+    color: #d92525;
+}
+
 .creationDS{
     border-radius: 15px;
     background-color: #2F7aea;
