@@ -47,7 +47,9 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
     } else if ($_SESSION['logged'] === 'admin'){
         ##Routes pour les admins
         $router->map("GET", "/", "homeAdmin", "home");
-        $router->map("GET", "/api/listeUtilisateur", "listeUtilisateur");
+        $router->map("GET", "/api/listeEtu", "listeEtu");
+        $router->map("GET", "/api/listeProfesseur", "listeProfesseur");
+
         $router->map("GET", "/gererUtilisateur", "gererUtilisateur","gererUtilisateurAdmin");
     }
     ##Route test home (temporaire)
