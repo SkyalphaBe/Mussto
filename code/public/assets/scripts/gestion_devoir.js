@@ -219,7 +219,7 @@ function gestion_info(){
 
 
         //Gestion des inputs
-        const inputs = [...document.querySelectorAll("input.devoir-info-input, select.devoir-info-input, div.devoir-info-input")]; //Les selecteurs sont gérés comme les inputs
+        const inputs = [...document.querySelectorAll("input.devoir-info-input, select.devoir-info-input, div.devoir-info-input, textarea.devoir-info-input")]; //Les selecteurs sont gérés comme les inputs
         const submitButton = document.querySelector("button#devoir-info-submit");
         
         //Création de l'objets des valeurs initiales
@@ -240,6 +240,7 @@ function gestion_info(){
 
         //Méthode de vérification de changement (valeur initial != valeur actuelle)
         const checkChange = () => {
+            //console.log(initialValue);
             if (JSON.stringify(getData()) === JSON.stringify(initialValue)){
                 submitButton.setAttribute("disabled", "");
                 return false;
@@ -252,20 +253,33 @@ function gestion_info(){
         //Chaque changement des inputs engendre un checkChange
         inputs.forEach(elt => {
             elt.onchange = checkChange;
+            elt.oninput = checkChange;
         })
 
         const submit = () => {
-            console.log(getData());
             if (checkChange()){
+                let data = getData();
+                data.orga = data.orga.map(elt => elt.LOGINPROF); //Réarrangement profs;
                 var header = {
                     method : 'POST', 
                     headers: {
                     'Content-Type': 'application/json'
                     },
-                    body : JSON.stringify(getData())
+                    body : JSON.stringify(data)
                 }
         
-                fetch("/api/devoir/update-infos-ds-"+id, header).then(res => res.text()).then(text => {console.log(text)});
+                submitButton.setAttribute("disabled", "");
+                fetch("/api/devoir/update-infos-ds-"+id, header).then(res => {
+                    
+                    if (res.status === 200){
+                        submitButton.removeAttribute("disabled");
+                        location.reload();
+                    } else {
+                        submitButton.removeAttribute("disabled");
+                        console.log("Error");
+                    }
+                    return res.text()
+                }).then(text => {console.log(text)});
             }
         }
 

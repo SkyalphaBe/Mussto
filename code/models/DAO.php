@@ -30,6 +30,18 @@ abstract class DAO
         return $pdos;
     }
 
+    public function beginTransaction(){
+        return Database::getInstance()->getBdd()->beginTransaction();
+    }
+
+    public function commitTransaction(){
+        return Database::getInstance()->getBdd()->commit();
+    }
+
+    public function rollbackTransaction(){
+        return Database::getInstance()->getBdd()->rollBack();
+    }
+
     public function queryRow($sql, $args = null)
     {
         try
@@ -40,6 +52,7 @@ abstract class DAO
         }
         catch(PDOException $e)
         {
+            error_log($e->getMessage());
             if($this->_debug)
                 die($e->getMessage());
             $this->_erreur = 'query';
@@ -58,6 +71,7 @@ abstract class DAO
         }
         catch(PDOException $e)
         {
+            error_log($e->getMessage());
             if($this->_debug)
                 die($e->getMessage());
             $this->_erreur = 'query';
@@ -66,17 +80,19 @@ abstract class DAO
         return $res;
     }
 
-    public function insertRow($sql,$args){
+    public function execQuery($sql,$args){
         try
         {
-            $res = $this->_requete($sql,$args);
+            $pdos = $this->_requete($sql,$args);
+            $res = $pdos->rowCount();
         
         }
         catch(PDOException $e)
         {
+            error_log($e->getMessage());
             if($this->_debug)
                 die($e->getMessage());
-            $this->_erreur = 'insert';
+            $this->_erreur = 'exec';
             $res = false;
         }
         return $res;

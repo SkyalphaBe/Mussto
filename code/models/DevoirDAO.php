@@ -3,29 +3,31 @@ require_once (PATH_MODELS."DAO.php");
 class DevoirDAO extends DAO
 {
     public $id;
-    public $DS;
+    public $username;
 
-    private function __construct($debug, $id, $username){
+    public function __construct($debug, $id, $username){
         parent::__construct($debug);
-        $data = $this->queryRow("SELECT IDDEVOIR, REFMODULE, CONTENUDEVOIR, COEF, DATEDEVOIR, SALLE FROM DEVOIR NATURAL JOIN ORGANISER_DEVOIR WHERE IDDEVOIR = ? AND LOGINPROF = ?", [$id, $username]);
-        if (!$data){
-            throw new Exception("Pas de devoir");
-        } else {
-            $this->id = $id;
-
-            $data['GROUPES'] = $this->getGroupsForDS($data['IDDEVOIR']);
-            $data['ORGANISATEUR'] = $this->getOrganisteurForDS($data['IDDEVOIR']);
-
-            $this->DS = $data;
-        }
+        $this->id = $id;
+        $this->username = $username;
     }
 
     public static function getDS($id, $username){
         try {
-            return new DevoirDAO(true, $id, $username);
+            return (new DevoirDAO(true, $id, $username))->getAllInfo();
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    public function getAllInfo(){
+        $data = $this->queryRow("SELECT IDDEVOIR, REFMODULE, CONTENUDEVOIR, COEF, DATEDEVOIR, SALLE FROM DEVOIR NATURAL JOIN ORGANISER_DEVOIR WHERE IDDEVOIR = ? AND LOGINPROF = ?", [$this->id, $this->username]);
+        if (!$data){
+            throw new Exception("Pas de devoir");
+        }
+
+        $data['GROUPES'] = $this->getGroupsForDS($data['IDDEVOIR']);
+        $data['ORGANISATEUR'] = $this->getOrganisteurForDS($data['IDDEVOIR']);
+        return $data;
     }
 
      /**
@@ -57,6 +59,44 @@ class DevoirDAO extends DAO
     public function getResultsForDS(){
         $data = $this->queryAll("SELECT LOGINETU, PRENOMETU, NOMETU, NOTE, DATE_ENVOIE, COMMENTAIRE FROM NOTER RIGHT OUTER JOIN ( SELECT LOGINETU, IDDEVOIR FROM DEVOIR NATURAL JOIN EVALUER NATURAL JOIN AFFECTER WHERE IDDEVOIR = ? ) as ELEVE USING (LOGINETU, IDDEVOIR) NATURAL JOIN ETUDIANT", [$this->id] );
         return $data;
+    }
+
+    public function updateDevoir($new){
+        $this->beginTransaction();
+        try {
+            $res = $this->execQuery("UPDATE DEVOIR SET COEF = ?, DATEDEVOIR = ?, SALLE = ?, CONTENUDEVOIR = ? WHERE IDDEVOIR = ?", [$new['coef'], $new['date'], $new['salle'], $new['content'], $this->id]);
+            if ($res === false){ throw new Exception("Erreur update devoir");}
+
+            $res = $this->execQuery("DELETE FROM ORGANISER_DEVOIR WHERE IDDEVOIR = ? AND NOT LOGINPROF = ?", [$this->id, $this->username]); //Suppression de tous les organisateur sauf celui qui fait la requete
+            if ($res === false){ throw new Exception("Erreur suppression prof");}
+
+            foreach($new['orga'] as $prof){
+                if ($prof !== $this->username){
+                    $res = $this->execQuery("INSERT INTO ORGANISER_DEVOIR (iddevoir, loginprof) VALUES (?, ?)", [$this->id, $prof]); //Insertion de tout les nouveaux organisateurs
+                    if ($res === false){ throw new Exception("Erreur insertion prof");}
+                }
+            }
+
+            $res = $this->execQuery("DELETE FROM EVALUER WHERE IDDEVOIR = ?", [$this->id]); //Suppression de tous les groupes
+            if ($res === false){ throw new Exception("Erreur suppression groupes");}
+
+            foreach($new['groups'] as $grp){
+                $res = $this->execQuery("INSERT INTO EVALUER (INTITULEGROUPE, ANNEEGROUPE, IDDEVOIR) VALUES (?, 2022, ?)", [$grp, $this->id]);
+                if ($res === false){ throw new Exception("Erreur insertion groupes");}
+            }
+            
+            return $this->commitTransaction();
+        } catch (Exception $e) {
+            $this->rollbackTransaction();
+
+            return false;
+        }
+        
+    }
+
+    public function insertOrUpdateNote($note){
+        $res = $this->execQuery("INSERT INTO NOTER (LOGINETU, IDDEVOIR, NOTE, DATE_ENVOIE, COMMENTAIRE) VALUES (?, ?, ?, NOW(), ?) ON DUPLICATE KEY UPDATE NOTE = ?, COMMENTAIRE = ?", [$note['loginetu'], $this->id, $note['note'], $note['comment'], $note['note'], $note['comment']]);
+        return $res;
     }
 
     

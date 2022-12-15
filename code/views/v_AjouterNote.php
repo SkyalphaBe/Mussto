@@ -22,12 +22,16 @@ const id = "<?=$match['params']['id']?>";
     </div>
     <div class="devoir-info">
         <h2>Information sur le devoir</h2>
+        <div class="devoir-content">
+            <label for="devoir-content-input">Intitule :  </label>
+            <textarea class="devoir-info-input" id="devoir-content-input" name="content"><?=$devoir['CONTENUDEVOIR']?></textarea>
+        </div>
         <div class="devoir-salle">
             <label for="salle-select">Salle : </label>
             <select class="devoir-info-input" name="salle" id="salle-select">
                 <?php if ($salle_available){
                     foreach ($salle_available as $salle){
-                        if ($salle === $devoir->DS['SALLE']){
+                        if ($salle === $devoir['SALLE']){
                             echo "<option selected value=".$salle.">".$salle."</option>";
                         } else {
                             echo "<option value=".$salle.">".$salle."</option>";
@@ -38,23 +42,23 @@ const id = "<?=$match['params']['id']?>";
         </div>
         <div class="devoir-date">
             <label for="devoir-date-input">Date : </label> 
-            <input class="devoir-info-input" id="devoir-date-input" name="date" type="date" value="<?=$devoir->DS['DATEDEVOIR']?>"/>
+            <input class="devoir-info-input" id="devoir-date-input" name="date" type="date" value="<?=$devoir['DATEDEVOIR']?>"/>
         </div>
         <div class="devoir-group" id="devoir-group">
             <script>
-                var groups_selected = <?=json_encode($devoir->DS['GROUPES'])?>;
+                var groups_selected = <?=json_encode($devoir['GROUPES'])?>;
                 var groups_available = <?=json_encode($groups_available)?>;
             </script>>
         </div>
         <div class="devoir-orga" id="devoir-orga">
             <script>
-                var profs_selected = <?=json_encode($devoir->DS['ORGANISATEUR'])?>;
+                var profs_selected = <?=json_encode($devoir['ORGANISATEUR'])?>;
                 var profs_available = <?=json_encode($profs_available)?>
             </script>
         </div>
         <div class="devoir-coef">
             <label for="devoir-coef-input">Coefficient : </label> 
-            <input class="devoir-info-input" id="devoir-coef-input" name="coef" type="number" min="1" step="0.01" value="<?=$devoir->DS['COEF']?>"/>
+            <input class="devoir-info-input" id="devoir-coef-input" name="coef" type="number" min="1" step="0.01" value="<?=$devoir['COEF']?>"/>
         </div>
         <button id="devoir-info-submit">Enregistrer</button>
         <script>
@@ -64,9 +68,9 @@ const id = "<?=$match['params']['id']?>";
 
     <div>
         <h2>Résultats du devoir</h2>
-        <?php if (date_create($devoir->DS['DATEDEVOIR']) > new DateTime()) { ?>
+        <?php if (date_create($devoir['DATEDEVOIR']) > new DateTime()) { ?>
             <p>Le devoir n'est pas encore passé</p>
-        <?php } else if (!$devoir->DS['GROUPES']){ ?>
+        <?php } else if (!$devoir['GROUPES']){ ?>
             <p>Aucun groupe inscrit</p>
         <?php } else { ?>
             <div id="ajout-note-table">

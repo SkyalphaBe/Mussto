@@ -6,7 +6,7 @@ $devoir = DevoirDAO::getDS($match['params']['id'], $_SESSION['login']); //$dao->
 
 if ($devoir){
     $salle_available = $dao->getAllSalle();
-    $module = $dao->getModule($devoir->DS['REFMODULE']);
+    $module = $dao->getModule($devoir['REFMODULE']);
     if ($module){
         $profs_available = $dao->getCollegueForModule($module['REFMODULE']);
         $groups_available = $dao->getGroups($module['REFMODULE']);
