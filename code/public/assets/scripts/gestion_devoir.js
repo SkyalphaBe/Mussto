@@ -272,7 +272,7 @@ function gestion_info(){
                 fetch("/api/devoir/update-infos-ds-"+id, header).then(res => {
                     
                     if (res.status === 200){
-                        submitButton.removeAttribute("disabled");
+                        //submitButton.removeAttribute("disabled");
                         location.reload();
                     } else {
                         submitButton.removeAttribute("disabled");

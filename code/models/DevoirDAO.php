@@ -9,22 +9,34 @@ class DevoirDAO extends DAO
         parent::__construct($debug);
         $this->id = $id;
         $this->username = $username;
+        $res = $this->queryRow("SELECT IDDEVOIR FROM DEVOIR NATURAL JOIN ORGANISER_DEVOIR WHERE IDDEVOIR = ? AND LOGINPROF = ?", [$this->id, $this->username]);
+        if (!$res){
+            throw new Exception("Pas de devoir accesible");
+        }
+        
     }
 
     public static function getDS($id, $username){
-        try {
-            return (new DevoirDAO(true, $id, $username))->getAllInfo();
-        } catch (Exception $e) {
+        try{
+            return new DevoirDAO(false, $id, $username);
+        } catch (Exception $e){
+            error_log($e->getMessage());
             return false;
         }
     }
 
+    public static function getAllInfoDS($id, $username){
+        $ds = DevoirDAO::getDS($id, $username);
+        $res = false;
+        if ($ds){
+            $res = $ds->getAllInfo();
+        }
+        return $res;
+    }
+
     public function getAllInfo(){
         $data = $this->queryRow("SELECT IDDEVOIR, REFMODULE, CONTENUDEVOIR, COEF, DATEDEVOIR, SALLE FROM DEVOIR NATURAL JOIN ORGANISER_DEVOIR WHERE IDDEVOIR = ? AND LOGINPROF = ?", [$this->id, $this->username]);
-        if (!$data){
-            throw new Exception("Pas de devoir");
-        }
-
+        
         $data['GROUPES'] = $this->getGroupsForDS($data['IDDEVOIR']);
         $data['ORGANISATEUR'] = $this->getOrganisteurForDS($data['IDDEVOIR']);
         return $data;

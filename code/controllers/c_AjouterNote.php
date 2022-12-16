@@ -2,7 +2,7 @@
 require_once(PATH_MODELS."ProfDAO.php");
 require_once(PATH_MODELS."DevoirDAO.php");
 $dao = new ProfDAO(true,$_SESSION['login']);
-$devoir = DevoirDAO::getDS($match['params']['id'], $_SESSION['login']); //$dao->getDS($match['params']['id']);
+$devoir = DevoirDAO::getAllInfoDS($match['params']['id'], $_SESSION['login']); //$dao->getDS($match['params']['id']);
 
 if ($devoir){
     $salle_available = $dao->getAllSalle();
