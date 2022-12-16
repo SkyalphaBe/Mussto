@@ -3,6 +3,9 @@ import {Professeur} from "./Professeur.js";
 
 const content = document.getElementsByClassName("content")[0];
 const radioChoix = document.querySelectorAll('input[type="radio"]');
+const btnCreerGroupe = document.getElementById("btnCreer");
+const checkBox = document.getElementsByClassName("check")[0];
+const topBoxUsr = document.getElementsByClassName("topBoxUsr")[0];
 
 
 window.onload = update();
@@ -13,6 +16,7 @@ radioChoix.forEach(elem=>{
     });
 });
 
+btnCreerGroupe.addEventListener("click",creerCompte);
 
 function update(){
     content.innerHTML = "";
@@ -91,4 +95,30 @@ function createLineGroup(group){
     newDiv.appendChild(annee);
     newDiv.appendChild(newBtn);
     content.appendChild(newDiv);
+}
+
+function creerCompte(){
+
+    btnCreerGroupe.style.display="none";
+    checkBox.style.display="none";
+    content.innerHTML = '<form method=\"post\">' +
+        '<label>login <input type=\"text\"></label>' +
+        '<label>Mot de passe <input type=\"text\"></label>' +
+        '<label>Prenom <input type=\"text\"></label>' +
+        '<label>Nom <input type=\"text\"></label>' +
+        '<label>Type de compte <select></select></label>' +
+        '<input type=\"submit\"></form>';
+
+
+    let btnRetour = document.createElement("button");
+    btnRetour.textContent="retour";
+
+    topBoxUsr.appendChild(btnRetour);
+
+    btnRetour.addEventListener("click",()=>{
+        btnCreerGroupe.style.display="block";
+        checkBox.style.display="flex";
+        topBoxUsr.removeChild(btnRetour);
+        update();
+    });
 }

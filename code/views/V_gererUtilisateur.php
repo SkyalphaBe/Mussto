@@ -17,7 +17,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <label>Liste Etudiant<input type="radio" name="choix" value="/api/listeEtu" checked></label>
         <label>Liste Professeur<input type="radio" name="choix" value="/api/listeProfesseur"></label>
     </div>
-    <button>Créer un compte</button>
+    <button id="btnCreer">Créer un compte</button>
 </div>
 <div class="content"></div>
 <script type="module" src="<?php echo PATH_SCRIPTS?>gestionAdmin.js"></script>
