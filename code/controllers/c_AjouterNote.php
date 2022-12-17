@@ -1,5 +1,5 @@
 <?php
-require_once(PATH_MODELS."ProfDAO.php");
+/* require_once(PATH_MODELS."ProfDAO.php");
 require_once(PATH_MODELS."DevoirDAO.php");
 $dao = new ProfDAO(true,$_SESSION['login']);
 $devoir = DevoirDAO::getAllInfoDS($match['params']['id'], $_SESSION['login']); //$dao->getDS($match['params']['id']);
@@ -8,7 +8,7 @@ if ($devoir){
     $salle_available = $dao->getAllSalle();
     $module = $dao->getModule($devoir['REFMODULE']);
     if ($module){
-        $profs_available = $dao->getCollegueForModule($module['REFMODULE']);
+        $profs_available = $dao->getProfsForModule($module['REFMODULE']);
         $groups_available = $dao->getGroups($module['REFMODULE']);
     }
 
@@ -20,6 +20,6 @@ if ($devoir){
     } else {
         header('Location: ./');
     }
-}
-
+} */
+require_once(PATH_VIEWS."gererDevoir.php");
 ?>

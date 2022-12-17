@@ -1,4 +1,4 @@
-function gestion_notes(root_id){
+function gestion_notes(root_id, id){
 
     ///Importation librairie SheetJS
     let js = document.createElement("script");
@@ -191,7 +191,6 @@ function gestion_notes(root_id){
 };
 
 function gestion_info(){
-
     ///Importation du selecteur
     let js = document.createElement("script");
     js.src = "/assets/scripts/selecteur.js";
@@ -291,3 +290,9 @@ function gestion_info(){
 
     
 }
+
+(function main(){
+    var id = location.pathname.split('-').pop();
+
+    gestion_notes("result-devoir", id);
+})()

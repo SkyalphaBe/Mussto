@@ -12,7 +12,7 @@ class ProfDAO extends UserDAO
      * @return array|false|null
      */
     public function getModule($ref){
-        $data = $this->queryRow("SELECT NOMMODULE, REFMODULE
+        $data = $this->queryRow("SELECT NOMMODULE, REFMODULE, DESCRIPTIONMODULE
         FROM MODULE
         JOIN ENSEIGNER USING(REFMODULE)
         WHERE LOGINPROF = ? AND REFMODULE = ?", [$this->_username, $ref]);
@@ -32,7 +32,7 @@ class ProfDAO extends UserDAO
     /**
      * 
      */
-    public function getCollegueForModule($ref){
+    public function getProfsForModule($ref){
         $data = $this->queryAll("SELECT LOGINPROF, PRENOMPROF, NOMEPROF FROM ENSEIGNER NATURAL JOIN PROFESSEUR WHERE REFMODULE = ?", [$ref]);
         return $data;
     }
