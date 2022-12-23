@@ -31,6 +31,7 @@
     padding: 30px;
     margin-top: 85px;
     border-radius: 15px;
+    justify-content: space-between;
 }
 
 .userElement{
@@ -97,10 +98,57 @@
     margin: 0;
 }
 
+.attribute{
+    display: flex;
+    justify-content: space-around;
+    width: 45%;
+}
+
 input[type="submit"]{
     border-radius: 15px;
     border: none;
     background-color: #4e2f83;
     color: #FFFFFF;
     padding: 10px;
+    transition: 0.3s;
+}
+
+.ExcelExport{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    gap: 15px;
+}
+
+.ExcelExport button{
+    border: none;
+    background-color: #4e2f83;
+    color: #FFFFFF;
+    border-radius: 10px;
+    width: 50%;
+    padding: 10px;
+    font-size: large;
+    transition: 0.3s;
+}
+.ExcelExport button:hover{
+    background-color: #8661c7;
+}
+
+input::file-selector-button{
+    border-radius: 15px;
+    padding: 10px;
+    font-size: large;
+    border: solid #4e2f83;
+    transition: 0.3s;
+}
+
+input[type="submit"]:hover{
+    background-color: #8661c7;
+}
+
+input::file-selector-button:hover{
+    background-color: #8661c7;
+    color: #FFFFFF;
 }

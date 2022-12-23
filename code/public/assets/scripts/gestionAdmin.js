@@ -16,7 +16,15 @@ radioChoix.forEach(elem=>{
     });
 });
 
-btnCreerGroupe.addEventListener("click",creerCompte);
+btnCreerGroupe.addEventListener("click",()=>{
+    btnCreerGroupe.style.display="none";
+    checkBox.style.display="none";
+    content.style.flexDirection="row";
+    content.style.height="80vh";
+    creerCompte();
+    creerCompteExcel();
+
+});
 
 function update(){
     content.innerHTML = "";
@@ -33,11 +41,11 @@ function update(){
                 json.forEach(line =>{
                     if(elem.value == "/api/listeEtu"){
                         let user = new Etudiant(line);
-                        createLineEtu(user);
+                        createLine(user);
                     }
                     else if(elem.value == "/api/listeProfesseur"){
                         let user = new Professeur(line);
-                        createLineEtu(user);
+                        createLine(user);
                     }
                     else{
                         createLineGroup(line);
@@ -51,11 +59,12 @@ function update(){
     });
 }
 
-function createLineEtu(user){
+function createLine(user){
     let newElem = document.createElement("div");
     let newNom = document.createElement("h3");
     let newPrenom = document.createElement("h3");
     let newBtn = document.createElement("button");
+    let attribute = document.createElement("div");
 
     newElem.className = "userElement";
 
@@ -68,8 +77,11 @@ function createLineEtu(user){
     newBtn.className = "btnUser";
     newBtn.textContent = "gérer";
 
-    newElem.appendChild(newPrenom);
-    newElem.appendChild(newNom);
+    attribute.className = "attribute";
+
+    attribute.appendChild(newPrenom);
+    attribute.appendChild(newNom);
+    newElem.appendChild(attribute);
     newElem.appendChild(newBtn);
     content.appendChild(newElem);
 }
@@ -98,11 +110,6 @@ function createLineGroup(group){
 }
 
 function creerCompte(){
-    btnCreerGroupe.style.display="none";
-    checkBox.style.display="none";
-    content.style.flexDirection="row";
-    content.style.height="80vh";
-
     let templateForm = document.querySelector("template");
     content.replaceChildren(templateForm.content.cloneNode(true));
 
@@ -120,6 +127,7 @@ function creerCompte(){
     });
 }
 
-function creerCompteExel(){
-
+function creerCompteExcel(){
+    let templateExcel = document.querySelectorAll("template")[1];
+    content.appendChild(templateExcel.content.cloneNode(true));
 }

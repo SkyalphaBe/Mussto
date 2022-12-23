@@ -46,6 +46,12 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         </div>
         <input type="submit"></form>
 </template>
+<template>
+    <div class="ExcelExport">
+        <button>Télécharger Excel</button>
+        <input type="file" id="file">
+    </div>
+</template>
 <div class="content"></div>
 <script type="module" src="<?php echo PATH_SCRIPTS?>gestionAdmin.js"></script>
 
