@@ -27,10 +27,9 @@
 .content{
     display: flex;
     flex-direction: column;
-    box-shadow: black;
     border: #222528;
     padding: 30px;
-    margin-top: 60px;
+    margin-top: 85px;
     border-radius: 15px;
 }
 
@@ -39,7 +38,6 @@
     justify-content: space-around;
     align-items: center;
     margin: 10px;
-    border-color: #222528;
     border-style: solid;
     border-radius: 20px;
 }
@@ -57,3 +55,52 @@
     padding: 11px;
 }
 
+.formAdmin{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    border-color: #4e2f83;
+    border-width: thick;
+    border-radius: 15px;
+    padding: 10px;
+    width: 45%;
+}
+
+.formContentAdmin{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 40%;
+}
+.formContentAdmin input[type="text"]{
+    border-color:  #4e2f83;
+    border-radius: 15px;
+    border-style: solid;
+    height: 30%;
+    width: 60%;
+}
+
+.formContentAdmin select{
+    border-color:  #4e2f83;
+    border-radius: 15px;
+    border-style: solid;
+    height: 30%;
+    width: 60%;
+}
+
+.formContentAdmin label{
+    font-size: large;
+    margin: 0;
+}
+
+input[type="submit"]{
+    border-radius: 15px;
+    border: none;
+    background-color: #4e2f83;
+    color: #FFFFFF;
+    padding: 10px;
+}

@@ -19,6 +19,33 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
     </div>
     <button id="btnCreer">Créer un compte</button>
 </div>
+<template>
+    <form method="post" class="formAdmin">
+        <div class="formContentAdmin">
+            <label>Login</label>
+            <input type="text" name="login" required>
+        </div>
+        <div class="formContentAdmin">
+            <label>Mot de passe</label>
+            <input type="text" name="mdp" required>
+        </div>
+        <div class="formContentAdmin">
+            <label>Prenom</label>
+            <input type="text" name="prenom" required>
+        </div>
+        <div class="formContentAdmin">
+            <label>Nom</label>
+            <input type="text" name="nom" required>
+        </div>
+        <div class="formContentAdmin">
+            <label>Type de compte</label>
+            <select name="type">
+                <option value="ETUDIANT">Etudiant</option>
+                <option value="PROFESSEUR">Professeur</option>
+            </select>
+        </div>
+        <input type="submit"></form>
+</template>
 <div class="content"></div>
 <script type="module" src="<?php echo PATH_SCRIPTS?>gestionAdmin.js"></script>
 

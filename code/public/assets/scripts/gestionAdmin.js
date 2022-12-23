@@ -98,17 +98,13 @@ function createLineGroup(group){
 }
 
 function creerCompte(){
-
     btnCreerGroupe.style.display="none";
     checkBox.style.display="none";
-    content.innerHTML = '<form method=\"post\">' +
-        '<label>login <input type=\"text\"></label>' +
-        '<label>Mot de passe <input type=\"text\"></label>' +
-        '<label>Prenom <input type=\"text\"></label>' +
-        '<label>Nom <input type=\"text\"></label>' +
-        '<label>Type de compte <select></select></label>' +
-        '<input type=\"submit\"></form>';
+    content.style.flexDirection="row";
+    content.style.height="80vh";
 
+    let templateForm = document.querySelector("template");
+    content.replaceChildren(templateForm.content.cloneNode(true));
 
     let btnRetour = document.createElement("button");
     btnRetour.textContent="retour";
@@ -118,7 +114,12 @@ function creerCompte(){
     btnRetour.addEventListener("click",()=>{
         btnCreerGroupe.style.display="block";
         checkBox.style.display="flex";
+        content.style.flexDirection="column";``
         topBoxUsr.removeChild(btnRetour);
         update();
     });
+}
+
+function creerCompteExel(){
+
 }
