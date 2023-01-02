@@ -7,4 +7,3 @@
         $dao->createCompte($_POST["login"],$_POST["mdp"],$_POST["prenom"],$_POST["nom"],$_POST["type"]);
     }
     require_once (PATH_VIEWS.'gererUtilisateur.php');
-?>

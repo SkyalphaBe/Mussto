@@ -31,7 +31,6 @@
     padding: 30px;
     margin-top: 85px;
     border-radius: 15px;
-    justify-content: space-between;
 }
 
 .userElement{
@@ -122,7 +121,7 @@ input[type="submit"]{
     gap: 15px;
 }
 
-.ExcelExport button{
+.ExcelExport a{
     border: none;
     background-color: #4e2f83;
     color: #FFFFFF;
@@ -131,9 +130,19 @@ input[type="submit"]{
     padding: 10px;
     font-size: large;
     transition: 0.3s;
+    text-decoration:none;
+    text-align: center;
 }
-.ExcelExport button:hover{
+.ExcelExport a:hover{
     background-color: #8661c7;
+}
+
+.formAdminExcel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 input::file-selector-button{
@@ -144,6 +153,7 @@ input::file-selector-button{
     transition: 0.3s;
 }
 
+
 input[type="submit"]:hover{
     background-color: #8661c7;
 }
@@ -151,4 +161,5 @@ input[type="submit"]:hover{
 input::file-selector-button:hover{
     background-color: #8661c7;
     color: #FFFFFF;
+    border-color: #FFFFFF;
 }
