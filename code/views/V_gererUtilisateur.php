@@ -48,7 +48,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 </template>
 <template>
     <div class="ExcelExport">
-        <a href="assets/excels/creerCompte.xlsx" download>Télécharger Excel</a>
+        <a href="assets/excels/creerCompte.xlsx" download>Télécharger excel exemple</a>
         <form class="formAdminExcel">
             <input type="file" id="fileCompte">
             <input type="submit" id="sendIt">
