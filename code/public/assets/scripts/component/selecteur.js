@@ -1,10 +1,15 @@
-const selecteur = (name, selected, available, callback) => {
+export default function selecteur(name, selected, available, callback){
     var div = document.createElement("div");
     div.classList.add("selecteur");
-    div.classList.add("devoir-info-input");
+    /* div.classList.add("devoir-info-input"); */
     div.name = name;
 
-    selected = [...selected];  ///Copie des deux tableaux
+    if (selected){
+        selected = [...selected];  ///Copie des deux tableaux
+    } else {
+        selected  = [];
+    }
+    
     available = [...available];
 
     const update = () => {
@@ -12,8 +17,9 @@ const selecteur = (name, selected, available, callback) => {
         div.innerHTML = "";
 
         //console.log("update");
-
-        callback(selected);
+        if (callback){  
+            callback(selected);
+        }
         if (div.onchange){
             div.onchange();
         }

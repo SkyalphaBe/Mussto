@@ -10,7 +10,7 @@
     $nbDevoir = 0;
 ?>
     
-    <div style="background-color: <?=CSScolorByName($module['NOMMODULE'])?>" class="devoirModuleProf">
+    <div style="background-color: <?=CSScolorByName($module['REFMODULE'])?>" class="devoirModuleProf">
         <div class="topBoxProf">
             <h1 class="moduleProfTitle"><?=$module['NOMMODULE']?></h1>
             <a class="button" href="<?=$router->generate("CreerDSProf", ['ue' => $devoirs[0]['REFMODULE']])?>">Créer un DS</a>
@@ -22,7 +22,7 @@
                     <p class="devoirProf-titre"><?=$devoir['CONTENUDEVOIR']?></p>
                     <p class="devoirProf-group">Groupe : <?php foreach($devoir['GROUPES'] as $grp){ echo $grp." "; }?></p>
                     <p class="devoirProf-date">Date : <?=$devoir['DATEDEVOIR']?></p>
-                    <a class="button" href="<?=$router->generate("AjouterNote", ['ue' => $match['params']['ue'], 'id' => $devoir['IDDEVOIR']])?>" style="background-color: <?=CSScolorByName($module['NOMMODULE'])?>">Gérer</a>
+                    <a class="button" href="<?=$router->generate("AjouterNote", ['id' => $devoir['IDDEVOIR']])?>" style="background-color: <?=CSScolorByName($module['REFMODULE'])?>">Gérer</a>
                 </div>
         <?php } } else { ?>
         <p>Aucune DS pour le moment</p>

@@ -9,12 +9,15 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
 require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 
 ?>
-<script src="/assets/scripts/gestion_devoir.js" defer></script>
+<script>
+    const devoir = <?=json_encode($devoir)?>;
+</script>
+<script  type="module" src="/assets/scripts/gestion_devoir/gestion_devoir.js"></script>
 
-<div class="ajoutNote">
+<div style="background-color: <?=CSScolorByName($devoir['REFMODULE'])?>" class="ajoutNote">
     <div id="title">
         <h1>Gérer le devoir</h1>
-        <a class="buttonFormFile" href="/">Retour</a>
+        <a class="buttonFormFile" href="<?=$router->generate("listeDsUe", ['ue' => $devoir['REFMODULE']])?>">Retour</a>
     </div>
     <div class="devoir-info">
         <h2>Information sur le devoir</h2>

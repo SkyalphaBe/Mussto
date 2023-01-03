@@ -16,6 +16,55 @@ class DevoirDAO extends DAO
         
     }
 
+    public static function insertDS($data, $username){
+        $res = false;
+        if ($data && array_key_exists("module", $data) && $data['module']){
+            require_once(PATH_MODELS."ProfDAO.php");
+            $prof_dao = new ProfDAO(false, $username);
+            if ($prof_dao->getModule($data['module'])){
+                if (array_key_exists("content", $data) && $data['content'] && 
+                array_key_exists("date", $data) && $data['date'] && 
+                array_key_exists("salle", $data) && $data['salle'] && 
+                array_key_exists("groups", $data) && $data['groups'] && is_array($data['groups']) &&
+                array_key_exists("orga", $data) && is_array($data['orga']) && 
+                array_key_exists("coef", $data) && $data['coef'] && 
+                array_key_exists("module", $data) && $data['module']){
+                    $prof_dao->beginTransaction();
+                    $idInsert = $prof_dao->insertRow("INSERT INTO DEVOIR (REFMODULE, CONTENUDEVOIR, COEF, DATEDEVOIR, SALLE) VALUES (?, ?, ?, ?, ?)", [$data['module'], $data['content'], $data['coef'], $data['date'], $data['salle']]);
+                    if ($idInsert > 0){
+                        if ($prof_dao->execQuery("INSERT INTO ORGANISER_DEVOIR VALUES (?, ?)", [$username, $idInsert])){ //On insert au moins celui qui fait la requete
+                            foreach($data['orga'] as $orga){
+                                $prof_dao->execQuery("INSERT INTO ORGANISER_DEVOIR VALUES (?, ?)", [$orga, $idInsert]);
+                            }
+
+                            foreach($data['groups'] as $group){
+                                $prof_dao->execQuery("INSERT INTO EVALUER VALUES (?, 2022, ?)", [$group, $idInsert]);
+                            }
+                            
+                            $prof_dao->commitTransaction();
+                            $res = $idInsert;
+                        } else {
+                            $prof_dao->rollbackTransaction();
+                            throw new Exception("Erreur insertion", 5);
+                        }
+
+                    } else {
+                        $prof_dao->rollbackTransaction();
+                        throw new Exception("Erreur insertion", 4);
+                    }
+                } else {
+                    throw new Exception("Pas assez de données", 3);
+                }
+            } else {
+                throw new Exception("Module innaccesible pour le professeur", 2);
+            }
+        } else {
+            throw new Exception("Pas de ref module", 1);
+        }
+
+        return $res;
+    }
+
     public static function getDS($id, $username){
         try{
             return new DevoirDAO(false, $id, $username);
@@ -25,6 +74,9 @@ class DevoirDAO extends DAO
         }
     }
 
+    /**
+     * @return array|false renvoie toutes les infos d'un ds
+     */
     public static function getAllInfoDS($id, $username){
         $ds = DevoirDAO::getDS($id, $username);
         $res = false;
@@ -34,6 +86,9 @@ class DevoirDAO extends DAO
         return $res;
     }
 
+    /**
+     * @return array recupere toutes les infos du devoir
+     */
     public function getAllInfo(){
         $data = $this->queryRow("SELECT IDDEVOIR, REFMODULE, CONTENUDEVOIR, COEF, DATEDEVOIR, SALLE FROM DEVOIR NATURAL JOIN ORGANISER_DEVOIR WHERE IDDEVOIR = ? AND LOGINPROF = ?", [$this->id, $this->username]);
         
@@ -108,6 +163,11 @@ class DevoirDAO extends DAO
 
     public function insertOrUpdateNote($note){
         $res = $this->execQuery("INSERT INTO NOTER (LOGINETU, IDDEVOIR, NOTE, DATE_ENVOIE, COMMENTAIRE) VALUES (?, ?, ?, NOW(), ?) ON DUPLICATE KEY UPDATE NOTE = ?, COMMENTAIRE = ?", [$note['loginetu'], $this->id, $note['note'], $note['comment'], $note['note'], $note['comment']]);
+        return $res;
+    }
+
+    public function deleteDS(){
+        $res = $this->execQuery("DELETE FROM DEVOIR WHERE IDDEVOIR = ?", [$this->id]);
         return $res;
     }
 

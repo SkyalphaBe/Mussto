@@ -37,10 +37,12 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("GET", "/creerDS-[:ue]", "CreerDS", "CreerDSProf");
         $router->map("GET", "/download", "download", "download");
 
+        $router->map("PUT", "/api/devoir/creer-ds", "creerDS");
         $router->map("GET", "/api/devoir/get-infos-ds-[:id]", "getInfoDS");
         $router->map("GET", "/api/devoir/get-notes-ds-[:id]", "getNotesDS");
         $router->map("POST", "/api/devoir/update-notes-ds-[:id]", "updateNotesDS");
         $router->map("POST", "/api/devoir/update-infos-ds-[:id]", "updateInfoDS");
+        $router->map("DELETE", "/api/devoir/delete-[:id]", "supprDS");
 
         $router->map("GET", "/api/modules-[:ue]", "getInfosModule");
         $router->map("GET", "/api/modules-[:ue]/alletu", "getAllEtuForModule");

@@ -97,4 +97,20 @@ abstract class DAO
         }
         return $res;
     }
+
+    public function insertRow($sql, $args){
+        try{
+            $pdos = $this->_requete($sql,$args);
+            $res = Database::getInstance()->getBdd()->lastInsertId();
+        }
+        catch(PDOException $e)
+        {
+            error_log($e->getMessage());
+            if($this->_debug)
+                die($e->getMessage());
+            $this->_erreur = 'exec';
+            $res = false;
+        }
+        return $res;
+    }
 }
