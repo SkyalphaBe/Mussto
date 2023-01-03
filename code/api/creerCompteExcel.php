@@ -5,15 +5,20 @@
     $response = [
         'code'=> 200
     ];
-    if (!$data){
+    if (!$data || json_last_error() === JSON_ERROR_NONE){
         $response['code'] = 400;
     }
     if ($response['code']===200){
         $dao = new AdminDAO(true, $_SESSION['login']);
         $cpt = 0;
         foreach ($data as $compte){
-            $dao->createCompte($compte["login"],$compte["mdp"],$compte["prenom"],$compte["nom"],$compte["type"]);
-            $cpt++;
+            if ($compte["type"]==="ETUDIANT" || $compte["type"]==="PROFESSEUR"){
+                $dao->createCompte($compte["login"],$compte["mdp"],$compte["prenom"],$compte["nom"],$compte["type"]);
+                $cpt++;
+            }
+            else{
+                $response['code'] = 400;
+            }
         }
     }
     echo json_encode($response);

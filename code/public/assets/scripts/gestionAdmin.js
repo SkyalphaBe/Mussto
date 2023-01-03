@@ -38,6 +38,10 @@ btnCreerCompte.addEventListener("click",()=>{
     });
 
     sendBtn.addEventListener("click", (event)=>{
+        let testvalide = document.getElementById("validation");
+        if (testvalide){
+            testvalide.remove();
+        }
         event.preventDefault();
         if(selectedFile){
             let fileReader = new FileReader();
@@ -48,23 +52,46 @@ btnCreerCompte.addEventListener("click",()=>{
                 console.log(workbook);
                 workbook.SheetNames.forEach(async sheet => {
                     let rowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
-                    var header = {
-                        method : 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body : JSON.stringify(rowObject,undefined,4)
-                    }
-                    let request = await fetch("/api/creerCompteExcel", header);
-                    if (request.ok){
-                        let json = await request.json();
-                        console.log(json);
-                    }
+                    await CreationCompte(rowObject);
                 });
             }
         }
     });
 });
+
+async function CreationCompte(donnees){
+    let divExcel = document.getElementsByClassName("ExcelExport")[0];
+
+    let header = {
+        method : 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(donnees,undefined,4)
+    }
+    let request = await fetch("/api/creerCompteExcel", header);
+    if (request.ok){
+        let json = await request.json();
+        console.log(json);
+
+        if(json["code"] === 200){
+            let validation = document.createElement("p");
+            validation.textContent="Création des comptes réussi";
+            validation.style.color="green";
+            validation.id="validation";
+            divExcel.appendChild(validation);
+        }
+        else {
+            let validation = document.createElement("p");
+            validation.textContent = "Erreur lors de la création";
+            validation.style.color = "red";
+            validation.id="validation";
+            divExcel.appendChild(validation);
+        }
+    }else{
+        prompt("Une erreur c'est produite dans la requete au server");
+    }
+}
 
 function update(){
     content.innerHTML = "";
