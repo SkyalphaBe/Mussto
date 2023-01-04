@@ -54,6 +54,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
             foreach($devoir_coming as $devoir) {            //On boucle sur tous les devoirs pour créer la div?>
                 <div style="background-color: <?=CSScolorByName($devoir['NOMMODULE'])?>" class="devoir">
                     <h3 class="devoir-module-name"><?=$devoir['NOMMODULE']?></h3>
+                    <p class="devoir-content"><?=$devoir['CONTENUDEVOIR']?></p>
                     <p class="devoir-date"><?=$devoir['DATEDEVOIR']?></p>
                     <p class="devoir-salle">SALLE <?=$devoir['SALLE']?></p>
                 </div>

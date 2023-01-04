@@ -187,11 +187,14 @@ export default function gestion_notes(root_id, id_devoir){
         loadingTitle.innerText = "Chargement";
         dataDiv.appendChild(loadingTitle);
 
+        var errorMessage = document.createElement("p");
+
+
         fetch("/api/devoir/get-notes-ds-"+id_devoir).then(res => {
             if (res.ok){
                 return res.json();
             } else {
-                throw new Error(res.status);
+                return res.text().then(data => {throw new Error(data)});
             }
         }).then(json => {
             json.forEach(elt => {
@@ -203,8 +206,12 @@ export default function gestion_notes(root_id, id_devoir){
             dataDiv.appendChild(table);
             dataDiv.appendChild(buttondiv);
         }).catch(err => {
-            console.error(err);
-        }) ;
+
+            errorMessage.innerText = err.message;
+
+            dataDiv.removeChild(loadingTitle);
+            dataDiv.appendChild(errorMessage);
+        });
     }
 
     load();

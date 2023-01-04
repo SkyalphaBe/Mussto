@@ -5,6 +5,13 @@
     $module = $dao->getModule($match['params']['ue']);
     if ($module){
         require_once(PATH_VIEWS."CreerDS.php");
+    } else {
+        http_response_code(404);
+        if (isset($router)){
+            header('Location: '.$router->generate('home'));
+        } else {
+            header('Location: ./');
+        }
     }
 
     /* if ($_SERVER['REQUEST_METHOD'] === "POST" && array_key_exists('sujet', $_POST) && array_key_exists('date', $_POST)

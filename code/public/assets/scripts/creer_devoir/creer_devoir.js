@@ -30,7 +30,7 @@ if (id){
                 body : JSON.stringify(result)
             }
 
-            fetch("/api/devoir/creer-ds", header).then(res => {
+            fetch("/api/devoir/create-ds", header).then(res => {
                 if (res.ok){
                     return res.text();
                 } else {

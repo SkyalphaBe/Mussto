@@ -27,16 +27,23 @@ export default function selecteur(name, selected, available, callback){
         var listElt = document.createElement("ul");
         selected.forEach((elt, index) => {
             let item = document.createElement("li");
+            let span = document.createElement("span");
             if (elt instanceof Object){
-                item.innerText = elt.val;
+                span.innerText = elt.val;
             } else {
-                item.innerText = elt;
+                span.innerText = elt;
             }
-            item.onclick = () => {  //Suppresion
+            item.appendChild(span);
+
+            let supprButton = document.createElement("button");
+            supprButton.innerText = "Suppr";
+            supprButton.onclick = () => {  //Suppresion
                 selected.splice(index, 1);
                 selected.sort();
                 update();
             }
+
+            item.appendChild(supprButton);
             listElt.appendChild(item);
         })
         div.appendChild(listElt);

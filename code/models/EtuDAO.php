@@ -62,8 +62,8 @@ class EtuDAO extends UserDAO
         $groups = $this->getGroups();
         foreach ($groups as $group){
             $data = $this->queryAll("SELECT IDDEVOIR, NOMMODULE, CONTENUDEVOIR, SALLE, DATE_FORMAT(DATEDEVOIR, '%d/%m/%Y') as DATEDEVOIR
-            FROM DEVOIR JOIN MODULE USING(REFMODULE)
-            WHERE intitulegroupe = ? AND anneegroupe = ? AND CURRENT_DATE() < DATEDEVOIR", [$group['intitulegroupe'], $group['anneegroupe']]);
+            FROM DEVOIR JOIN MODULE USING(REFMODULE) NATURAL JOIN EVALUER
+            WHERE CURRENT_DATE() < DATEDEVOIR AND INTITULEGROUPE = ?", [$group['intitulegroupe']]);
             if ($data){
                 $result = array_merge($result, $data);
             }

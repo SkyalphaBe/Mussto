@@ -4,6 +4,7 @@ class DevoirDAO extends DAO
 {
     public $id;
     public $username;
+    public $data;
 
     public function __construct($debug, $id, $username){
         parent::__construct($debug);
@@ -13,7 +14,6 @@ class DevoirDAO extends DAO
         if (!$res){
             throw new Exception("Pas de devoir accesible");
         }
-        
     }
 
     public static function insertDS($data, $username){
@@ -94,6 +94,9 @@ class DevoirDAO extends DAO
         
         $data['GROUPES'] = $this->getGroupsForDS($data['IDDEVOIR']);
         $data['ORGANISATEUR'] = $this->getOrganisteurForDS($data['IDDEVOIR']);
+
+        $this->data = $data;
+
         return $data;
     }
 

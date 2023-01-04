@@ -6,6 +6,7 @@
     $module = $dao->getModule($match['params']['ue']);
     if ($module){
         $devoirs = AllDevoirDAO::getAllDSForModule($match['params']['ue'], $_SESSION["login"]);
+        $sondages = $dao->getAllSondage($module['REFMODULE']);
         
         require_once (PATH_VIEWS."ListeDS.php");
     }  else {
