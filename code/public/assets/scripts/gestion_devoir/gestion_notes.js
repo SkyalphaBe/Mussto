@@ -33,6 +33,9 @@ export default function gestion_notes(root_id, id_devoir){
         }
 
         setNote(note){
+            if (note){  
+                note = note.replace(",", ".");
+            }
             this.input_note.value = note;
             this.note = note;
         }
@@ -47,9 +50,9 @@ export default function gestion_notes(root_id, id_devoir){
 
         updateNote(e){
             if (e.target.value === ""){
-                this.note = null;
+                this.setNote(null)
             } else {
-                this.note = e.target.value;
+                this.setNote(e.target.value)
             }
         }
 
