@@ -55,8 +55,9 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("GET", "/api/listeGroupes/Annee1", "listeGroupesAnnee1");
         $router->map("GET", "/api/listeGroupes/Annee2", "listeGroupesAnnee2");
         $router->map("GET", "/api/listeGroupes/Annee3", "listeGroupesAnnee3");
+        $router->map("GET|POST", "/api/deleteUser", "deleteUser");
 
-        $router->map("GET", "/gererUtilisateur", "gererUtilisateur","gererUtilisateurAdmin");
+        $router->map("GET|POST", "/gererUtilisateur", "gererUtilisateur","gererUtilisateurAdmin");
         $router->map("GET", "/gererGroupes", "GestionGroupes","GestionGroupes");
     }
     ##Route test home (temporaire)

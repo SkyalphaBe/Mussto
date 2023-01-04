@@ -13,12 +13,12 @@ class AdminDAO extends UserDAO
     }
 
     public function getAllEtudiants(){
-        $res = $this->queryAll("SELECT PRENOMETU,NOMETU FROM ETUDIANT");
+        $res = $this->queryAll("SELECT LOGINETU,PRENOMETU,NOMETU,PASSWORD_HASH FROM ETUDIANT");
         return $res;
     }
 
     public function getAllProfesseurs(){
-        $res = $this->queryAll("SELECT PRENOMPROF, NOMEPROF FROM PROFESSEUR");
+        $res = $this->queryAll("SELECT LOGINPROF,PRENOMPROF,NOMEPROF,PASSWORD_HASH FROM PROFESSEUR");
         return $res;
 
     }
@@ -51,6 +51,36 @@ class AdminDAO extends UserDAO
 
     public function assignerProf($loginProf,$refModule){
         $this->insertRow("insert into ENSEIGNER values (?,?)",[$loginProf,$refModule]);
+    }
+
+    public function updateStudent($newLogin,$firstName,$lastName,$password,$oldLogin){
+        $mdp = password_hash($password, PASSWORD_DEFAULT);
+        $this->updateRow("update table ETUDIANT set (?,?,?,?) where login = ? ",[$newLogin,$firstName,$lastName,$mdp,$oldLogin]);
+    }
+
+    public function updateTeacher($newLogin,$firstName,$lastName,$password,$oldLogin){
+        $mdp = password_hash($password, PASSWORD_DEFAULT);
+        $this->updateRow("update table PROFESSEUR set (?,?,?,?) where login = ?",[$newLogin,$firstName,$lastName,$mdp,$oldLogin]);
+    }
+
+    public function deleteAccount($login,$typeCompte){
+        $res = false;
+        if ($typeCompte == "ETUDIANT"){
+            $res = $this->updateRow("DELETE from ETUDIANT where LOGINETU = ?",[$login]);
+        }
+        else if ($typeCompte == "PROFESSEUR"){
+            $res = $this->updateRow("DELETE from PROFESSEUR where LOGINPROF = ?",[$login]);
+        }
+        return $res;
+    }
+
+    public function deleteAffectation($login,$typeCompte){
+        $res = false;
+        if($typeCompte == "ETUDIANT")
+            $res = $this->updateRow("DELETE from AFFECTER where LOGINETU = ?",[$login]);
+        if($typeCompte == "PROFESSEUR")
+            $res = $this->updateRow("DELETE from ENSEIGNER where LOGINPROF = ?",[$login]);
+        return $res;
     }
 }
 ?>

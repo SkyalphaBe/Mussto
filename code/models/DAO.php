@@ -81,4 +81,36 @@ abstract class DAO
         }
         return $res;
     }
+
+    public function updateRow($sql,$args){
+        try
+        {
+            $res = $this->_requete($sql,$args);
+
+        }
+        catch(PDOException $e)
+        {
+            if($this->_debug)
+                die($e->getMessage());
+            $this->_erreur = 'insert';
+            $res = false;
+        }
+        return $res;
+    }
+
+    public function deleteRow($sql,$args){
+        try
+        {
+            $res = $this->_requete($sql,$args);
+
+        }
+        catch(PDOException $e)
+        {
+            if($this->_debug)
+                die($e->getMessage());
+            $this->_erreur = 'insert';
+            $res = false;
+        }
+        return $res;
+    }
 }
