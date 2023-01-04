@@ -2,6 +2,7 @@ import selecteur from "/assets/scripts/component/selecteur.js";
 
 export default function formulaire_infos_devoir(data, callback){
     var root = document.createElement("div");
+    root.className = "form-info-devoir"
     if (!(data.GROUPES_AVAILABLE && data.ORGANISATEUR_AVAILABLE && data.SALLES_AVAILABLE)){
         console.error("Pas assez de data");
     } else {

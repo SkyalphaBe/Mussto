@@ -1,4 +1,5 @@
-import selecteur from "/assets/scripts/component/selecteur.js";
+import Selecteur from "/assets/scripts/component/selecteur.js";
+import Message from "/assets/scripts/component/message.js";
 
 var free_section = () => {
     var root = document.createElement("div");
@@ -112,7 +113,7 @@ if (id){
         var groupeDiv = document.createElement("div");
         var groupeLabel = document.createElement("p");
         groupeLabel.innerText = "Groupe :";
-        var groupeInput = selecteur("groups", [], json);
+        var groupeInput = Selecteur("groups", [], json);
         groupeDiv.appendChild(groupeLabel);
         groupeDiv.appendChild(groupeInput);
         root.appendChild(groupeDiv);
@@ -159,7 +160,7 @@ if (id){
         root.appendChild(newSectionDiv);
         root.appendChild(sectionsDiv);
         
-        var errorMessage = document.createElement("p");
+        var errorMessage = Message();
         var submitButton = document.createElement("button");
         submitButton.innerText = "Envoyer";
         submitButton.onclick = () => {
@@ -167,10 +168,9 @@ if (id){
 
             console.log(data)
             if (data.title && data.groups && data.groups.length > 0 && data.fields && data.fields.length > 0){
-                errorMessage.innerText  = "";
                 console.log("ok");
             } else {
-                errorMessage.innerText = "Veuillez mettre un objet et au moins un groupe et un champ de réponse";
+                errorMessage.showMessage("Veuillez mettre un objet et au moins un groupe et un champ de réponse");
             }
 
         }
