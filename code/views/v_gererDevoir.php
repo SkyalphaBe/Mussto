@@ -1,6 +1,6 @@
 <?php
 //Tableau des fichiers CSS nécessaire
-$style = ["sideBarre.css", "main.css", "ajouterNote.css"];
+$style = ["sideBarre.css", "main.css", "ajouterNote.css", "selecteur.css", "formulaire_info_devoir.css"];
 
 //Appel de l'header
 require_once(PATH_VIEW_COMPONENT.'header.php');
@@ -17,7 +17,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 <div style="background-color: <?=CSScolorByName($devoir['REFMODULE'])?>" class="ajoutNote">
     <div id="title">
         <h1>Gérer le devoir</h1>
-        <a class="buttonFormFile" href="<?=$router->generate("listeDsUe", ['ue' => $devoir['REFMODULE']])?>">Retour</a>
+        <a class="button" href="<?=$router->generate("listeDsUe", ['ue' => $devoir['REFMODULE']])?>">Retour</a>
     </div>
     <div class="devoir-info">
         <h2>Information sur le devoir</h2>

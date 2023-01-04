@@ -27,7 +27,7 @@ export default function selecteur(name, selected, available, callback){
         var listElt = document.createElement("ul");
         selected.forEach((elt, index) => {
             let item = document.createElement("li");
-            let span = document.createElement("span");
+            let span = document.createElement("p");
             if (elt instanceof Object){
                 span.innerText = elt.val;
             } else {
@@ -35,8 +35,8 @@ export default function selecteur(name, selected, available, callback){
             }
             item.appendChild(span);
 
-            let supprButton = document.createElement("button");
-            supprButton.innerText = "Suppr";
+            let supprButton = document.createElement("i");
+            supprButton.className = "fa-solid fa-xmark";
             supprButton.onclick = () => {  //Suppresion
                 selected.splice(index, 1);
                 selected.sort();
@@ -58,7 +58,11 @@ export default function selecteur(name, selected, available, callback){
                 selectElt.add(new Option(elt, index));
             }
         })
-        div.appendChild(selectElt);
+
+        var bottomDiv = document.createElement("div");
+        div.appendChild(bottomDiv);
+
+        bottomDiv.appendChild(selectElt);
 
         var buttonElt = document.createElement("button");
         buttonElt.innerText = "Ajouter";
@@ -70,7 +74,7 @@ export default function selecteur(name, selected, available, callback){
                 update();
             }
         }
-        div.appendChild(buttonElt);
+        bottomDiv.appendChild(buttonElt);
     }
 
     update();

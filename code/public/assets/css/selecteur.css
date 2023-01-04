@@ -1,0 +1,78 @@
+.selecteur{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 0.5em;
+
+}
+
+.selecteur ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em  ;
+}
+
+.selecteur ul li{
+    background-color: white;
+    padding: .3em;
+    border-radius: .4em;
+
+    display: flex;
+    flex-direction: row;
+    
+    gap: .3em;
+    justify-content: space-between;
+    align-items: center;
+
+    color: black;
+}
+
+
+.selecteur ul li p{
+    margin: 0;
+    padding: 0;
+
+    
+}
+
+.selecteur ul li i{
+    cursor: pointer;
+    font-size: larger;
+
+    transition: all 0.2s;
+}
+
+.selecteur ul li i:hover{
+    opacity: 0.7;
+}
+
+.selecteur select{
+    width: 10em;
+    padding: .3em;
+    border-radius: .4em 0 0 .4em;
+    margin: 0;
+    border: 0;
+    height: 2em;
+}
+
+.selecteur button{
+    height: 2em;
+    padding: .3em;
+    border-radius:  0 .4em .4em 0 ;
+    margin: 0;
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+}
+
+.selecteur button:hover{
+    background-color: rgb(238, 238, 238);
+}
+
+.selecteur button:active{
+    background-color: rgb(212, 212, 212);
+}

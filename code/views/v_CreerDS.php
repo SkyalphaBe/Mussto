@@ -1,6 +1,6 @@
 <?php
 //Tableau des fichiers CSS nécessaire
-$style = ["sideBarre.css", "main.css", "creerDS.css"];
+$style = ["sideBarre.css", "main.css", "creerDS.css", "selecteur.css", "formulaire_info_devoir.css"];
 
 //Appel de l'header
 require_once(PATH_VIEW_COMPONENT.'header.php');
@@ -15,7 +15,12 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 </script>
 <script type="module" src="/assets/scripts/creer_devoir/creer_devoir.js"></script>
 
-<div style="background-color: <?=CSScolorByName($module['REFMODULE'])?>" id="creer-devoir"></div>
+<div style="background-color: <?=CSScolorByName($module['REFMODULE'])?>" id="creer-devoir">
+    <div class="header">
+        <h1><?=$module['NOMMODULE']?> : Creation devoir</h1>
+        <a class="button" href="<?=$router->generate("listeDsUe", ['ue' => $module['REFMODULE']])?>">Retour</a>
+    </div>
+</div>
 
 <?php 
     //Appel du footer

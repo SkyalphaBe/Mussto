@@ -1,0 +1,93 @@
+.form-info-devoir{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    color: white
+}
+
+.form-info-devoir input, .form-info-devoir select, .form-info-devoir button{
+    padding: .3em;
+    border-radius: .4em;
+    border: 0;
+}
+
+.form-info-devoir > button:enabled{
+    cursor: pointer;
+}
+
+.form-info-devoir > button:active{
+    background-color: rgb(228, 228, 228);
+}
+
+
+.form-info-devoir > .field{
+    display: flex;
+    flex-direction: column;
+}
+
+.loader{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    font-size: smaller;  
+    height: 0.487em; 
+}
+
+
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 3em;
+    height: 0.487em;
+  }
+  .lds-ellipsis div {
+    position: absolute;
+    width: 0.487em;
+    height: 0.487em;
+    border-radius: 50%;
+    background: #fff;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  .lds-ellipsis div:nth-child(1) {
+    left: 0.3em;
+    animation: lds-ellipsis1 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(2) {
+    left: 0.3em;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(3) {
+    left: 1.2em;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(4) {
+    left: 2.1em;
+    animation: lds-ellipsis3 0.6s infinite;
+  }
+  @keyframes lds-ellipsis1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes lds-ellipsis3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes lds-ellipsis2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(0.9em, 0);
+    }
+  }
+  

@@ -30,11 +30,13 @@ export default function gestion_infos_devoir(root_id, data){
             }
             
             form.setEnable(false);
+            form.showLoader(true);
             fetch("/api/devoir/update-infos-ds-"+data.IDDEVOIR, header).then(res => {
                 if (res.status === 200){
                     location.reload();
                 } else {
                     console.error('error');
+                    form.showLoader(false);
                 }
                 return res.text()
             }).then(text => {console.log(text)});
@@ -63,7 +65,8 @@ export default function gestion_infos_devoir(root_id, data){
         document.getElementById(root_id).appendChild(form);
 
         var button = document.createElement("button");
-        button.innerText = "Supprimer";
+        button.className = "delete-button"
+        button.innerText = "Supprimer le devoir";
         button.onclick = suppr;
         document.getElementById(root_id).appendChild(button);
 

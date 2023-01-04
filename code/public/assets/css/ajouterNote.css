@@ -4,125 +4,75 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Roboto', sans-serif;
 }
 
 .ajoutNote{
-    border-radius: 15px;
-    width: 90%;
-    height: 90%;
-}
+    width: 85%;
 
-.ajoutNote h1{
-     color: white;
-     font-size: 2em;
-}
+    border-radius: 1em;
 
-.ajoutNote label{
-    font-weight: lighter;
+    padding: 3%;
+
     color: white;
 }
 
-#title{
+.ajoutNote #title{
     display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-around;
-    align-items: center;
+
+    color: white;
+    margin-bottom: 3%;
+
 }
 
-.buttonTopBox{
-    display: flex;
-    width: 70%;
-    justify-content: space-around;
-    align-items: center;
-    height: 50px;
-}
-
-.buttonTopBox a:hover{
-    padding: 1.7%;
-    margin: 8px;
-}
-
-.buttonFormFile{
-    text-decoration: None;
-    text-align: center;
-    border-radius: 15px;
-    border: None;
-    background-color: #FFFFFF;
-    color: black;
-    height: 20px;
-    width: 30%;
-    padding: 1.5%;
-    transition: 0.3s;
-    margin: 10px;
-}
-
-form{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding:4% ;
-}
-
-.formContent{
+.ajoutNote #form-info-devoir{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    margin: 10px;
+
+    gap: 2em;
+}
+
+.delete-button{
+    border: 0;
+    cursor: pointer;
+    background-color: white;
+    color: red;
+    padding: .3em;
+    border-radius: .4em;
+    font-weight: bold;
+    
+    border: 1px solid white;
+
+    transition: all 0.3s;
+}
+
+
+.delete-button:hover{
+    background-color: rgb(255, 87, 87);
+    color: white;
+
+    transform: scale(0.99);
+}
+
+table{
     width: 100%;
 }
 
-#file{
-    color: #FFFFFF;
-    font-size: medium;
+thead{
+    background-color: rgba(255, 255, 255, 0.26);
 }
 
-input::file-selector-button{
-    border-radius: 15px;
-    font-size: medium;
-    border: None;
-    width: 20%;
-    padding: 1%;
+td{
+    padding: 0;
+    text-align: center;
 }
 
+td > input, td > textarea{
+    width: calc(100% - .6em);
+    padding: .3em;
+    border: 0;
 
-input:invalid{
-    background-color: lightpink;
-}
-
-#valideButton{
-    background-color: rgb(29,161,58);
-    font-size: medium;
-    border-radius: 15px;
-    color: white;
-    border: None;
-    width: 40%;
-    padding: 1%;
-    transition: 0.3s;
-    margin-top: 4%;
-}
-#valideButton:hover{
-    background-color: rgb(37, 203, 79);
-}
-
-@media (max-width: 1558px) {
-    #title{
-        flex-direction: column;
-
-    }
-    .formContent{
-        align-items: center;
-    }
-    #file{
-        font-size: small;
-    }
-    input::file-selector-button{
-        font-size: small;
-        width: 50%;
-    }
-}
-@media (max-width: 903px){
-    .buttonFormFile {
-        font-size: 60%;
-    }
 }

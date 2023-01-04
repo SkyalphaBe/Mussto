@@ -10,6 +10,7 @@ export default function formulaire_infos_devoir(data, callback){
 
         //Sujet
         var contentDiv = document.createElement("div");
+        contentDiv.className = "field";
         var contentLabel = document.createElement("label");
         contentLabel.innerText = "Contenue du devoir :"
         contentLabel.htmlFor = "content-input";
@@ -28,6 +29,7 @@ export default function formulaire_infos_devoir(data, callback){
 
         //Date
         var dateDiv = document.createElement("div");
+        dateDiv.className = "field";
         var dateLabel = document.createElement("label");
         dateLabel.innerText = "Date du devoir :"
         dateLabel.htmlFor = "date-input";
@@ -47,6 +49,7 @@ export default function formulaire_infos_devoir(data, callback){
 
         //Salle
         var salleDiv = document.createElement("div");
+        salleDiv.className = "field";
         var salleLabel = document.createElement("label");
         salleLabel.innerText = "Salle du devoir :"
         salleLabel.htmlFor = "salle-input";
@@ -66,6 +69,7 @@ export default function formulaire_infos_devoir(data, callback){
 
         //Groupes
         var groupsDiv = document.createElement("div");
+        groupsDiv.className = "field";
         var groupsLabel = document.createElement("label");
         groupsLabel.innerText = "Groupes participants :"
 
@@ -78,6 +82,7 @@ export default function formulaire_infos_devoir(data, callback){
 
         //Orga
         var orgaDiv = document.createElement("div");
+        orgaDiv.className = "field";
         var orgaLabel = document.createElement("label");
         orgaLabel.innerText = "Organisateurs :"
 
@@ -90,6 +95,7 @@ export default function formulaire_infos_devoir(data, callback){
 
         //Coef
         var coefDiv = document.createElement("div");
+        coefDiv.className = "field";
         var coefLabel = document.createElement("label");
         coefLabel.innerText = "Coefficient :"
         coefLabel.htmlFor = "coef-input";
@@ -118,6 +124,18 @@ export default function formulaire_infos_devoir(data, callback){
         submitButton.setAttribute("disabled", "");
 
         root.appendChild(submitButton);
+
+        //Loader
+        var loaderDiv = document.createElement("div");
+        loaderDiv.className = "loader";
+        loaderDiv.show = () => {
+            loaderDiv.innerHTML = "<div class='lds-ellipsis'><div></div><div></div><div></div><div></div></div>";
+        }
+        loaderDiv.hide = () => {
+            loaderDiv.innerHTML = "";
+        }
+
+        root.appendChild(loaderDiv);
 
         //Création de l'objets des valeurs initiales
         const initialValue = {};
@@ -154,6 +172,7 @@ export default function formulaire_infos_devoir(data, callback){
         }
 
         submitButton.onclick = submit;
+
     }
 
     root.setEnable = (value) => {
@@ -162,6 +181,16 @@ export default function formulaire_infos_devoir(data, callback){
                 submitButton.removeAttribute("disabled");
             } else {
                 submitButton.setAttribute("disabled", "");
+            }
+        }
+    }
+
+    root.showLoader = (value) => {
+        if (loaderDiv){
+            if (value){
+                loaderDiv.show();
+            } else {
+                loaderDiv.hide();
             }
         }
     }

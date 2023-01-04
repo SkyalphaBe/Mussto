@@ -1,4 +1,5 @@
 import formulaire_infos_devoir from "/assets/scripts/component/formulaire_infos_devoir.js";
+import Message from "/assets/scripts/component/message.js";
 
 if (id){
     Promise.all([
@@ -17,6 +18,9 @@ if (id){
 
         data.ORGANISATEUR_AVAILABLE.forEach(elt => {elt.val = elt.PRENOMPROF + " " + elt.NOMEPROF});
 
+        var form;
+        var errorMessage = Message();
+
         var submit = (result) => {
             result.module = id;
 
@@ -30,23 +34,26 @@ if (id){
                 body : JSON.stringify(result)
             }
 
+            form.showLoader(true);
             fetch("/api/devoir/create-ds", header).then(res => {
                 if (res.ok){
                     return res.text();
                 } else {
-                    return new Error(res.code);
+                    return res.text().then(text => {throw new Error(text + " " + res.status)});
                 }
             }).then(text => {
                 location.replace(text);
             }).catch(err => {
+                errorMessage.showMessage(err);
                 console.log(err);
+                form.showLoader(false);
             })
         }
 
-        var form = formulaire_infos_devoir(data, submit);
+        form = formulaire_infos_devoir(data, submit);
 
         document.getElementById("creer-devoir").appendChild(form);
-        
+        document.getElementById("creer-devoir").appendChild(errorMessage);       
     }).catch(function (error) {
         console.log(error);
     });
