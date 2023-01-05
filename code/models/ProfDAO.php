@@ -12,7 +12,7 @@ class ProfDAO extends UserDAO
      * @return array|false|null
      */
     public function getModule($ref){
-        $data = $this->queryRow("SELECT NOMMODULE, REFMODULE
+        $data = $this->queryRow("SELECT NOMMODULE, REFMODULE, DESCRIPTIONMODULE
         FROM MODULE
         JOIN ENSEIGNER USING(REFMODULE)
         WHERE LOGINPROF = ? AND REFMODULE = ?", [$this->_username, $ref]);
@@ -32,7 +32,7 @@ class ProfDAO extends UserDAO
     /**
      * 
      */
-    public function getCollegueForModule($ref){
+    public function getProfsForModule($ref){
         $data = $this->queryAll("SELECT LOGINPROF, PRENOMPROF, NOMEPROF FROM ENSEIGNER NATURAL JOIN PROFESSEUR WHERE REFMODULE = ?", [$ref]);
         return $data;
     }
@@ -71,5 +71,51 @@ class ProfDAO extends UserDAO
         }
         return $result;
     }
+
+    public function insertSondage($ref, $title, $content, $groups){
+        $this->beginTransaction();
+        $res = $this->insertRow("INSERT INTO SONDAGE (REFMODULE, LOGINPROF, CONTENUSONDAGE, DATESONDAGE, TITLESONDAGE) VALUES (?, ?, ?, NOW(), ?)", [$ref, $this->_username, $content, $title]);
+        if ($res){
+            foreach($groups as $group){
+                $this->insertRow("INSERT RECEVOIR (IDSONDAGE, INTITULEGROUPE) VALUES (?, ?)", [$res, $group]);
+            }
+            $this->commitTransaction();
+        } else {
+            $this->rollbackTransaction();
+        }
+        return $res;
+    }
+
+    public function deleteSondage($id){
+        $res = $this->execQuery("DELETE FROM SONDAGE WHERE IDSONDAGE = ? AND LOGINPROF = ?", [$id, $this->_username]);
+        return $res;
+    }
+
+    public function getSondage($id){
+        $res = $this->queryRow("SELECT * FROM SONDAGE WHERE LOGINPROF = ? AND IDSONDAGE = ?", [$this->_username, $id]);
+        if ($res){
+            $res['CONTENUSONDAGE'] = json_decode($res['CONTENUSONDAGE'], true);
+            $res['GROUPS'] = array_map(fn($val) => $val['INTITULEGROUPE'], $this->queryAll("SELECT INTITULEGROUPE FROM RECEVOIR WHERE IDSONDAGE = ?", [$id]));
+        }
+        return $res;
+    }
+
+    public function getResultSondage($id){
+        $res = $this->queryAll("SELECT * FROM REPONDRE NATURAL JOIN ETUDIANT WHERE IDSONDAGE = ?", [$id]);
+        if ($res){
+            $callback = function($line){
+                $line['CONTENUREPONSE'] = json_decode($line['CONTENUREPONSE'], true);
+                return $line;
+            };
+            $res = array_map($callback, $res);
+        }
+        return $res;
+    }
+
+    public function getAllSondage($ref){
+        $res = $this->queryAll("SELECT * FROM SONDAGE WHERE LOGINPROF = ? AND REFMODULE = ?", [$this->_username, $ref]);
+        return $res;
+    }
+
 }
 ?>

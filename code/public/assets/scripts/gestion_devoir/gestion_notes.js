@@ -1,10 +1,13 @@
-function gestion_notes(root_id){
+import XLSX from "https://cdn.sheetjs.com/xlsx-0.19.1/package/xlsx.mjs";
+import Message from "/assets/scripts/component/message.js";
+
+export default function gestion_notes(root_id, id_devoir){
 
     ///Importation librairie SheetJS
-    let js = document.createElement("script");
+    /* let js = document.createElement("script");
     js.src = "https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js";
     js.type = "text/javascript";
-    document.body.appendChild(js);
+    document.body.appendChild(js); */
 
     class Note{
         static id = 0;
@@ -30,6 +33,9 @@ function gestion_notes(root_id){
         }
 
         setNote(note){
+            if (note){  
+                note = note.replace(",", ".");
+            }
             this.input_note.value = note;
             this.note = note;
         }
@@ -44,9 +50,9 @@ function gestion_notes(root_id){
 
         updateNote(e){
             if (e.target.value === ""){
-                this.note = null;
+                this.setNote(null)
             } else {
-                this.note = e.target.value;
+                this.setNote(e.target.value)
             }
         }
 
@@ -79,10 +85,15 @@ function gestion_notes(root_id){
         }
     }
 
-    var data = {};
-
     var root = document.getElementById(root_id);
     root.innerHTML = "";
+
+    var data = {};
+    var dataDiv = document.createElement("div");
+    root.appendChild(dataDiv);
+
+    var message = Message();
+    root.appendChild(message);
 
     var send = () => {
         var header = {
@@ -93,8 +104,20 @@ function gestion_notes(root_id){
             body : JSON.stringify(Object.values(data).map(elt => elt.getData()))
         }
 
-        fetch("/api/devoir/update-notes-ds-"+id, header).then(res => res.text()).then(text => {console.log(text)});
+        fetch("/api/devoir/update-notes-ds-"+id_devoir, header).then(res => {
+            if (res.ok){
+               
+                message.showMessage("Les modifications ont bien été enregistré");   
+                load();
+                return res.text();
+            } else {
+                return new Error(res.status);
+            }
+        }).then(text => {console.log(text)}).catch(err => {
+            console.log(err);
+        });
     }
+
 
     var download = () => {
 
@@ -138,7 +161,7 @@ function gestion_notes(root_id){
     }
 
     var load = () => {
-        root.innerHTML = "";
+        dataDiv.innerHTML = "";
 
         data = {};
 
@@ -165,13 +188,16 @@ function gestion_notes(root_id){
 
         var loadingTitle = document.createElement("h2");
         loadingTitle.innerText = "Chargement";
-        root.appendChild(loadingTitle);
+        dataDiv.appendChild(loadingTitle);
 
-        fetch("/api/devoir/get-notes-ds-"+id).then(res => {
+        var errorMessage = document.createElement("p");
+
+
+        fetch("/api/devoir/get-notes-ds-"+id_devoir).then(res => {
             if (res.ok){
                 return res.json();
             } else {
-                throw new Error(res.status);
+                return res.text().then(data => {throw new Error(data)});
             }
         }).then(json => {
             json.forEach(elt => {
@@ -179,101 +205,17 @@ function gestion_notes(root_id){
                 tbody.appendChild(line.getDOMElt());
                 data[line.login] = line
             })
-            root.removeChild(loadingTitle);
-            root.appendChild(table);
-            root.appendChild(buttondiv);
+            dataDiv.removeChild(loadingTitle);
+            dataDiv.appendChild(table);
+            dataDiv.appendChild(buttondiv);
         }).catch(err => {
-            console.error(err);
-        }) ;
+
+            errorMessage.innerText = err.message;
+
+            dataDiv.removeChild(loadingTitle);
+            dataDiv.appendChild(errorMessage);
+        });
     }
 
     load();
 };
-
-function gestion_info(){
-
-    ///Importation du selecteur
-    let js = document.createElement("script");
-    js.src = "/assets/scripts/selecteur.js";
-    js.type = "text/javascript";
-    js.onload = () => {
-        groups_selected.sort();
-        profs_selected.sort();
-
-        //Recuperation des div pour les selecteurs
-        const groupsDiv = document.getElementById("devoir-group");
-        const orgaDiv = document.getElementById("devoir-orga");
-
-        //Création des selecteur et affectation
-        groupsDiv.innerHTML = "<p>Groupes : </p>";
-        groupsDiv.appendChild(selecteur("groups", groups_selected, groups_available, (selected) => {
-            groups_selected = selected;
-        }));
-
-        orgaDiv.innerHTML = "<p>Organisateur : </p>";
-        profs_available.forEach(elt => {elt.val = elt.PRENOMPROF + " " + elt.NOMEPROF});
-        profs_selected.forEach(elt => {elt.val = elt.PRENOMPROF + " " + elt.NOMEPROF});
-        orgaDiv.appendChild(selecteur("orga", profs_selected, profs_available, (selected) => {
-            profs_selected = selected;
-        }))
-
-
-        //Gestion des inputs
-        const inputs = [...document.querySelectorAll("input.devoir-info-input, select.devoir-info-input, div.devoir-info-input")]; //Les selecteurs sont gérés comme les inputs
-        const submitButton = document.querySelector("button#devoir-info-submit");
-        
-        //Création de l'objets des valeurs initiales
-        const initialValue = {iddevoir : id};
-        inputs.forEach(elt => {
-            initialValue[elt.name] = elt.value;
-        });
-
-        //Méthode de récupération des valuers actuelles
-        const getData = () => {
-            const data = {iddevoir : id};
-            inputs.forEach(elt => {
-                data[elt.name] = elt.value;
-            });
-
-            return data;
-        }
-
-        //Méthode de vérification de changement (valeur initial != valeur actuelle)
-        const checkChange = () => {
-            if (JSON.stringify(getData()) === JSON.stringify(initialValue)){
-                submitButton.setAttribute("disabled", "");
-                return false;
-            } else {
-                submitButton.removeAttribute("disabled");
-                return true;
-            };
-        }
-
-        //Chaque changement des inputs engendre un checkChange
-        inputs.forEach(elt => {
-            elt.onchange = checkChange;
-        })
-
-        const submit = () => {
-            console.log(getData());
-            if (checkChange()){
-                var header = {
-                    method : 'POST', 
-                    headers: {
-                    'Content-Type': 'application/json'
-                    },
-                    body : JSON.stringify(getData())
-                }
-        
-                fetch("/api/devoir/update-infos-ds-"+id, header).then(res => res.text()).then(text => {console.log(text)});
-            }
-        }
-
-        submitButton.onclick = submit;
-        submitButton.setAttribute("disabled", "");
-    }
-    document.body.appendChild(js);
-
-
-    
-}

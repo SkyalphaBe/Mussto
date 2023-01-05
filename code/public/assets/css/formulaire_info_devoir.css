@@ -1,0 +1,27 @@
+.form-info-devoir{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    color: white
+}
+
+.form-info-devoir input, .form-info-devoir select, .form-info-devoir button{
+    padding: .3em;
+    border-radius: .4em;
+    border: 0;
+}
+
+.form-info-devoir > button:enabled{
+    cursor: pointer;
+}
+
+.form-info-devoir > button:active{
+    background-color: rgb(228, 228, 228);
+}
+
+
+.form-info-devoir > .field{
+    display: flex;
+    flex-direction: column;
+}

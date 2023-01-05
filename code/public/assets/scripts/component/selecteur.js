@@ -1,10 +1,15 @@
-const selecteur = (name, selected, available, callback) => {
+export default function selecteur(name, selected, available, callback){
     var div = document.createElement("div");
     div.classList.add("selecteur");
-    div.classList.add("devoir-info-input");
+    /* div.classList.add("devoir-info-input"); */
     div.name = name;
 
-    selected = [...selected];  ///Copie des deux tableaux
+    if (selected){
+        selected = [...selected];  ///Copie des deux tableaux
+    } else {
+        selected  = [];
+    }
+    
     available = [...available];
 
     const update = () => {
@@ -12,8 +17,9 @@ const selecteur = (name, selected, available, callback) => {
         div.innerHTML = "";
 
         //console.log("update");
-
-        callback(selected);
+        if (callback){  
+            callback(selected);
+        }
         if (div.onchange){
             div.onchange();
         }
@@ -21,16 +27,23 @@ const selecteur = (name, selected, available, callback) => {
         var listElt = document.createElement("ul");
         selected.forEach((elt, index) => {
             let item = document.createElement("li");
+            let span = document.createElement("p");
             if (elt instanceof Object){
-                item.innerText = elt.val;
+                span.innerText = elt.val;
             } else {
-                item.innerText = elt;
+                span.innerText = elt;
             }
-            item.onclick = () => {  //Suppresion
+            item.appendChild(span);
+
+            let supprButton = document.createElement("i");
+            supprButton.className = "fa-solid fa-xmark";
+            supprButton.onclick = () => {  //Suppresion
                 selected.splice(index, 1);
                 selected.sort();
                 update();
             }
+
+            item.appendChild(supprButton);
             listElt.appendChild(item);
         })
         div.appendChild(listElt);
@@ -45,7 +58,11 @@ const selecteur = (name, selected, available, callback) => {
                 selectElt.add(new Option(elt, index));
             }
         })
-        div.appendChild(selectElt);
+
+        var bottomDiv = document.createElement("div");
+        div.appendChild(bottomDiv);
+
+        bottomDiv.appendChild(selectElt);
 
         var buttonElt = document.createElement("button");
         buttonElt.innerText = "Ajouter";
@@ -57,7 +74,7 @@ const selecteur = (name, selected, available, callback) => {
                 update();
             }
         }
-        div.appendChild(buttonElt);
+        bottomDiv.appendChild(buttonElt);
     }
 
     update();

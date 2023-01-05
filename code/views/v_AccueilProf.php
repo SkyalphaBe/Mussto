@@ -13,7 +13,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 <?php
     if(isset($modules) && $modules){
         foreach ($modules as $allmodules){?>
-            <div style="background-color: hsl(<?=hexdec(substr(bin2hex($allmodules['NOMMODULE']), 0, 16))%360?>, 66%, 41%)" class="modulesP">
+            <div style="background-color: <?=CSScolorByName($allmodules['REFMODULE'])?>" class="modulesP">
                 <h2 class="modulesP-titre"><?=$allmodules['NOMMODULE']?></h2>
                 <div class="modulesP-classe">
                     <h3>Classe : </h3>

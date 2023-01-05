@@ -1,0 +1,64 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+#creer-sondage{
+    color: white;
+}
+
+#creer-sondage > p{
+    margin: 0;
+    height: 1em;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+    color: white;
+    margin-bottom: 3%;
+
+}
+.header h1{
+    margin: 0;
+}
+
+#sondage{
+    width: 85%;
+
+    border-radius: 1em;
+
+    padding: 2em;
+}
+
+#sondage .form{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    gap: 1em;
+}
+
+.form > div{
+    display: flex;
+    flex-direction: column;
+}
+
+.form input, .form select, .form button{
+    padding: .3em;
+    border-radius: .4em;
+    border: 0;
+}
+
+.form .add-question{
+    display: flex;
+    flex-direction: row;
+}
+
+.form .add-question select{
+    flex: 2;
+}

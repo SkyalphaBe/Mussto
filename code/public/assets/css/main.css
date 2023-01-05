@@ -4,11 +4,39 @@
 body{
     background: #ececec;
     font-family: 'Roboto', sans-serif;
-    padding: 8px;
+    padding: 1.5em;
     font-size: 100%;
-    /*transition: all .5s;*/
+    min-height: calc(100vh - 3em);
 }
 
+.delete-button{
+    border: 0;
+    cursor: pointer;
+    background-color: white;
+    color: red;
+    padding: .3em;
+    border-radius: .4em;
+    font-weight: bold;
+    
+    border: 1px solid white;
+
+    transition: all 0.3s;
+}
+
+
+.delete-button:hover{
+    background-color: rgb(255, 87, 87);
+    color: white;
+
+    transform: scale(0.99);
+}
+
+.delete-button:active{
+    background-color: rgb(253, 56, 56);
+    color: white;
+
+    transform: scale(0.90);
+}
 
 @media (orientation: landscape) and (max-width: 1050px){
     body{

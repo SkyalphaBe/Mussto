@@ -34,17 +34,30 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
     } else if ($_SESSION['logged'] === 'prof'){
         ##Routes pour les professeurs
         $router->map("GET", "/", "homeProf", "home");
-        #$router->map("GET", "/modules/detail-[:ue]", "moduleProfDetail", "moduleDetail");
-        $router->map("GET", "/modules/detail-[:ue]", "ListeDS", "listeDsUe");
-        $router->map("GET", "/devoir/ds-[:id]", "AjouterNote", "AjouterNote");
-        $router->map("GET", "/creerDS-[:ue]", "CreerDS", "CreerDSProf");
-        $router->map("GET", "/download", "download", "download");
+        
+        $router->map("GET", "/modules-[:ue]", "ListeDS", "listeDsUe");
+        $router->map("GET", "/modules-[:ue]/new-devoir", "CreerDS", "CreerDSProf");
+        $router->map("GET", "/modules-[:ue]/new-sondage", "CreerSondage", "CreerSondage");
 
+        $router->map("GET", "/devoir-[:id]", "AjouterNote", "AjouterNote");
+        $router->map("GET", "/sondage-[:id]", "sondage", "sondage");
+
+        $router->map("PUT", "/api/devoir/create-ds", "createDS");
+        $router->map("GET", "/api/devoir/get-infos-ds-[:id]", "getInfoDS");
         $router->map("GET", "/api/devoir/get-notes-ds-[:id]", "getNotesDS");
         $router->map("POST", "/api/devoir/update-notes-ds-[:id]", "updateNotesDS");
         $router->map("POST", "/api/devoir/update-infos-ds-[:id]", "updateInfoDS");
-        $router->map("GET", "/api/modules-[:ue]/alletu", "alletu");
+        $router->map("DELETE", "/api/devoir/delete-[:id]", "deleteDS");
 
+        $router->map("PUT", "/api/sondage/create-sondage", "createSondage");
+        $router->map("DELETE", "/api/sondage/delete-[:id]", "deleteSondage", "deleteSondage");
+
+        $router->map("GET", "/api/modules-[:ue]", "getInfosModule");
+        $router->map("GET", "/api/modules-[:ue]/alletu", "getAllEtuForModule");
+        $router->map("GET", "/api/modules-[:ue]/groups", "getGroupsForModule");
+        $router->map("GET", "/api/modules-[:ue]/teachers", "getProfForModule");
+
+        $router->map("GET", "/api/salles", "getAllSalle");
 
         //Définition du contenu de la sideBar
         $menu = [

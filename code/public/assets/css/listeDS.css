@@ -3,6 +3,11 @@
     flex-direction: column;
     border-radius: 15px;
 
+    padding: 1em;
+    gap: 1em;
+
+    background-color: hsl(var(--color), 66%, 41%, 0.8);
+
 }
 
 .moduleProfTitle{
@@ -13,7 +18,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 10px 0px 10px;
+
+    color: white;
 
 }
 
@@ -24,13 +30,27 @@
 .devoirProf{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    margin:0px 10px 10px 10px;
+    padding: .4em 1.2em;
     background-color: #FFFFFF;
     border-radius: 15px;
+
+    color: black;
+}
+
+.devoirProf .button{
+    background-color: hsl(var(--color), 66%, 41%, 0.8);
 }
 
 .devoirProf a{
     color: #FFFFFF;
+}
+
+.list{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+
+    color: white;
 }
