@@ -1,3 +1,10 @@
+body{
+    height: calc(100vh - 16px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
 .welcome{
     display: flex;
     align-items: center;
@@ -112,3 +119,55 @@ h2{
     font-size: 1.75em;
 }
 
+#sondage{
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+#sondage .sondage{
+    width: 100%;
+    border-radius: 15px;
+    padding: 10px;
+    color: white;
+
+    
+}
+#sondage .sondage h3{
+    text-align: center;
+}
+
+#sondage .sondage .sondage-header{
+    display: flex;  
+    justify-content: space-between;
+}
+
+#sondage .sondage #reponse{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#sondage .sondage #reponse input{
+    width: 60%;
+    border: none;
+    border-radius: 5px;
+}
+
+#sondage .sondage #reponse button{
+    width: 20%;
+    margin-right: 2%;
+    text-decoration: none;
+    background-color: #FFFFFF;
+    color: black;
+    border: none;
+    border-radius: 15px;
+    padding: 1%;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+#sondage .sondage #reponse button:hover{
+    width: 24%;
+    margin-right: 0%;
+    font-weight: bold;
+}
