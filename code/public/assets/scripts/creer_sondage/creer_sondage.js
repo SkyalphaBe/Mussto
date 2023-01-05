@@ -1,5 +1,6 @@
 import Selecteur from "/assets/scripts/component/selecteur.js";
 import Message from "/assets/scripts/component/message.js";
+import Loader from "/assets/scripts/component/loader.js";
 
 var free_section = () => {
     var root = document.createElement("div");
@@ -100,47 +101,72 @@ if (id){
     }).then(json => {
 
         var root = document.getElementById("creer-sondage");
+
+        var topDiv = document.createElement("div");
+        topDiv.className = "form";
     
+        var titleDiv = document.createElement("div");
+        var titleLabel = document.createElement("label");
+        titleLabel.innerText = "Objet du sondage :";
+        titleLabel.htmlFor = "objet";
+        titleDiv.appendChild(titleLabel);
+
         var titleInput = document.createElement("input");
         titleInput.placeholder = "Objet";
-        titleInput.name = "title";
-        root.appendChild(titleInput);
+        titleInput.id = "objet";
+        titleDiv.appendChild(titleInput);
+
+        topDiv.appendChild(titleDiv);
 
         var groupeDiv = document.createElement("div");
-        var groupeLabel = document.createElement("p");
-        groupeLabel.innerText = "Groupe :";
+        var groupeLabel = document.createElement("label");
+        groupeLabel.innerText = "Groupes :";
         var groupeInput = Selecteur("groups", [], json);
         groupeDiv.appendChild(groupeLabel);
         groupeDiv.appendChild(groupeInput);
-        root.appendChild(groupeDiv);
+        topDiv.appendChild(groupeDiv);
 
         
         var sections = [];
         var sectionsDiv = document.createElement("ul");
-        var loadSections = () => {
+        var loadSections = () => {    //Charger la liste des questions
             sectionsDiv.innerHTML = "";
-            sections.forEach((element, index) => {
+            if (sections.length > 0){
+                sections.forEach((element, index) => {
                 
-                let item = document.createElement("li");
-                item.appendChild(element);
-                
-                let supprButton = document.createElement("button");
-                supprButton.innerText = "suppr";
-                supprButton.onclick = () => {
-                    sections.splice(index, 1);
-                    loadSections();
-                }
-                item.appendChild(supprButton);
-
-                sectionsDiv.appendChild(item);
-            });
+                    let item = document.createElement("li");
+                    item.appendChild(element);
+                    
+                    let supprButton = document.createElement("button");
+                    supprButton.innerText = "suppr";
+                    supprButton.onclick = () => {
+                        sections.splice(index, 1);
+                        loadSections();
+                    }
+                    item.appendChild(supprButton);
+    
+                    sectionsDiv.appendChild(item);
+                });
+            } else {
+                sectionsDiv.innerHTML = "Auncune question ajoutée";
+            }
         }
+        loadSections();
 
         var newSectionDiv = document.createElement("div");
+        var newSectionSubDiv = document.createElement("div");
+        newSectionSubDiv.className = "add-question";
+
+        var newSectionLabel = document.createElement("label");
+        newSectionLabel.innerText = "Ajouter une nouvelle question : ";
+        newSectionLabel.htmlFor = "type-select";
+        newSectionDiv.appendChild(newSectionLabel);
+
         var newSectionSelect = document.createElement("select");
+        newSectionSelect.id = "type-select";
         newSectionSelect.add(new Option("Champs libre", "free"));
         newSectionSelect.add(new Option("Champs à choix multiple", "select"));
-        newSectionDiv.appendChild(newSectionSelect);
+        newSectionSubDiv.appendChild(newSectionSelect);
 
         var newSectionSubmit = document.createElement("button");
         newSectionSubmit.innerText = "Ajouter";
@@ -152,12 +178,21 @@ if (id){
             }
             loadSections();
         }
-        newSectionDiv.appendChild(newSectionSubmit);
-        root.appendChild(newSectionDiv);
-        root.appendChild(sectionsDiv);
+        newSectionSubDiv.appendChild(newSectionSubmit);
+        newSectionDiv.appendChild(newSectionSubDiv);
+        topDiv.appendChild(newSectionDiv);
+        root.appendChild(topDiv);
+
+        var parentSectionDiv = document.createElement("div");
+        parentSectionDiv.className = "question-list";
+        parentSectionDiv.innerHTML = "<h2>Liste des question : </h2>";
+        parentSectionDiv.appendChild(sectionsDiv);
+
+        root.appendChild(parentSectionDiv);
         
         var errorMessage = Message();
         var submitButton = document.createElement("button");
+        var loader = Loader();
         submitButton.innerText = "Envoyer";
         submitButton.onclick = () => {
             var data = {title : titleInput.value, groups : groupeInput.value, fields : sections.map(elt => elt.getData()), module : id}
@@ -180,6 +215,7 @@ if (id){
                 });
 
                 if (pass){
+                    loader.show();
                     var header = {
                         method : 'PUT', 
                         headers: {
@@ -188,12 +224,17 @@ if (id){
                         body : JSON.stringify(data)
                     }
     
-                    fetch("/api/devoir/create-sondage", header).then(res => {
+                    fetch("/api/sondage/create-sondage", header).then(res => {
                         if (res.ok){
                             return res.text();
+                        } else {
+                            return res.text().then(text => {throw new Error(text + " " + res.status)});
                         }
                     }).then(text => {
-                        console.log(text);
+                        location.replace(text);
+                    }).catch(err => {
+                        loader.hide();
+                        console.error(err);
                     }) 
                 } else {
                     errorMessage.showMessage("Une question n'est pas complète");
@@ -207,6 +248,7 @@ if (id){
         }
 
         root.appendChild(submitButton);
+        root.appendChild(loader);
         root.appendChild(errorMessage);
 
 

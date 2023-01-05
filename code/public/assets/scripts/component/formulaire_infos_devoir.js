@@ -1,4 +1,5 @@
 import selecteur from "/assets/scripts/component/selecteur.js";
+import Loader from "/assets/scripts/component/loader.js";
 
 export default function formulaire_infos_devoir(data, callback){
     var root = document.createElement("div");
@@ -12,7 +13,7 @@ export default function formulaire_infos_devoir(data, callback){
         var contentDiv = document.createElement("div");
         contentDiv.className = "field";
         var contentLabel = document.createElement("label");
-        contentLabel.innerText = "Contenue du devoir :"
+        contentLabel.innerText = "Sujet du devoir :"
         contentLabel.htmlFor = "content-input";
 
         var contentInput = document.createElement("input");
@@ -126,14 +127,7 @@ export default function formulaire_infos_devoir(data, callback){
         root.appendChild(submitButton);
 
         //Loader
-        var loaderDiv = document.createElement("div");
-        loaderDiv.className = "loader";
-        loaderDiv.show = () => {
-            loaderDiv.innerHTML = "<div class='lds-ellipsis'><div></div><div></div><div></div><div></div></div>";
-        }
-        loaderDiv.hide = () => {
-            loaderDiv.innerHTML = "";
-        }
+        var loaderDiv = Loader();
 
         root.appendChild(loaderDiv);
 

@@ -181,7 +181,7 @@ class AllDevoirDAO extends DevoirDAO{
     public $list;
 
     private function __construct($debug, $ref, $username){
-        $devoirs = $this->queryAll("SELECT IDDEVOIR, REFMODULE, CONTENUDEVOIR, DATEDEVOIR  FROM DEVOIR NATURAL JOIN ORGANISER_DEVOIR join MODULE using(REFMODULE) WHERE REFMODULE = ? AND LOGINPROF = ?", [$ref, $username]);
+        $devoirs = $this->queryAll("SELECT IDDEVOIR, REFMODULE, CONTENUDEVOIR, DATEDEVOIR  FROM DEVOIR NATURAL JOIN ORGANISER_DEVOIR join MODULE using(REFMODULE) WHERE REFMODULE = ? AND LOGINPROF = ? ORDER BY DATEDEVOIR DESC", [$ref, $username]);
         if ($devoirs){
             for ($i = 0; $i < count($devoirs); $i++){
                 $this->id = $devoirs[$i]['IDDEVOIR'];

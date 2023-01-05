@@ -1,6 +1,6 @@
 <?php
 //Tableau des fichiers CSS nécessaire
-$style = ["sideBarre.css", "main.css", "creerDS.css", "selecteur.css", "formulaire_info_devoir.css"];
+$style = ["sideBarre.css", "main.css", "creerDS.css", "selecteur.css", "formulaire_info_devoir.css", "loader.css"];
 
 //Appel de l'header
 require_once(PATH_VIEW_COMPONENT.'header.php');

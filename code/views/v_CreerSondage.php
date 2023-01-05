@@ -1,6 +1,6 @@
 <?php
 //Tableau des fichiers CSS nécessaire
-$style = ["sideBarre.css", "main.css", "creerDS.css", "selecteur.css"];
+$style = ["sideBarre.css", "main.css", "creerDS.css", "selecteur.css", "loader.css", "creerSondage.css"];
 
 //Appel de l'header
 require_once(PATH_VIEW_COMPONENT.'header.php');
@@ -16,7 +16,15 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 </script>
 <script type="module" src="/assets/scripts/creer_sondage/creer_sondage.js"></script>
 
-<div style="background-color: <?=CSScolorByName($module['REFMODULE'])?>" id="creer-sondage"></div>
+<div style="background-color: <?=CSScolorByName($module['REFMODULE'])?>" id="sondage">
+    <div class="header">
+        <h1><?=$module['NOMMODULE']?> : Creation sondage</h1>
+        <a class="button" href="<?=$router->generate("listeDsUe", ['ue' => $module['REFMODULE']])?>">Retour</a>
+    </div>
+    <div id="creer-sondage">
+
+    </div>
+</div>
 
 <?php 
     //Appel du footer

@@ -1,18 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Roboto', sans-serif;
-}
-
 .ajoutNote{
-    width: 85%;
 
     border-radius: 1em;
 
-    padding: 3%;
+    padding: 2em;
 
     color: white;
 }
@@ -24,8 +15,12 @@ body{
     justify-content: space-around;
 
     color: white;
-    margin-bottom: 3%;
+    margin-bottom: 1em;
 
+}
+
+.ajoutNote #title h1{
+    margin: 0;
 }
 
 .ajoutNote #form-info-devoir{
@@ -33,28 +28,6 @@ body{
     flex-direction: column;
 
     gap: 2em;
-}
-
-.delete-button{
-    border: 0;
-    cursor: pointer;
-    background-color: white;
-    color: red;
-    padding: .3em;
-    border-radius: .4em;
-    font-weight: bold;
-    
-    border: 1px solid white;
-
-    transition: all 0.3s;
-}
-
-
-.delete-button:hover{
-    background-color: rgb(255, 87, 87);
-    color: white;
-
-    transform: scale(0.99);
 }
 
 table{

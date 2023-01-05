@@ -34,8 +34,10 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         
         $router->map("GET", "/modules-[:ue]", "ListeDS", "listeDsUe");
         $router->map("GET", "/modules-[:ue]/new-devoir", "CreerDS", "CreerDSProf");
-        $router->map("GET", "/devoir/ds-[:id]", "AjouterNote", "AjouterNote");
         $router->map("GET", "/modules-[:ue]/new-sondage", "CreerSondage", "CreerSondage");
+
+        $router->map("GET", "/devoir-[:id]", "AjouterNote", "AjouterNote");
+        $router->map("GET", "/sondage-[:id]", "sondage", "sondage");
 
         $router->map("PUT", "/api/devoir/create-ds", "createDS");
         $router->map("GET", "/api/devoir/get-infos-ds-[:id]", "getInfoDS");
@@ -44,7 +46,8 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("POST", "/api/devoir/update-infos-ds-[:id]", "updateInfoDS");
         $router->map("DELETE", "/api/devoir/delete-[:id]", "deleteDS");
 
-        $router->map("PUT", "/api/devoir/create-sondage", "createSondage");
+        $router->map("PUT", "/api/sondage/create-sondage", "createSondage");
+        $router->map("DELETE", "/api/sondage/delete-[:id]", "deleteSondage", "deleteSondage");
 
         $router->map("GET", "/api/modules-[:ue]", "getInfosModule");
         $router->map("GET", "/api/modules-[:ue]/alletu", "getAllEtuForModule");
