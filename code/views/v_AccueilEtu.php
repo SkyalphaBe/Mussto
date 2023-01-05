@@ -33,6 +33,19 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
     </div>
     <div id="sondage" class="info">
         <h2>Sondages</h2>
+        <?php if(isset($sondages) && $sondages){
+            foreach ($sondages as $sondage){?>
+                <div style="background-color: <?=CSScolorByName($sondage['NOMMODULE'])?>" class="sondage" id="<?= $sondage['IDSONDAGE'] ?>">
+                    <h3 class="sondage-nom"><?=$sondage['NOMMODULE']?></h3>
+                    <div class="sondage-header">
+                        <p class="sondage-prof"><?=$sondage['NOMEPROF']?></p>
+                        <p class="sondage-date"><?=$sondage['DATESONDAGE']?></p>
+                    </div>
+                    <p class="sondage-message"><?=$sondage['CONTENUSONDAGE']?></p>
+                </div>
+        <?php } } else { ?>
+            <p>Aucun sondage pour le moment</p>
+        <?php } ?>
     </div>
     <div id="othersMarks" class="info">
         <h2>Autres notes</h2>
@@ -63,6 +76,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <?php } ?>
     </div>
 </div>
+<script src="/assets/scripts/gestionSondage.js"></script>
 
 <?php
 //Appel du footer

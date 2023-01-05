@@ -12,6 +12,7 @@
     $devoir_coming = $dao->getDS();
     $other_devoir = $dao->getNotes();
     $last_devoir = $dao->getLastNotes();
+    $sondages = $dao->getSondages();
 
-    require_once(PATH_VIEWS.'AcceuilEtu.php');
+    require_once(PATH_VIEWS.'AccueilEtu.php');
 ?>

@@ -71,10 +71,19 @@ class EtuDAO extends UserDAO
         return $result;
     }
 
-    /*
-    public function getSondage(){
-
-    }*/
+    /**
+     * @return array Liste des sondages concernant l'étudiant. Le tableau est vide si il n'y a pas de sondage pour cet étudiant
+     */
+    public function getSondages(){
+        $result = false;
+        $modules = $this->getModules();
+        if ($modules){
+            $modules = array_map(fn($e) => $e['REFMODULE'], $modules);
+            $in  = str_repeat('?,', count($modules) - 1) . '?';
+            $result = $this->queryAll("SELECT NOMMODULE,  NOMEPROF, DATE_FORMAT(DATESONDAGE, '%d septembre %Y') as DATESONDAGE, CONTENUSONDAGE, IDSONDAGE FROM `SONDAGE` NATURAL JOIN MODULE NATURAL JOIN PROFESSEUR WHERE REFMODULE IN ($in) ORDER BY DATESONDAGE DESC", $modules);    
+        }
+        return $result;
+    }
 
     /**
      * @param $module
