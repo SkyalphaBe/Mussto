@@ -72,8 +72,12 @@ class ProfDAO extends UserDAO
         return $result;
     }
 
-    public function insertSondage($ref, $content){
-        $res = $this->insertRow("INSERT INTO SONDAGE (REFMODULE, LOGINPROF, CONTENUSONDAGE, DATESONDAGE) VALUES (?, ?, ?, NOW())", [$ref, $this->_username, $content]);
+    public function insertSondage($ref, $title, $content, $groups){
+        
+        $res = $this->insertRow("INSERT INTO SONDAGE (REFMODULE, LOGINPROF, CONTENUSONDAGE, DATESONDAGE, TITLESONDAGE) VALUES (?, ?, ?, NOW(), ?)", [$ref, $this->_username, $content, $title]);
+        if ($res){
+
+        }
         return $res;
     }
 

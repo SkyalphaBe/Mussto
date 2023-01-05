@@ -44,6 +44,8 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("POST", "/api/devoir/update-infos-ds-[:id]", "updateInfoDS");
         $router->map("DELETE", "/api/devoir/delete-[:id]", "deleteDS");
 
+        $router->map("PUT", "/api/devoir/create-sondage", "createSondage");
+
         $router->map("GET", "/api/modules-[:ue]", "getInfosModule");
         $router->map("GET", "/api/modules-[:ue]/alletu", "getAllEtuForModule");
         $router->map("GET", "/api/modules-[:ue]/groups", "getGroupsForModule");

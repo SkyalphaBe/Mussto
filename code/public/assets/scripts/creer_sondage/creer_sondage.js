@@ -16,9 +16,7 @@ var free_section = () => {
     var inputQuestion = document.createElement("input");
     inputQuestion.placeholder = "Question";
     inputQuestion.oninput = (e) => {
-        if (e.target.value){
-            root.question = e.target.value;
-        }
+        root.question = e.target.value;
     }
 
     root.appendChild(inputQuestion);
@@ -34,7 +32,7 @@ var select_section = () => {
     root.choice = [];
 
     root.getData = () => {
-        return {question : root.question, type : root.type, choice : root.choice}
+        return {question : root.question, type : root.type, choices : root.choice}
     }
 
     root.innerHTML = '<p>Champ à choix multiple : </p>';
@@ -42,9 +40,7 @@ var select_section = () => {
     var inputQuestion = document.createElement("input");
     inputQuestion.placeholder = "Question";
     inputQuestion.oninput = (e) => {
-        if (e.target.value){
-            root.question = e.target.value;
-        }
+        root.question = e.target.value;
     }
 
     var choiceDiv = document.createElement("div");
@@ -164,11 +160,46 @@ if (id){
         var submitButton = document.createElement("button");
         submitButton.innerText = "Envoyer";
         submitButton.onclick = () => {
-            var data = {title : titleInput.value, groups : groupeInput.value, fields : sections.map(elt => elt.getData())}
+            var data = {title : titleInput.value, groups : groupeInput.value, fields : sections.map(elt => elt.getData()), module : id}
 
-            console.log(data)
             if (data.title && data.groups && data.groups.length > 0 && data.fields && data.fields.length > 0){
-                console.log("ok");
+                var pass = data.fields.every(elt => {
+                    if (elt.question && elt.question.length > 0){
+                        if (elt.type === "choice"){
+                            if (elt.choices.length > 1){
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        return false;
+                    }
+                });
+
+                if (pass){
+                    var header = {
+                        method : 'PUT', 
+                        headers: {
+                        'Content-Type': 'application/json'
+                        },
+                        body : JSON.stringify(data)
+                    }
+    
+                    fetch("/api/devoir/create-sondage", header).then(res => {
+                        if (res.ok){
+                            return res.text();
+                        }
+                    }).then(text => {
+                        console.log(text);
+                    }) 
+                } else {
+                    errorMessage.showMessage("Une question n'est pas complète");
+                }
+
+                
             } else {
                 errorMessage.showMessage("Veuillez mettre un objet et au moins un groupe et un champ de réponse");
             }
