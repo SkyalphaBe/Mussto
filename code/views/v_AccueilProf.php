@@ -10,13 +10,15 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
 
 require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
+<h1>Mes modules enseignés</h1>
+<div id="modules">
 <?php
     if(isset($modules) && $modules){
         foreach ($modules as $allmodules){?>
-            <div style="background-color: <?=CSScolorByName($allmodules['REFMODULE'])?>" class="modulesP">
+            <a  href="<?=$router->generate("listeDsUe", ['ue' => $allmodules['REFMODULE']])?>" style="--color: <?=DegreeColorByName($allmodules['REFMODULE'])?>" class="modulesP">
                 <h2 class="modulesP-titre"><?=$allmodules['NOMMODULE']?></h2>
                 <div class="modulesP-classe">
-                    <h3>Classe : </h3>
+                    <h3>Groupes : </h3>
                     <div class="groups">
                         <?php
                         if(isset($allmodules['GROUPS']) !=0 ){
@@ -27,11 +29,12 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                         <?php }?>
                     </div>
                 </div>
-                <a href="<?=$router->generate("listeDsUe", ['ue' => $allmodules['REFMODULE']])?>" class="modulesP-detail">detail</a>
-            </div>
+            </a>
         <?php } } else { ?>
         <p>Aucune modules pour le moment</p>
     <?php } ?>
+</div>
+
 <?php
 //Appel du footer
 require_once(PATH_VIEW_COMPONENT.'footer.php');

@@ -6,6 +6,7 @@ class UserDAO extends DAO
 
     public function __construct($debug, $username)
     {
+        parent::__construct($debug);
         $this->_debug = $debug;
         $this->_username = $username;
     }

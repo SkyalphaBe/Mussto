@@ -14,7 +14,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 <script>
     const id = "<?=$module['REFMODULE']?>"
 </script>
-<script type="module" src="/assets/scripts/creer_sondage/creer_sondage.js"></script>
+<script type="module" src="/assets/scripts/sondage/creer_sondage.js"></script>
 
 <div style="background-color: <?=CSScolorByName($module['REFMODULE'])?>" id="sondage">
     <div class="header">

@@ -21,7 +21,12 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
     </div>
     <div id="infoSondage">
         <h2><?=$sondage['TITLESONDAGE']?></h2>
-        <p>Publié le <?=$sondage['DATESONDAGE']?></p>
+        <div>
+            <p>Publié le <?=$sondage['DATESONDAGE']?></p>
+            <?php if ($sondage['AFFICHER'] == '0') { ?>
+                <p>Ce sondage n'est actuellement pas visible par les étudiants</p>
+            <?php } ?>
+        </div>
         <ul>
             <?php foreach($sondage['GROUPS'] as $group){
                 echo "<li>".$group."</li>";
@@ -29,6 +34,13 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         </ul>
         <div id="delete-section">
             <button id="delete-button" class="delete-button">Supprimer le sondage</button>
+        </div>
+        <div id="show-section">
+            <?php if ($sondage['AFFICHER'] == '0') { ?>
+                <button value="1" id="show-button">Rendre visible</button>
+            <?php } else {?>
+                <button value="0" id="show-button">Rendre invisible</button>
+            <?php } ?>
         </div>
     </div>
     <table>

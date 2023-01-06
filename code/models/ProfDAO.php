@@ -91,6 +91,11 @@ class ProfDAO extends UserDAO
         return $res;
     }
 
+    public function changeVisibilitySondage($id, $value){
+        $res = $this->execQuery("UPDATE SONDAGE SET AFFICHER = ? WHERE IDSONDAGE = ? AND LOGINPROF = ?", [$value, $id, $this->_username]);
+        return $res;
+    }
+
     public function getSondage($id){
         $res = $this->queryRow("SELECT * FROM SONDAGE WHERE LOGINPROF = ? AND IDSONDAGE = ?", [$this->_username, $id]);
         if ($res){

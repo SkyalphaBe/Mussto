@@ -26,6 +26,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                 <div class="last">
                     <h3 class="last-name"><?=$last_devoir['NOMMODULE']?></h3>
                     <p class="last-note"><?=$last_devoir['NOTE']?>/20</p>
+                    <p>Reçu le <?=$last_devoir['DATE_ENVOIE_FORM']?></p>
                 </div>
         <?php } else { ?>
             <p>Aucune notes pour le moment</p>
@@ -35,7 +36,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <h2>Sondages</h2>
         <?php if(isset($sondages) && $sondages){
             foreach ($sondages as $sondage){?>
-                <div style="background-color: <?=CSScolorByName($sondage['NOMMODULE'])?>" class="sondage" id="<?= $sondage['IDSONDAGE'] ?>">
+                <div style="--color: <?=DegreeColorByName($sondage['NOMMODULE'])?>" class="sondage" id="<?= $sondage['IDSONDAGE'] ?>">
                     <h3 class="sondage-nom"><?=$sondage['NOMMODULE']?></h3>
                     <div class="sondage-header">
                         <p class="sondage-prof"><?=$sondage['NOMEPROF']?></p>
@@ -48,15 +49,15 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <?php } ?>
     </div>
     <div id="othersMarks" class="info">
-        <h2>Autres notes</h2>
+        <h2>Autres notes récentes</h2>
             <?php
             if (isset($other_devoir) && $other_devoir){
                 foreach ($other_devoir as $notes){?>
-                    <div class="note">
+                    <a href="<?=$router->generate("moduleDetail", ['ue' => $notes['REFMODULE']])?>" class="note" style="--color: <?=DegreeColorByName($notes['NOMMODULE'])?>">
                         <h3 class="note-name"><?=$notes['NOMMODULE']?></h3>
-                        <p class="note-date"><?=$notes['DATEDEVOIR']?></p>
+                        <p class="note-date"><?=$notes['DATE_ENVOIE_FORM']?></p>
                         <p class="note-number">Note : <?=$notes['NOTE']?>/20</p>
-                    </div>
+                    </a>
                 <?php } } else { ?>
                 <p>Aucune notes pour le moment</p>
             <?php } ?>
@@ -65,7 +66,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <h2>DS à venir</h2>
         <?php if (isset($devoir_coming) && $devoir_coming){ //Si il a des devoirs
             foreach($devoir_coming as $devoir) {            //On boucle sur tous les devoirs pour créer la div?>
-                <div style="background-color: <?=CSScolorByName($devoir['NOMMODULE'])?>" class="devoir">
+                <div style="--color: <?=DegreeColorByName($devoir['NOMMODULE'])?>" class="devoir">
                     <h3 class="devoir-module-name"><?=$devoir['NOMMODULE']?></h3>
                     <p class="devoir-content"><?=$devoir['CONTENUDEVOIR']?></p>
                     <p class="devoir-date"><?=$devoir['DATEDEVOIR']?></p>
@@ -77,7 +78,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <?php } ?>
     </div>
 </div>
-<script src="/assets/scripts/gestionSondage.js"></script>
+<script src="/assets/scripts/sondage/sondageEtu.js"></script>
 
 <?php
 //Appel du footer

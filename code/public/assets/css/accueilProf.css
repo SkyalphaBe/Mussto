@@ -1,48 +1,74 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#modules{
+    width: 100%;
+}
+
 .modulesP{
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 15px;
-    color: #FFFFFF;
+    color: hsl(var(--color), 66%, 41%, 0.9);
     padding: 1.5em;
     margin: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 15px rgba(47, 50, 53, 0.15);
+    transition: all 0.3s;
+}
+
+.modulesP:hover{
+    transform: scale(1.01);
+}
+
+.modulesP:hover .modulesP-titre{
+    transform: scale(1.01);
+    box-shadow: 0px 0px 15px hsl(var(--color), 66%, 41%, 0.6);
 }
 
 .modulesP-classe{
     display: flex;
+    align-items: center;
 }
 
 .modulesP-titre{
     font-size: 1.8em;
+    background-color: hsl(var(--color), 66%, 41%, 0.5);
+    box-shadow: 0px 0px 15px hsl(var(--color), 66%, 41%, 0.3);
+    padding: .3em;
+    margin: 0;
+    border-radius: .3em;
+    color: white;
+    transition: all 0.3s;
 }
 
-.modulesP-classe{
-    font-size: 1em;
+.modulesP-classe .groups{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap : .5em;
 }
 
 .modulesP-classe h3{
-    padding-right: 20px;
+    padding-right: .5em;
     margin: 0;
 }
 
 .modulesP-classe p{
-    padding-bottom: 5px;
     margin: 0;
 }
 
-.modulesP a{
+a{
     text-decoration: none;
-    background-color: #FFFFFF;
-    color: black;
-    border-radius: 15px;
-    padding: 1%;
-    margin: 10px;
-    transition: 0.3s;
 }
 
-.modulesP a:hover{
-    /*background-color: #A11D3CFF;
-    color: #FFFFFF;*/
+/* .modulesP a:hover{
+    background-color: #A11D3CFF;
+    color: #FFFFFF;
     padding: 1.2%;
     margin: 8px;
-}
+} */

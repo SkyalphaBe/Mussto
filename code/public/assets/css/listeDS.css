@@ -6,8 +6,8 @@
     padding: 1em;
     gap: 1em;
 
-    background-color: hsl(var(--color), 66%, 41%, 0.8);
-
+    background-color: hsl(var(--color), 66%, 41%, 0.5);
+    position: relative;
 }
 
 .moduleProfTitle{
@@ -40,7 +40,7 @@
 }
 
 .devoirProf .button{
-    background-color: hsl(var(--color), 66%, 41%, 0.8);
+    background-color: hsl(var(--color), 66%, 41%, 0.5);
 }
 
 .devoirProf a{
