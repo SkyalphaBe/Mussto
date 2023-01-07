@@ -23,9 +23,11 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("GET", "/", "homeEtu", "home");
         $router->map("GET", "/modules", "moduleEtu", "module");
         $router->map("GET", "/modules/detail-[:ue]", "moduleEtuDetail", "moduleDetail");
+
+        $router->map("GET", "/sondage-[:id]", "repSondageEtu", "repSondageEtu");
+
         $router->map("POST", "/api/update-rep-sondage-[:id]", "updateReponsesSondage");
         $router->map("GET", "/api/get-rep-sondage-[:id]", "getReponsesSondage");
-
 
         ##Définition des élements dans le menu
         $menu = [

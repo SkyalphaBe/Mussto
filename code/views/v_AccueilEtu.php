@@ -25,6 +25,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
             if (isset($last_devoir) && $last_devoir){?>
                 <div class="last">
                     <h3 class="last-name"><?=$last_devoir['NOMMODULE']?></h3>
+                    <h4 class="last-content"><?=$last_devoir['CONTENUDEVOIR']?></h4>
                     <p class="last-note"><?=$last_devoir['NOTE']?>/20</p>
                     <p>Reçu le <?=$last_devoir['DATE_ENVOIE_FORM']?></p>
                 </div>
@@ -39,10 +40,10 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                 <div style="--color: <?=DegreeColorByName($sondage['NOMMODULE'])?>" class="sondage" id="<?= $sondage['IDSONDAGE'] ?>">
                     <h3 class="sondage-nom"><?=$sondage['NOMMODULE']?></h3>
                     <div class="sondage-header">
-                        <p class="sondage-prof"><?=$sondage['NOMEPROF']?></p>
+                        <p class="sondage-prof"><?=$sondage['TITLESONDAGE']?></p>
                         <p class="sondage-date"><?=$sondage['DATESONDAGE']?></p>
                     </div>
-                    <p class="sondage-message"><?=$sondage['CONTENUSONDAGE']?></p>
+                    <a class="button" href="<?=$router->generate("repSondageEtu", ['id' => $sondage['IDSONDAGE']])?>">Repondre</a>
                 </div>
         <?php } } else { ?>
             <p>Aucun sondage pour le moment</p>
@@ -55,6 +56,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                 foreach ($other_devoir as $notes){?>
                     <a href="<?=$router->generate("moduleDetail", ['ue' => $notes['REFMODULE']])?>" class="note" style="--color: <?=DegreeColorByName($notes['NOMMODULE'])?>">
                         <h3 class="note-name"><?=$notes['NOMMODULE']?></h3>
+                        <h4 class="last-content"><?=$notes['CONTENUDEVOIR']?></h4>
                         <p class="note-date"><?=$notes['DATE_ENVOIE_FORM']?></p>
                         <p class="note-number">Note : <?=$notes['NOTE']?>/20</p>
                     </a>
@@ -78,7 +80,6 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <?php } ?>
     </div>
 </div>
-<script src="/assets/scripts/sondage/sondageEtu.js"></script>
 
 <?php
 //Appel du footer

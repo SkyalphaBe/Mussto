@@ -38,6 +38,9 @@ h2{
 }
 
 .info{
+    overflow-x: hidden;
+    overflow-y: auto;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,8 +83,6 @@ h2{
 #othersMarks h3{
     text-align: center;
     align-self: center;
-    padding: .5em;
-    border-radius: .5em;
 }
 
 #othersMarks .note *{
@@ -150,6 +151,7 @@ h2{
 }
 #sondage .sondage h3{
     text-align: center;
+    margin: 0;
 }
 
 #sondage .sondage .sondage-header{
@@ -157,33 +159,6 @@ h2{
     justify-content: space-between;
 }
 
-#sondage .sondage #reponse{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#sondage .sondage #reponse input{
-    width: 60%;
-    border: none;
-    border-radius: 5px;
-}
-
-#sondage .sondage #reponse button{
-    width: 20%;
-    margin-right: 2%;
-    text-decoration: none;
-    background-color: #FFFFFF;
-    color: black;
-    border: none;
-    border-radius: 15px;
-    padding: 1%;
-    margin: 10px;
-    transition: 0.3s;
-}
-
-#sondage .sondage #reponse button:hover{
-    width: 24%;
-    margin-right: 0%;
-    font-weight: bold;
+#sondage .sondage a.button{
+    padding: 0.2em;
 }

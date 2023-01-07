@@ -18,7 +18,7 @@
         <div class="devoir-div section">
             <div class="topBoxProf">
                 <h2>Devoirs</h2>
-                <a class="button" href="<?=$router->generate("CreerDSProf", ['ue' => $devoirs[0]['REFMODULE']])?>">Créer un DS</a>
+                <a class="button" href="<?=$router->generate("CreerDSProf", ['ue' => $module['REFMODULE']])?>">Créer un DS</a>
             </div>
             <div class="devoir-list list">
                 <?php if (isset($devoirs)&& $devoirs){?>

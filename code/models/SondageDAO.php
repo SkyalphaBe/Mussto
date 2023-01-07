@@ -4,15 +4,19 @@ class SondageDAO extends DAO
 {
     public $id;
     public $login;
+    public $data;
 
     private function __construct($id, $username){
-        print_r($username, $id);
-        $data = $this->queryRow("SELECT * FROM `SONDAGE` NATURAL JOIN PARTICIPER NATURAL JOIN AFFECTER WHERE LOGINETU = ? AND IDSONDAGE = ?", [$username,$id]);
+        $data = $this->queryRow("SELECT * FROM SONDAGE NATURAL JOIN MODULE NATURAL JOIN RECEVOIR NATURAL JOIN AFFECTER LEFT OUTER JOIN REPONDRE USING (IDSONDAGE, LOGINETU) WHERE LOGINETU = ? AND IDSONDAGE = ?", [$username,$id]);
         if(!$data){
             throw new Exception("Pas de sondage");
         } else {
+            $data['CONTENUSONDAGE'] = json_decode($data['CONTENUSONDAGE'], true);
+            $data['CONTENUREPONSE'] = json_decode($data['CONTENUREPONSE'], true);
+
             $this->id = $id;
             $this->login = $username;
+            $this->data = $data;
         }
     }
 
@@ -24,12 +28,11 @@ class SondageDAO extends DAO
         }
     }
 
-    public function getReponseSondage(){
-        $res = $this->queryRow("SELECT CONTENUREPONSE FROM REPONDRE WHERE LOGINETU = ? AND IDSONDAGE = ?", [$this->login,$this->id]);
-        return $res;
+    public function getData(){
+        return $this->data;
     }
 
-    public function InsertOrUpdateReponseSondage($msg){
-    $this->insertRow("INSERT INTO REPONDRE VALUES (?,?,?) ON DUPLICATE KEY UPDATE CONTENUREPONSE = ?",[$this->login,$this->id,$msg,$msg]); 
+    public function InsertOrUpdateReponse($msg){
+        $this->insertRow("INSERT INTO REPONDRE (LOGINETU, IDSONDAGE, CONTENUREPONSE) VALUES (?,?,?) ON DUPLICATE KEY UPDATE CONTENUREPONSE = ?",[$this->login,$this->id,$msg,$msg]); 
     }
 }

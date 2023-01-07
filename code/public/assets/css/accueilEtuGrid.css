@@ -6,6 +6,7 @@
     gap: 20px 10px;
     width: calc(100% - 20px);
     height: 80vh;
+    width: 100%;
 }
 #lastMark{
     grid-column-start: 1;

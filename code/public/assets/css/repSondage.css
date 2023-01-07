@@ -1,0 +1,62 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+#rep-sondage{
+    background-color: hsl(var(--color), 66%, 41%, 0.7);
+
+    width: 85%;
+
+    border-radius: 1em;
+
+    padding: 3%;
+
+    display: flex;
+    flex-direction: column;
+
+    color: white;
+}
+
+#rep-sondage .header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#rep-sondage .info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+#form .question{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#form .question input, #form .question select, #form > button{
+    border: 0;
+    background-color: white;
+    padding: 0.4em;
+    border-radius: 0.5em;
+
+    width: 100%;
+}
+
+#form > p{
+    margin: 0;
+    text-align: center;
+}

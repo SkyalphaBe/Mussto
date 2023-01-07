@@ -80,7 +80,7 @@ class EtuDAO extends UserDAO
         if ($modules){
             $modules = array_map(fn($e) => $e['REFMODULE'], $modules);
             $in  = str_repeat('?,', count($modules) - 1) . '?';
-            $result = $this->queryAll("SELECT NOMMODULE,  NOMEPROF, DATE_FORMAT(DATESONDAGE, '%d septembre %Y') as DATESONDAGE, CONTENUSONDAGE, IDSONDAGE FROM `SONDAGE` NATURAL JOIN MODULE NATURAL JOIN PROFESSEUR WHERE REFMODULE IN ($in) AND AFFICHER = TRUE ORDER BY DATESONDAGE DESC", $modules);    
+            $result = $this->queryAll("SELECT * FROM SONDAGE NATURAL JOIN MODULE WHERE REFMODULE  IN ($in) AND AFFICHER = TRUE ORDER BY DATESONDAGE DESC", $modules);    
         }
         return $result;
     }
@@ -148,23 +148,11 @@ class EtuDAO extends UserDAO
      * @return array|false|null Renvoie toutes les notes d'un élève
      */
     public function getNotes(){
-        $result = $this->queryAll("SELECT REFMODULE, NOTE, NOMMODULE,DATE_FORMAT(DATEDEVOIR, '%d %M %Y') as DATEDEVOIR_FORM, DATE_FORMAT(DATE_ENVOIE, '%d %M %Y') as DATE_ENVOIE_FORM
+        $result = $this->queryAll("SELECT REFMODULE, NOTE, NOMMODULE,DATE_FORMAT(DATEDEVOIR, '%d %M %Y') as DATEDEVOIR_FORM, DATE_FORMAT(DATE_ENVOIE, '%d %M %Y') as DATE_ENVOIE_FORM, CONTENUDEVOIR
         FROM NOTER 
         JOIN DEVOIR USING(IDDEVOIR)
         JOIN MODULE using(REFMODULE)
         WHERE LOGINETU = ? AND DATEDIFF(DATE_ENVOIE, NOW()) > -32 ORDER BY DATE_ENVOIE",[$this->_username]);
-        return $result;
-    }
-
-    /**
-     * @return false|mixed|null Renvoie la dernière note de l'élève
-     */
-    public function getLastNotes(){
-        $result = $this->queryRow("SELECT REFMODULE, NOTE, NOMMODULE, MAX(IDDEVOIR)
-        FROM NOTER 
-        JOIN DEVOIR USING(IDDEVOIR)
-        JOIN MODULE using(REFMODULE)
-        WHERE LOGINETU = ?",[$this->_username]);
         return $result;
     }
 }
