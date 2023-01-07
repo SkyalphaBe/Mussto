@@ -6,7 +6,9 @@
     $dao = new AdminDAO(true, $_SESSION['login']);
     $res = $dao ->deleteAffectation($data[0],$data[1]);
     if($res){
-        $res = $dao ->deleteAccount($data[0],$data[1]);
+        $res = $dao ->deleteDevoirNote($data[0],$data[1]);
+        if($res)
+            $res = $dao ->deleteAccount($data[0],$data[1]);
         if($res)
             $response['code'] = 200;
     }

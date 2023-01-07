@@ -53,14 +53,16 @@ class AdminDAO extends UserDAO
         $this->insertRow("insert into ENSEIGNER values (?,?)",[$loginProf,$refModule]);
     }
 
-    public function updateStudent($newLogin,$firstName,$lastName,$password,$oldLogin){
-        $mdp = password_hash($password, PASSWORD_DEFAULT);
-        $this->updateRow("update table ETUDIANT set (?,?,?,?) where login = ? ",[$newLogin,$firstName,$lastName,$mdp,$oldLogin]);
+    public function updateStudent($firstName,$lastName,$login){
+        $this->updateRow("UPDATE ETUDIANT SET PRENOMETU=?,NOMETU=? WHERE LOGINETU=?",[$firstName,$lastName,$login]);
     }
 
-    public function updateTeacher($newLogin,$firstName,$lastName,$password,$oldLogin){
-        $mdp = password_hash($password, PASSWORD_DEFAULT);
-        $this->updateRow("update table PROFESSEUR set (?,?,?,?) where login = ?",[$newLogin,$firstName,$lastName,$mdp,$oldLogin]);
+    public function updateGroup($login,$newGroup){
+        $this->updateRow("UPDATE AFFECTER SET INTITULEGROUPE=? WHERE LOGINETU=?",[$newGroup,$login]);
+    }
+
+    public function updateTeacher($firstName,$lastName,$login){
+        $this->updateRow("UPDATE PROFESSEUR SET PRENOMPROF=?,NOMEPROF=? WHERE LOGINPROF=?",[$firstName,$lastName,$login]);
     }
 
     public function deleteAccount($login,$typeCompte){
@@ -80,6 +82,16 @@ class AdminDAO extends UserDAO
             $res = $this->updateRow("DELETE from AFFECTER where LOGINETU = ?",[$login]);
         if($typeCompte == "PROFESSEUR")
             $res = $this->updateRow("DELETE from ENSEIGNER where LOGINPROF = ?",[$login]);
+        return $res;
+    }
+
+    public function deleteDevoirNote($login,$typeCompte)
+    {
+        $res = false;
+        if ($typeCompte == "ETUDIANT")
+            $res = $this->updateRow("DELETE from NOTER where LOGINETU = ?", [$login]);
+        if ($typeCompte == "PROFESSEUR")
+            $res = $this->updateRow("DELETE from ORGANISER_DEVOIR where LOGINPROF = ?", [$login]);
         return $res;
     }
 }

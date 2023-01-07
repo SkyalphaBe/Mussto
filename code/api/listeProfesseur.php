@@ -1,5 +1,7 @@
 <?php
 require_once (PATH_MODELS.'AdminDAO.php');
 $dao = new AdminDAO(true,$_SESSION['login']);
-echo json_encode($dao->getAllProfesseurs());
+$data['user']=$dao->getAllProfesseurs();
+$data['module'] = $dao->getAllModules();
+echo json_encode($data);
 ?>
