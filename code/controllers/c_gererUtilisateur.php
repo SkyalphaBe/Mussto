@@ -8,7 +8,6 @@
         if($_POST['type']=='ETUDIANT'){
             $dao->updateStudent($_POST['prenom'],$_POST['nom'],$_POST['login']);
             $dao->updateGroup($_POST['login'],$_POST['groups']);
-            print_r($_POST);
         }
         if($_POST['type']=='PROFESSEUR'){
             $dao->updateTeacher($_POST['prenom'],$_POST['nom'],$_POST['login']);
@@ -16,7 +15,6 @@
             for($i=1;$i<sizeof($_POST)-3;$i++){
                 $dao->assignerProf($_POST['login'],$_POST['module'.$i]);
             }
-            print_r($_POST);
         }
 
     }

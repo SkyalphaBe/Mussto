@@ -20,6 +20,6 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
     <button>Créer un compte</button>
 </div>
 <div class="content"></div>
-<script type="module" src="<?php echo PATH_SCRIPTS?>gestionAdmin.js"></script>
+<script type="module" src="<?php echo PATH_SCRIPTS?>gestionAdminUser.js"></script>
 
 <?php require_once (PATH_VIEW_COMPONENT.'footer.php');?>

@@ -21,7 +21,6 @@ function update(){
     content.innerHTML = "";
     radioChoix.forEach(elem =>{
         if(elem.checked){
-            console.log(elem.value)
             fetch(elem.value).then(res =>{
                 if (res.ok){
                     return res.json();
@@ -31,7 +30,6 @@ function update(){
             }).then(json => {
                 json.user.forEach(line =>{
                     if(elem.value == "/api/listeEtu"){
-
                         let user = new Etudiant(line);
                         createLineEtu(user,"Etudiant",json.groups);
                     }
