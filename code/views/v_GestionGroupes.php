@@ -20,7 +20,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
     <button>Créer un Groupe</button>
 </div>
 <div class="content"></div>
-<script type="module" src="<?= PATH_SCRIPTS?>gestionAdmin.js"></script>
+<script type="module" src="<?= PATH_SCRIPTS?>gestionAdminGroupes.js"></script>
 <?php
 //Appel du footer
 require_once(PATH_VIEW_COMPONENT.'footer.php');

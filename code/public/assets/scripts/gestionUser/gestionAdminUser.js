@@ -7,17 +7,17 @@ js.type = "text/javascript";
 document.body.appendChild(js);
 
 const content = document.getElementsByClassName("content")[0];
-const radioChoix = document.querySelectorAll('input[type="radio"]');
+const radioChoice = document.querySelectorAll('input[type="radio"]');
 const btnCreerCompte = document.getElementById("btnCreer");
 const checkBox = document.getElementsByClassName("check")[0];
 const topBoxUsr = document.getElementsByClassName("topBoxUsr")[0];
 
 
-window.onload = update();
+window.onload = updateAccount();
 
-radioChoix.forEach(elem=>{
+radioChoice.forEach(elem=>{
     elem.addEventListener("click",()=>{
-        update();
+        updateAccount();
     });
 });
 
@@ -26,8 +26,8 @@ btnCreerCompte.addEventListener("click",()=>{
     checkBox.style.display="none";
     content.style.flexDirection="row";
     content.style.height="80vh";
-    creerCompte();
-    creerCompteExcel();
+    createAccountForm();
+    createAccountFormExcel();
 
     let selectedFile;
     let inputFileCompte = document.getElementById('fileCompte');
@@ -52,14 +52,42 @@ btnCreerCompte.addEventListener("click",()=>{
                 console.log(workbook);
                 workbook.SheetNames.forEach(async sheet => {
                     let rowObject = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
-                    await CreationCompte(rowObject);
+                    await createUser(rowObject);
                 });
             }
         }
     });
 });
 
-async function CreationCompte(donnees){
+function updateAccount(){
+    content.innerHTML = "";
+    radioChoice.forEach(elem =>{
+        if(elem.checked){
+            fetch(elem.value).then(res =>{
+                if (res.ok){
+                    return res.json();
+                }else {
+                    throw new Error(res.status);
+                }
+            }).then(json => {
+                json.forEach(line =>{
+                    if(elem.value == "/api/listeEtu"){
+                        let user = new Etudiant(line);
+                        createLineUser(user);
+                    }
+                    else if(elem.value == "/api/listeProfesseur"){
+                        let user = new Professeur(line);
+                        createLineUser(user);
+                    }
+                });
+            }).catch(err =>{
+                console.error(err);
+            });
+        }
+    });
+}
+
+async function createUser(donnees){
     let divExcel = document.getElementsByClassName("ExcelExport")[0];
 
     let header = {
@@ -93,34 +121,6 @@ async function CreationCompte(donnees){
     }
 }
 
-function update(){
-    content.innerHTML = "";
-    radioChoix.forEach(elem =>{
-        if(elem.checked){
-            fetch(elem.value).then(res =>{
-                if (res.ok){
-                    return res.json();
-                }else {
-                    throw new Error(res.status);
-                }
-            }).then(json => {
-                json.forEach(line =>{
-                    if(elem.value == "/api/listeEtu"){
-                        let user = new Etudiant(line);
-                        createLineUser(user);
-                    }
-                    else if(elem.value == "/api/listeProfesseur"){
-                        let user = new Professeur(line);
-                        createLineUser(user);
-                    }
-                });
-            }).catch(err =>{
-                console.error(err);
-            });
-        }
-    });
-}
-
 function createLineUser(user){
     let newElem = document.createElement("div");
     let newNom = document.createElement("h3");
@@ -148,30 +148,7 @@ function createLineUser(user){
     content.appendChild(newElem);
 }
 
-function createLineGroup(group){
-    let newDiv= document.createElement('div');
-    let intitule = document.createElement('h3');
-    let annee = document.createElement('h3');
-    let newBtn = document.createElement('button');
-
-    newDiv.className = "userElement";
-
-    intitule.className = "attribute";
-    intitule.textContent = group.INTITULEGROUPE;
-
-    annee.className = "attribute";
-    annee.textContent = group.ANNEEGROUPE;
-
-    newBtn.className='btnUser';
-    newBtn.textContent='supprimer';
-
-    newDiv.appendChild(intitule);
-    newDiv.appendChild(annee);
-    newDiv.appendChild(newBtn);
-    content.appendChild(newDiv);
-}
-
-function creerCompte(){
+function createAccountForm(){
     let templateForm = document.querySelector("template");
     content.replaceChildren(templateForm.content.cloneNode(true));
 
@@ -185,11 +162,11 @@ function creerCompte(){
         checkBox.style.display="flex";
         content.style.flexDirection="column";``
         topBoxUsr.removeChild(btnRetour);
-        update();
+        updateAccount();
     });
 }
 
-function creerCompteExcel(){
+function createAccountFormExcel(){
     let templateExcel = document.querySelectorAll("template")[1];
     content.appendChild(templateExcel.content.cloneNode(true));
 }
