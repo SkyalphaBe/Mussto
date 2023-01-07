@@ -22,7 +22,12 @@ class AdminDAO extends UserDAO
         return $res;
 
     }
-    
+
+    public function getModulesProf($loginProf){
+        $res = $this->queryAll("SELECT REFMODULE FROM ENSEIGNER WHERE LOGINPROF = ?",[$loginProf]);
+        return $res;
+    }
+
     public function createCompte($login,$password,$prenom,$nom,$typeCompte){
         $mdp = password_hash($password, PASSWORD_DEFAULT);
         if($typeCompte == "PROFESSEUR"){

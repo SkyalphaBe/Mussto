@@ -16,7 +16,7 @@
             for($i=1;$i<sizeof($_POST)-3;$i++){
                 $dao->assignerProf($_POST['login'],$_POST['module'.$i]);
             }
-
+            print_r($_POST);
         }
 
     }
