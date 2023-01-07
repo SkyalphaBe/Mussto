@@ -36,7 +36,7 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
     } else if ($_SESSION['logged'] === 'prof'){
         ##Routes pour les professeurs
         $router->map("GET", "/", "homeProf", "home");
-        
+
         $router->map("GET", "/modules-[:ue]", "ListeDS", "listeDsUe");
         $router->map("GET", "/modules-[:ue]/new-devoir", "CreerDS", "CreerDSProf");
         $router->map("GET", "/modules-[:ue]/new-sondage", "CreerSondage", "CreerSondage");
@@ -75,10 +75,14 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("GET", "/api/listeGroupes/Annee2", "listeGroupesAnnee2");
         $router->map("GET", "/api/listeGroupes/Annee3", "listeGroupesAnnee3");
         $router->map("POST", "/api/creerCompteExcel", "creerCompteExcel");
+        $router->map("GET", "/api/listeModules", "listeModules");
+
+        $router->map("GET|POST", "/api/deleteUser", "deleteUser");
 
 
         $router->map("GET|POST", "/gererUtilisateur", "gererUtilisateur","gererUtilisateurAdmin");
         $router->map("GET|POST", "/gererGroupes", "GestionGroupes","GestionGroupes");
+        $router->map("GET|POST", "/gererModules", "gererModules","GestionModules");
     }
     ##Route test home (temporaire)
 
