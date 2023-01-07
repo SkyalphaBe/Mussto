@@ -1,5 +1,6 @@
 import {Etudiant} from "./Etudiant.js";
 import {Professeur} from "./Professeur.js";
+import {generateFormGestion} from "./modifUser.js";
 
 let js = document.createElement("script");
 js.src = "https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js";
@@ -8,7 +9,7 @@ document.body.appendChild(js);
 
 const content = document.getElementsByClassName("content")[0];
 const radioChoice = document.querySelectorAll('input[type="radio"]');
-const btnCreerCompte = document.getElementById("btnCreer");
+const btnCreateAccout = document.getElementById("btnCreer");
 const checkBox = document.getElementsByClassName("check")[0];
 const topBoxUsr = document.getElementsByClassName("topBoxUsr")[0];
 
@@ -21,8 +22,8 @@ radioChoice.forEach(elem=>{
     });
 });
 
-btnCreerCompte.addEventListener("click",()=>{
-    btnCreerCompte.style.display="none";
+btnCreateAccout.addEventListener("click",()=>{
+    btnCreateAccout.style.display="none";
     checkBox.style.display="none";
     content.style.flexDirection="row";
     content.style.height="80vh";
@@ -70,14 +71,14 @@ function updateAccount(){
                     throw new Error(res.status);
                 }
             }).then(json => {
-                json.forEach(line =>{
+                json.user.forEach(line =>{
                     if(elem.value == "/api/listeEtu"){
                         let user = new Etudiant(line);
-                        createLineUser(user);
+                        createLineUser(user,"Etudiant",json.groups);
                     }
                     else if(elem.value == "/api/listeProfesseur"){
                         let user = new Professeur(line);
-                        createLineUser(user);
+                        createLineUser(user,"Professeur",json.module,json.assigns);
                     }
                 });
             }).catch(err =>{
@@ -121,7 +122,7 @@ async function createUser(donnees){
     }
 }
 
-function createLineUser(user){
+function createLineUser(user,typeAccount,assignList,defaultAssign=null){
     let newElem = document.createElement("div");
     let newNom = document.createElement("h3");
     let newPrenom = document.createElement("h3");
@@ -146,6 +147,35 @@ function createLineUser(user){
     newElem.appendChild(attribute);
     newElem.appendChild(newBtn);
     content.appendChild(newElem);
+
+    newBtn.addEventListener('click',()=>{
+        generateFormGestion(user,typeAccount,assignList,defaultAssign);
+        modifyTopBox(typeAccount);
+    });
+}
+
+function modifyTopBox(typeAccount){
+    let btnRetour = document.createElement('button');
+
+    btnRetour.textContent='Retour';
+    btnRetour.onclick=()=>{
+        btnCreateAccout.style.display = 'Block';
+        radioChoice.forEach(elem =>{
+            elem.parentElement.style.display = 'flex';
+        })
+        topBoxUsr.children[0].textContent="Utilisateur";
+        btnRetour.remove();
+        updateAccount();
+    };
+
+    topBoxUsr.appendChild(btnRetour);
+
+    btnCreateAccout.style.display = 'None';
+    radioChoice.forEach(elem =>{
+        elem.parentElement.style.display = 'None';
+    });
+    topBoxUsr.children[0].textContent=typeAccount;
+
 }
 
 function createAccountForm(){
@@ -158,7 +188,7 @@ function createAccountForm(){
     topBoxUsr.appendChild(btnRetour);
 
     btnRetour.addEventListener("click",()=>{
-        btnCreerCompte.style.display="block";
+        btnCreateAccout.style.display="block";
         checkBox.style.display="flex";
         content.style.flexDirection="column";``
         topBoxUsr.removeChild(btnRetour);
