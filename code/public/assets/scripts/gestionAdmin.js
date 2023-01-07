@@ -107,17 +107,13 @@ function update(){
                 json.forEach(line =>{
                     if(elem.value == "/api/listeEtu"){
                         let user = new Etudiant(line);
-                        createLine(user);
+                        createLineUser(user);
                     }
                     else if(elem.value == "/api/listeProfesseur"){
                         let user = new Professeur(line);
-                        createLine(user);
-                    }
-                    else{
-                        createLineGroup(line);
+                        createLineUser(user);
                     }
                 });
-
             }).catch(err =>{
                 console.error(err);
             });
@@ -125,7 +121,7 @@ function update(){
     });
 }
 
-function createLine(user){
+function createLineUser(user){
     let newElem = document.createElement("div");
     let newNom = document.createElement("h3");
     let newPrenom = document.createElement("h3");
