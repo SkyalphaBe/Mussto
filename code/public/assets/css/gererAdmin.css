@@ -184,15 +184,14 @@ input::file-selector-button:hover{
 .formAdminManage{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 50px;
     border-color:  #4e2f83;
     border-radius: 15px;
     border-style: solid;
     padding: 10px;
     width: 60%;
-    height: 50vh;
+    min-height: 50vh;
 }
 
 .formAdminManage input[type="submit"]{
@@ -209,7 +208,6 @@ input::file-selector-button:hover{
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 25%;
     width: 100%;
 }
 
@@ -219,7 +217,6 @@ input::file-selector-button:hover{
 
 .formContentAdminManage label{
     display: flex;
-    padding: 10px;
     justify-content: space-between;
     width: min(700px, 90%);
     height: 100%;
@@ -229,7 +226,6 @@ input::file-selector-button:hover{
     border-color:  #4e2f83;
     border-radius: 15px;
     border-style: solid;
-    height: 50%;
     width: 60%;
 }
 
@@ -237,6 +233,21 @@ input::file-selector-button:hover{
     border-color:  #4e2f83;
     border-radius: 15px;
     border-style: solid;
-    height: 50%;
     width: 60%;
+}
+
+#module div{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+#module button{
+    height: 35px;
+    border-radius: 100%;
+    border: none;
+    background-color: #4e2f83;
+    color: #FFFFFF;
+    width: 35px;
+    transition: 0.3s;
 }
