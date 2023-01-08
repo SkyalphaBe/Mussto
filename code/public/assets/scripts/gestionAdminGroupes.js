@@ -36,7 +36,7 @@ function createLineGroup(group){
     let annee = document.createElement('h3');
     let newBtn = document.createElement('button');
 
-    newDiv.className = "userElement";
+    newDiv.className = "Element";
 
     intitule.className = "attribute";
     intitule.textContent = group.INTITULEGROUPE;
@@ -44,7 +44,7 @@ function createLineGroup(group){
     annee.className = "attribute";
     annee.textContent = group.ANNEEGROUPE;
 
-    newBtn.className='btnUser';
+    newBtn.className='btnManage';
     newBtn.textContent='supprimer';
 
     newDiv.appendChild(intitule);

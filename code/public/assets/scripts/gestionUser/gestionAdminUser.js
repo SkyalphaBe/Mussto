@@ -9,9 +9,9 @@ document.body.appendChild(js);
 
 const content = document.getElementsByClassName("content")[0];
 const radioChoice = document.querySelectorAll('input[type="radio"]');
-const btnCreateAccout = document.getElementById("btnCreer");
+const btnCreateAccount = document.getElementById("btnCreer");
 const checkBox = document.getElementsByClassName("check")[0];
-const topBoxUsr = document.getElementsByClassName("topBoxUsr")[0];
+const topBoxAdmin = document.getElementsByClassName("topBoxAdmin")[0];
 
 
 window.onload = updateAccount();
@@ -22,11 +22,10 @@ radioChoice.forEach(elem=>{
     });
 });
 
-btnCreateAccout.addEventListener("click",()=>{
-    btnCreateAccout.style.display="none";
+btnCreateAccount.addEventListener("click",()=>{
+    btnCreateAccount.style.display="none";
     checkBox.style.display="none";
     content.style.flexDirection="row";
-    content.style.height="80vh";
     createAccountForm();
     createAccountFormExcel();
 
@@ -129,7 +128,7 @@ function createLineUser(user,typeAccount,assignList,defaultAssign=null){
     let newBtn = document.createElement("button");
     let attribute = document.createElement("div");
 
-    newElem.className = "userElement";
+    newElem.className = "Element";
 
     newPrenom.className = "attribute";
     newPrenom.textContent = user.prenom;
@@ -137,7 +136,7 @@ function createLineUser(user,typeAccount,assignList,defaultAssign=null){
     newNom.className = "attribute";
     newNom.textContent = user.nom;
 
-    newBtn.className = "btnUser";
+    newBtn.className = "btnManage";
     newBtn.textContent = "gérer";
 
     attribute.className = "attribute";
@@ -149,6 +148,8 @@ function createLineUser(user,typeAccount,assignList,defaultAssign=null){
     content.appendChild(newElem);
 
     newBtn.addEventListener('click',()=>{
+        content.style.alignItems = "center";
+        content.style.justifyContent = "space-evenly";
         generateFormGestion(user,typeAccount,assignList,defaultAssign);
         modifyTopBox(typeAccount);
     });
@@ -159,22 +160,24 @@ function modifyTopBox(typeAccount){
 
     btnRetour.textContent='Retour';
     btnRetour.onclick=()=>{
-        btnCreateAccout.style.display = 'Block';
+        content.style.alignItems = "normal";
+        content.style.justifyContent = "normal";
+        btnCreateAccount.style.display = 'Block';
         radioChoice.forEach(elem =>{
             elem.parentElement.style.display = 'flex';
         })
-        topBoxUsr.children[0].textContent="Utilisateur";
+        topBoxAdmin.children[0].textContent="Utilisateur";
         btnRetour.remove();
         updateAccount();
     };
 
-    topBoxUsr.appendChild(btnRetour);
+    topBoxAdmin.appendChild(btnRetour);
 
-    btnCreateAccout.style.display = 'None';
+    btnCreateAccount.style.display = 'None';
     radioChoice.forEach(elem =>{
         elem.parentElement.style.display = 'None';
     });
-    topBoxUsr.children[0].textContent=typeAccount;
+    topBoxAdmin.children[0].textContent=typeAccount;
 
 }
 
@@ -185,13 +188,13 @@ function createAccountForm(){
     let btnRetour = document.createElement("button");
     btnRetour.textContent="retour";
 
-    topBoxUsr.appendChild(btnRetour);
+    topBoxAdmin.appendChild(btnRetour);
 
     btnRetour.addEventListener("click",()=>{
-        btnCreateAccout.style.display="block";
+        btnCreateAccount.style.display="block";
         checkBox.style.display="flex";
-        content.style.flexDirection="column";``
-        topBoxUsr.removeChild(btnRetour);
+        content.style.flexDirection="column";
+        topBoxAdmin.removeChild(btnRetour);
         updateAccount();
     });
 }

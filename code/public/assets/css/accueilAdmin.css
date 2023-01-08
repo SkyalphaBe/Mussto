@@ -25,6 +25,6 @@ body{
 }
 
 .gestionAdmin a:hover{
-    padding: 4%;
-    box-shadow: 0.3rem black;
+    scale: 1.1;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

@@ -15,30 +15,31 @@ function generateFormGestion(user,typeCompte,assignList,defaultAssign){
     let divFirstName = document.createElement('div');
     let divLastName = document.createElement('div');
     let divAssign = document.createElement('div');
+    let divModule = document.createElement('div');
 
     form.method='POST';
-    form.classList.add('formAdmin');
+    form.classList.add('formAdminManage');
 
     labelFirstName.textContent = 'Prenom';
     inputFirstName.name = 'prenom';
     inputFirstName.type = 'text';
     inputFirstName.value = user.prenom;
 
-    divFirstName.classList.add('formContentAdmin');
+    divFirstName.classList.add('formContentAdminManage');
 
     labelNom.textContent = 'Nom';
     inputNom.name = 'nom';
     inputNom.type = 'text';
     inputNom.value = user.nom;
 
-    divLastName.classList.add('formContentAdmin')
+    divLastName.classList.add('formContentAdminManage')
 
     inputType.name = 'type';
     inputType.type = 'text';
     inputType.value = typeCompte.toUpperCase();
     inputType.hidden = true;
 
-    divAssign.classList.add('formContentAdmin')
+    divAssign.classList.add('formContentAdminManage')
 
     inputLogin.name = 'login';
     inputLogin.type = 'text';
@@ -61,17 +62,21 @@ function generateFormGestion(user,typeCompte,assignList,defaultAssign){
     }
     else{
         labelAssign.textContent = 'Module';
+        labelAssign.id ="module";
 
         for(let i=0;i<defaultAssign[user.login].length;i++){
-            labelAssign.appendChild(createSelectTeacher(assignList,defaultAssign[user.login][i]));
+            divModule.appendChild(createSelectTeacher(assignList,defaultAssign[user.login][i]));
         }
-        labelAssign.appendChild(generateAddBtn(assignList));
-        labelAssign.appendChild(generateRemoveBtn());
+        labelAssign.appendChild(generateAddBtn(assignList,divModule));
+        labelAssign.appendChild(generateRemoveBtn(divModule));
+        labelAssign.appendChild(divModule);
+
     }
     inputValide.type = 'submit';
     content.innerHTML="";
 
     deleteBtn.textContent = "supprimer";
+    deleteBtn.className = "deleteBtn";
     deleteBtn.addEventListener('click', async ()=>{
         await deleteUser(user.login,typeCompte.toUpperCase());
     });
@@ -92,36 +97,39 @@ function generateFormGestion(user,typeCompte,assignList,defaultAssign){
     content.appendChild(deleteBtn);
 }
 
-function generateAddBtn(assignList){
+function generateAddBtn(assignList,divModule){
     let addBtn = document.createElement('button');
     addBtn.textContent='+';
     addBtn.type='button';
     addBtn.addEventListener('click', (evt)=>{
-        if(addBtn.parentElement.children.length<(assignList.length)+2)
-            addSelect(evt,assignList);
+        if(evt.target.tagName==="BUTTON"){
+            if(divModule.children.length<assignList.length)
+                addSelect(assignList,divModule);
+        }
     });
     return addBtn;
 }
 
-function generateRemoveBtn(){
+function generateRemoveBtn(divModule){
     let rmvBtn = document.createElement('button');
     rmvBtn.textContent='-';
     rmvBtn.type='button';
     rmvBtn.addEventListener('click', (evt)=>{
-        if(rmvBtn.parentElement.children.length>3)
-            removeSelect(evt);
+        if(evt.target.tagName==="BUTTON") {
+            if (divModule.children.length > 1)
+                removeSelect(divModule);
+        }
     });
     return rmvBtn;
 }
 
-function addSelect(evt,assignList){
+function addSelect(assignList,divModule){
     let newSelect = createSelectTeacher(assignList);
-    evt.target.parentElement.insertBefore(newSelect,evt.target);
+    divModule.appendChild(newSelect);
 }
 
-function removeSelect(evt){
-    let lastSelect = evt.target.parentElement.children[(evt.target.parentElement.children.length)-3]
-    evt.target.parentElement.removeChild(lastSelect);
+function removeSelect(divModule){
+    divModule.removeChild(divModule.lastChild);
     idModule--;
 }
 

@@ -10,7 +10,7 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
 
 require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
-<div class="topBoxUsr">
+<div class="topBoxAdmin">
     <h1>Groupes</h1>
     <div class="check">
         <label>Année 1<input type="radio" name="year" value="/api/listeGroupes/Annee1" checked></label>

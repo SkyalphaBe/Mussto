@@ -10,7 +10,7 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
 
 require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
-<div class="topBoxUsr">
+<div class="topBoxAdmin">
     <h1>Modules</h1>
     <button>Créer module</button>
 </div>
