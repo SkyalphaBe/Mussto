@@ -44,7 +44,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                 <option value="PROFESSEUR">Professeur</option>
             </select>
         </div>
-        <input type="submit"></form>
+        <input type="submit" name="create" value="créer"></form>
 </template>
 <template>
     <div class="ExcelExport">

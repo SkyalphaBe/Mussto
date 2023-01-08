@@ -17,28 +17,28 @@ function generateFormGestion(user,typeCompte,assignList,defaultAssign){
     let divAssign = document.createElement('div');
 
     form.method='POST';
-    form.classList.add('formAdmin');
+    form.classList.add('formAdminManage');
 
     labelFirstName.textContent = 'Prenom';
     inputFirstName.name = 'prenom';
     inputFirstName.type = 'text';
     inputFirstName.value = user.prenom;
 
-    divFirstName.classList.add('formContentAdmin');
+    divFirstName.classList.add('formContentAdminManage');
 
     labelNom.textContent = 'Nom';
     inputNom.name = 'nom';
     inputNom.type = 'text';
     inputNom.value = user.nom;
 
-    divLastName.classList.add('formContentAdmin')
+    divLastName.classList.add('formContentAdminManage')
 
     inputType.name = 'type';
     inputType.type = 'text';
     inputType.value = typeCompte.toUpperCase();
     inputType.hidden = true;
 
-    divAssign.classList.add('formContentAdmin')
+    divAssign.classList.add('formContentAdminManage')
 
     inputLogin.name = 'login';
     inputLogin.type = 'text';
@@ -61,6 +61,7 @@ function generateFormGestion(user,typeCompte,assignList,defaultAssign){
     }
     else{
         labelAssign.textContent = 'Module';
+        labelAssign.id ="module";
 
         for(let i=0;i<defaultAssign[user.login].length;i++){
             labelAssign.appendChild(createSelectTeacher(assignList,defaultAssign[user.login][i]));

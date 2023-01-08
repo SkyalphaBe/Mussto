@@ -26,7 +26,6 @@ btnCreateAccount.addEventListener("click",()=>{
     btnCreateAccount.style.display="none";
     checkBox.style.display="none";
     content.style.flexDirection="row";
-    content.style.height="80vh";
     createAccountForm();
     createAccountFormExcel();
 
@@ -150,7 +149,7 @@ function createLineUser(user,typeAccount,assignList,defaultAssign=null){
 
     newBtn.addEventListener('click',()=>{
         content.style.alignItems = "center";
-        content.style.gap = "20px";
+        content.style.justifyContent = "space-evenly";
         generateFormGestion(user,typeAccount,assignList,defaultAssign);
         modifyTopBox(typeAccount);
     });
@@ -162,7 +161,7 @@ function modifyTopBox(typeAccount){
     btnRetour.textContent='Retour';
     btnRetour.onclick=()=>{
         content.style.alignItems = "normal";
-        content.style.gap = "0px";
+        content.style.justifyContent = "normal";
         btnCreateAccount.style.display = 'Block';
         radioChoice.forEach(elem =>{
             elem.parentElement.style.display = 'flex';

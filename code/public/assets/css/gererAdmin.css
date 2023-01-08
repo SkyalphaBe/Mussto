@@ -29,6 +29,7 @@
     border: #222528;
     padding: 30px;
     border-radius: 15px;
+    min-height: 80vh;
 }
 
 .Element{
@@ -173,4 +174,69 @@ input::file-selector-button:hover{
     text-decoration: none;
     text-align: center;
     width: 20%;
+}
+
+.deleteBtn:hover{
+    background-color: #d92525;
+}
+
+
+.formAdminManage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    border-color:  #4e2f83;
+    border-radius: 15px;
+    border-style: solid;
+    padding: 10px;
+    width: 60%;
+    height: 50vh;
+}
+
+.formAdminManage input[type="submit"]{
+    border-radius: 15px;
+    border: none;
+    background-color: #4e2f83;
+    color: #FFFFFF;
+    padding: 10px;
+    transition: 0.3s;
+    width: 100px;
+}
+
+.formContentAdminManage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 25%;
+    width: 100%;
+}
+
+.formContentAdminManage{
+    font-size: 1.5em;
+}
+
+.formContentAdminManage label{
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    width: min(700px, 90%);
+    height: 100%;
+}
+
+.formContentAdminManage label input{
+    border-color:  #4e2f83;
+    border-radius: 15px;
+    border-style: solid;
+    height: 50%;
+    width: 60%;
+}
+
+.formContentAdminManage label select{
+    border-color:  #4e2f83;
+    border-radius: 15px;
+    border-style: solid;
+    height: 50%;
+    width: 60%;
 }
