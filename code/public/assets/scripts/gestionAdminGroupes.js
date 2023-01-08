@@ -46,9 +46,35 @@ function createLineGroup(group){
 
     newBtn.className='btnManage';
     newBtn.textContent='supprimer';
+    newBtn.addEventListener('click',async ()=>{
+        await deleteGroup(group.INTITULEGROUPE,group.ANNEEGROUPE)
+    });
 
     newDiv.appendChild(intitule);
     newDiv.appendChild(annee);
     newDiv.appendChild(newBtn);
     content.appendChild(newDiv);
+}
+
+async function deleteGroup(name,year){
+    let header = {
+        method : 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body : JSON.stringify([name,year])
+    }
+
+    let request = await fetch("/api/deleteGroup", header);
+    if (request.ok){
+        let json = await request.json();
+        console.log(json);
+
+        if(json["code"] === 200){
+            location.reload();
+        }
+    }
+    else{
+        console.log('marche pas');
+    }
 }
