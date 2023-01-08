@@ -72,6 +72,7 @@ function generateFormGestion(user,typeCompte,assignList,defaultAssign){
     content.innerHTML="";
 
     deleteBtn.textContent = "supprimer";
+    deleteBtn.className = "deleteBtn";
     deleteBtn.addEventListener('click', async ()=>{
         await deleteUser(user.login,typeCompte.toUpperCase());
     });

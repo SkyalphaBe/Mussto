@@ -11,7 +11,7 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
 require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 
 ?>
-<div class="topBoxUsr">
+<div class="topBoxAdmin">
     <h1>Utilisateur</h1>
     <div class="check">
         <label>Liste Etudiant<input type="radio" name="choix" value="/api/listeEtu" checked></label>

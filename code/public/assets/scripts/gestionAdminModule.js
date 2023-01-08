@@ -27,7 +27,7 @@ function createLineModule(module){
     let refModule = document.createElement('h3');
     let newBtn = document.createElement('button');
 
-    newDiv.className = "userElement";
+    newDiv.className = "Element";
 
     intitule.className = "attribute";
     intitule.textContent = module.NOMMODULE;
@@ -35,7 +35,7 @@ function createLineModule(module){
     refModule.className = "attribute"
     refModule.textContent = module.REFMODULE;
 
-    newBtn.className='btnUser';
+    newBtn.className='btnManage';
     newBtn.textContent='gérer';
 
     newDiv.appendChild(intitule);
