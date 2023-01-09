@@ -23,6 +23,7 @@ class DevoirDAO extends DAO
             $prof_dao = new ProfDAO(false, $username);
             if ($prof_dao->getModule($data['module'])){
                 if (array_key_exists("content", $data) && $data['content'] && 
+                array_key_exists("desc", $data) && $data['desc'] && 
                 array_key_exists("date", $data) && $data['date'] && 
                 array_key_exists("salle", $data) && $data['salle'] && 
                 array_key_exists("groups", $data) && $data['groups'] && is_array($data['groups']) &&
@@ -30,7 +31,7 @@ class DevoirDAO extends DAO
                 array_key_exists("coef", $data) && $data['coef'] && 
                 array_key_exists("module", $data) && $data['module']){
                     $prof_dao->beginTransaction();
-                    $idInsert = $prof_dao->insertRow("INSERT INTO DEVOIR (REFMODULE, CONTENUDEVOIR, COEF, DATEDEVOIR, SALLE) VALUES (?, ?, ?, ?, ?)", [$data['module'], $data['content'], $data['coef'], $data['date'], $data['salle']]);
+                    $idInsert = $prof_dao->insertRow("INSERT INTO DEVOIR (REFMODULE, DESCDEVOIR, CONTENUDEVOIR, COEF, DATEDEVOIR, SALLE) VALUES (?, ?, ?, ?, ?, ?)", [$data['module'], $data['desc'], $data['content'], $data['coef'], $data['date'], $data['salle']]);
                     if ($idInsert > 0){
                         if ($prof_dao->execQuery("INSERT INTO ORGANISER_DEVOIR VALUES (?, ?)", [$username, $idInsert])){ //On insert au moins celui qui fait la requete
                             foreach($data['orga'] as $orga){
@@ -38,7 +39,7 @@ class DevoirDAO extends DAO
                             }
 
                             foreach($data['groups'] as $group){
-                                $prof_dao->execQuery("INSERT INTO EVALUER VALUES (?, 2022, ?)", [$group, $idInsert]);
+                                $prof_dao->execQuery("INSERT INTO EVALUER VALUES (?, ?)", [$group, $idInsert]);
                             }
                             
                             $prof_dao->commitTransaction();
@@ -90,7 +91,7 @@ class DevoirDAO extends DAO
      * @return array recupere toutes les infos du devoir
      */
     public function getAllInfo(){
-        $data = $this->queryRow("SELECT IDDEVOIR, REFMODULE, CONTENUDEVOIR, COEF, DATEDEVOIR, SALLE FROM DEVOIR NATURAL JOIN ORGANISER_DEVOIR WHERE IDDEVOIR = ? AND LOGINPROF = ?", [$this->id, $this->username]);
+        $data = $this->queryRow("SELECT IDDEVOIR, REFMODULE, DESCDEVOIR, CONTENUDEVOIR, COEF, DATEDEVOIR, SALLE FROM DEVOIR NATURAL JOIN ORGANISER_DEVOIR WHERE IDDEVOIR = ? AND LOGINPROF = ?", [$this->id, $this->username]);
         
         $data['GROUPES'] = $this->getGroupsForDS($data['IDDEVOIR']);
         $data['ORGANISATEUR'] = $this->getOrganisteurForDS($data['IDDEVOIR']);
@@ -134,7 +135,7 @@ class DevoirDAO extends DAO
     public function updateDevoir($new){
         $this->beginTransaction();
         try {
-            $res = $this->execQuery("UPDATE DEVOIR SET COEF = ?, DATEDEVOIR = ?, SALLE = ?, CONTENUDEVOIR = ? WHERE IDDEVOIR = ?", [$new['coef'], $new['date'], $new['salle'], $new['content'], $this->id]);
+            $res = $this->execQuery("UPDATE DEVOIR SET COEF = ?, DATEDEVOIR = ?, SALLE = ?, CONTENUDEVOIR = ?, DESCDEVOIR = ? WHERE IDDEVOIR = ?", [$new['coef'], $new['date'], $new['salle'], $new['content'], $new['desc'], $this->id]);
             if ($res === false){ throw new Exception("Erreur update devoir");}
 
             $res = $this->execQuery("DELETE FROM ORGANISER_DEVOIR WHERE IDDEVOIR = ? AND NOT LOGINPROF = ?", [$this->id, $this->username]); //Suppression de tous les organisateur sauf celui qui fait la requete
@@ -151,7 +152,7 @@ class DevoirDAO extends DAO
             if ($res === false){ throw new Exception("Erreur suppression groupes");}
 
             foreach($new['groups'] as $grp){
-                $res = $this->execQuery("INSERT INTO EVALUER (INTITULEGROUPE, ANNEEGROUPE, IDDEVOIR) VALUES (?, 2022, ?)", [$grp, $this->id]);
+                $res = $this->execQuery("INSERT INTO EVALUER (INTITULEGROUPE, IDDEVOIR) VALUES (?, ?)", [$grp, $this->id]);
                 if ($res === false){ throw new Exception("Erreur insertion groupes");}
             }
             

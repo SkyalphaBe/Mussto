@@ -28,6 +28,25 @@ export default function formulaire_infos_devoir(data, callback){
         root.appendChild(contentDiv);
         inputs.push(contentInput);
 
+        //Desc
+        var descDiv = document.createElement("div");
+        descDiv.className = "field";
+        var descLabel = document.createElement("label");
+        descLabel.innerText = "Description du devoir :"
+        descLabel.htmlFor = "desc-input";
+
+        var descInput = document.createElement("textarea");
+        if (data.DESCDEVOIR){
+            descInput.value = data.DESCDEVOIR;
+        }
+        descInput.id = "desc-input";
+        descInput.name = "desc";
+
+        descDiv.appendChild(descLabel);
+        descDiv.appendChild(descInput);
+        root.appendChild(descDiv);
+        inputs.push(descInput);
+
         //Date
         var dateDiv = document.createElement("div");
         dateDiv.className = "field";

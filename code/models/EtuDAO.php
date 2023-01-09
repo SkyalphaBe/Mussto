@@ -71,6 +71,18 @@ class EtuDAO extends UserDAO
         return $result;
     }
 
+    public function getDSForModule($ref){
+        $groups = $this->getGroups();
+        $result = [];
+        foreach ($groups as $group){
+            $data = $this->queryAll("SELECT * FROM DEVOIR NATURAL JOIN EVALUER WHERE CURRENT_DATE() < DATEDEVOIR AND REFMODULE = ? AND INTITULEGROUPE = ?", [$ref, $group['intitulegroupe']]);
+            if ($data){
+                $result = array_merge($result, $data);
+            }
+        }
+        return $result;
+    }
+
     /**
      * @return array Liste des sondages concernant l'étudiant. Le tableau est vide si il n'y a pas de sondage pour cet étudiant
      */

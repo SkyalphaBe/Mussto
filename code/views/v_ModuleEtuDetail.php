@@ -19,7 +19,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <p class="desc"><?=$module['DESCRIPTIONMODULE']?></p>
         <div class="content">
             <div class="prof">
-                <h2>Enseignant : </h2>
+                <h2>Enseignants : </h2>
                 <ul>
                     <?php if ($enseignants) {
                         foreach ($enseignants as $prof){ ?>
@@ -28,8 +28,27 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                     }?>
                 </ul>
             </div>
-            <div class="groups">
-                <h2>Groupes : </h2>
+            <div class="devoirs">
+                <h2>Devoirs prochains : </h2>
+                <div class="devoir-list">
+                    <?php 
+                    if ($devoirs){
+                        foreach($devoirs as $devoir){
+                            echo <<<HTML
+                            <div class="devoir-elt">
+                                <div>
+                                    <h3>{$devoir['CONTENUDEVOIR']}</h3>
+                                    <p>{$devoir['DATEDEVOIR']}</p>
+                                </div>
+                                <p class="salle" >Salle {$devoir['SALLE']}</p>
+                                <p class="coef" >Coefficient : {$devoir['COEF']}</p>
+                                <p class="desc" >{$devoir['DESCDEVOIR']}</p>
+                            </div>
+                            HTML;
+                        }
+                    }
+                    ?>
+                </div>
             </div>
             <div class="notes">
                 <h2>Notes : </h2>
