@@ -8,7 +8,7 @@
     if($res){
         $res = $dao ->deleteRow("DELETE FROM PARTICIPER WHERE INTITULEGROUPE = ? AND ANNEEGROUPE = ?",[$data[0],$data[1]]);
         if($res){
-            $res = $dao->deleteRow("DELETE FROM EVALUER WHERE INTITULEGROUPE = ? AND ANNEEGROUPE = ?", [$data[0], $data[1]]);
+            $res = $dao->deleteRow("DELETE FROM EVALUER WHERE INTITULEGROUPE = ?", [$data[0]]);
             if ($res){
                 $res = $dao->deleteRow("DELETE FROM RECEVOIR WHERE INTITULEGROUPE = ?", [$data[0]]);
                 if ($res) {
