@@ -4,16 +4,20 @@ const btnCreerModule = document.getElementById("btnCreer");
 
 window.onload = updateModule();
 
+let js = document.createElement("script");
+js.src = "https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js";
+js.type = "text/javascript";
+document.body.appendChild(js);
+
 btnCreerModule.addEventListener("click",()=>{
-    console.log("cc");
     btnCreerModule.style.display="none";
     content.style.flexDirection="row";
     createAccountForm();
     createAccountFormExcel();
 
     let selectedFile;
-    let inputFileModule = document.getElementById('fileCompte');
-    let sendBtn = document.getElementById("sendIt");
+    let inputFileModule = document.getElementById('fileModule');
+    let sendBtn = document.getElementById("sendItModule");
 
     inputFileModule.addEventListener("change",(event)=>{
         selectedFile = event.target.files[0];
@@ -51,7 +55,7 @@ async function createModule(donnees){
         },
         body : JSON.stringify(donnees,undefined,4)
     }
-    let request = await fetch("/api/creerCompteExcel", header);
+    let request = await fetch("/api/createModuleExcel", header);
     if (request.ok){
         let json = await request.json();
         console.log(json);
