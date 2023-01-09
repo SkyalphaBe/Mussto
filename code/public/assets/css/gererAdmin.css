@@ -1,22 +1,21 @@
-.topBoxUsr{
+.topBoxAdmin{
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: #4e2f83;
     color: #FFFFFF;
     border-radius: 15px;
-    position: fixed;
-    width: calc(100% - 16.625em);
 }
 
-.topBoxUsr button{
+.topBoxAdmin button{
     padding: 10px;
     border: none;
     border-radius: 15px;
     transition: 0.3s;
 }
-.topBoxUsr button:hover{
-    padding: 11px;
+.topBoxAdmin button:hover{
+    scale: 1.1;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .check{
@@ -29,11 +28,11 @@
     flex-direction: column;
     border: #222528;
     padding: 30px;
-    margin-top: 85px;
     border-radius: 15px;
+    min-height: 80vh;
 }
 
-.userElement{
+.Element{
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -42,7 +41,7 @@
     border-radius: 20px;
 }
 
-.btnUser{
+.btnManage{
     padding: 10px;
     border: none;
     border-radius: 15px;
@@ -51,8 +50,9 @@
     transition: 0.3s;
 }
 
-.btnUser:hover{
-    padding: 11px;
+.btnManage:hover{
+    scale: 1.1;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .formAdmin{
@@ -80,7 +80,7 @@
     border-color:  #4e2f83;
     border-radius: 15px;
     border-style: solid;
-    height: 30%;
+    height: 20%;
     width: 60%;
 }
 
@@ -161,5 +161,93 @@ input[type="submit"]:hover{
 input::file-selector-button:hover{
     background-color: #8661c7;
     color: #FFFFFF;
-    border-color: #FFFFFF;
+}
+
+.deleteBtn{
+    border: none;
+    background-color: #4e2f83;
+    color: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: large;
+    transition: 0.3s;
+    text-decoration: none;
+    text-align: center;
+    width: 20%;
+}
+
+.deleteBtn:hover{
+    background-color: #d92525;
+}
+
+
+.formAdminManage{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-color:  #4e2f83;
+    border-radius: 15px;
+    border-style: solid;
+    padding: 10px;
+    width: 60%;
+    min-height: 50vh;
+}
+
+.formAdminManage input[type="submit"]{
+    border-radius: 15px;
+    border: none;
+    background-color: #4e2f83;
+    color: #FFFFFF;
+    padding: 10px;
+    transition: 0.3s;
+    width: 100px;
+}
+
+.formContentAdminManage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.formContentAdminManage{
+    font-size: 1.5em;
+}
+
+.formContentAdminManage label{
+    display: flex;
+    justify-content: space-between;
+    width: min(700px, 90%);
+    height: 100%;
+}
+
+.formContentAdminManage label input{
+    border-color:  #4e2f83;
+    border-radius: 15px;
+    border-style: solid;
+    width: 60%;
+}
+
+.formContentAdminManage label select{
+    border-color:  #4e2f83;
+    border-radius: 15px;
+    border-style: solid;
+    width: 60%;
+}
+
+#module div{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+#module button{
+    height: 35px;
+    border-radius: 100%;
+    border: none;
+    background-color: #4e2f83;
+    color: #FFFFFF;
+    width: 35px;
+    transition: 0.3s;
 }

@@ -12,5 +12,7 @@ function CSScolorByName($name): string
 
 function DegreeColorByName($name)
 {
-    return (hexdec(substr(bin2hex($name), 0, 16)))*15000%360;
+    $one = hexdec(substr(bin2hex($name), 0, 16));
+    $two = fmod(round(($one)*15000), 360);
+    return $two;
 }
