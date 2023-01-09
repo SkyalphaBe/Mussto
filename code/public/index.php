@@ -79,7 +79,7 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("POST", "/api/createModuleExcel", "createModuleExcel");
 
         $router->map("GET|POST", "/api/deleteUser", "deleteUser");
-
+        $router->map("GET|POST", "/api/deleteGroup", "deleteGroup");
 
         $router->map("GET|POST", "/gererUtilisateur", "gererUtilisateur","gererUtilisateurAdmin");
         $router->map("GET|POST", "/gererGroupes", "GestionGroupes","GestionGroupes");
