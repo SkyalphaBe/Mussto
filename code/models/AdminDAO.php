@@ -12,13 +12,15 @@ class AdminDAO extends UserDAO
         return $res;
     }
 
-    public function getAllEtudiants(){
-        $res = $this->queryAll("SELECT LOGINETU,PRENOMETU,NOMETU,PASSWORD_HASH FROM ETUDIANT");
+    public function getAllEtudiants($search = ""){
+        $search = "%".$search."%";
+        $res = $this->queryAll("SELECT LOGINETU,PRENOMETU,NOMETU,PASSWORD_HASH FROM ETUDIANT WHERE CONCAT(PRENOMETU, ' ', NOMETU) LIKE ?", [$search]);
         return $res;
     }
 
-    public function getAllProfesseurs(){
-        $res = $this->queryAll("SELECT LOGINPROF,PRENOMPROF,NOMEPROF,PASSWORD_HASH FROM PROFESSEUR");
+    public function getAllProfesseurs($search = ""){
+        $search = "%".$search."%";
+        $res = $this->queryAll("SELECT LOGINPROF,PRENOMPROF,NOMEPROF,PASSWORD_HASH FROM PROFESSEUR WHERE CONCAT(PRENOMPROF, ' ', NOMEPROF) LIKE ?", [$search]);
         return $res;
 
     }

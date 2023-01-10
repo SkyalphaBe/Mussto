@@ -1,9 +1,15 @@
 <?php
     require_once (PATH_MODELS.'AdminDAO.php');
+
+    $search = "";
+    if (array_key_exists("query", $_GET)){
+        $search = $_GET['query'];
+    }
+
     $dao = new AdminDAO(true,$_SESSION['login']);
-    $data['user']=$dao->getAllEtudiants();
-    $data['groups'] = $dao->getAllGroupes();
-    echo json_encode($data);
+    $res['user']=$dao->getAllEtudiants($search);
+    $res['groups'] = $dao->getAllGroupes();
+    echo json_encode($res);
 ?>
 
 
