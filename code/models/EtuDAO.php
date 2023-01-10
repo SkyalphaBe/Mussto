@@ -116,9 +116,7 @@ class EtuDAO extends UserDAO
      * @return array|false|null renvoie les notes pour un module
      */
     public function getNotesForModule($module){
-        $result = $this->queryAll("SELECT IDDEVOIR, DATE_FORMAT(DATEDEVOIR, '%d/%m/%Y') as DATEDEVOIR, DATE_FORMAT(DATE_ENVOIE, '%d/%m/%Y') as DATE_ENVOIE, COMMENTAIRE, CONTENUDEVOIR, NOTE, COEF
-        FROM NOTER NATURAL JOIN DEVOIR NATURAL JOIN MODULE
-        WHERE LOGINETU = ? AND REFMODULE = ?" , [$this->_username, $module]);
+        $result = $this->queryAll("SELECT * FROM (SELECT *, RANK() OVER (PARTITION BY IDDEVOIR ORDER BY NOTE DESC) AS RANG FROM `NOTER` NATURAL JOIN DEVOIR NATURAL JOIN MODULE WHERE REFMODULE = ?) t WHERE LOGINETU = ?" , [ $module, $this->_username]);
         return $result;
     }
 

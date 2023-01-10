@@ -22,7 +22,7 @@ echo '</pre>'; */
     if (isset($mes_modules) && $mes_modules){
         foreach($mes_modules as $module){
             ?>
-        <div class="module" style="background-color : <?=CSScolorByName($module['NOMMODULE'])?>">
+        <div class="module" style="--color : <?=DegreeColorByName($module['NOMMODULE'])?>">
             <h1> <?= $module['NOMMODULE'] ?></h1>
             <?php if ($module['NOTE']) { ?>
                 <p>Dernière note : </p>

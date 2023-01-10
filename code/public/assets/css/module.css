@@ -15,7 +15,8 @@ body > div.modules > div.module{
     justify-content: space-between;
     width: 30%;
     margin: 1.5%;
-    background-color: darkblue;
+    background-color: hsl(var(--color), 66%, 41%, 0.8);
+    box-shadow: 0px 0px 20px hsl(var(--color), 66%, 41%, 0.5);
     border-radius: 20px;
     color: white;
     font-size: 1.5em;
@@ -64,15 +65,28 @@ body > div.modules > div.module > a{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    background-color: hsl(var(--color), 66%, 41%, 0.8);
+    padding: 0.7em;
+    border-radius: 0.8em;
+    
+    box-shadow: 0px 0px 20px  hsl(var(--color), 66%, 41%, 0.3);
 }
 
 
 
 .module-detail h1{
     color: hsl(var(--color), 66%, 41%, 1);
-    text-shadow: 0px 0px 5px hsl(var(--color), 66%, 41%, 0.3);
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 0.3em;
+    border-radius: 0.3em;
+    /* text-shadow: 0px 0px 5px hsl(var(--color), 66%, 41%, 0.3); */
     margin: 0;
 
+}
+
+.module-detail > .desc{
+    text-align: center;
 }
 
 .module-detail .content{
@@ -84,7 +98,7 @@ body > div.modules > div.module > a{
 }
 
 .module-detail .content > * {
-    margin: 10px 30px;
+    padding: 10px 30px;
 }
 
 .module-detail .content:before{
@@ -115,7 +129,8 @@ body > div.modules > div.module > a{
 
 .module-detail .notes .notes-list{
     height: 100%;
-    overflow: auto;
+    overflow-x :visible;
+    overflow-y : auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -124,8 +139,8 @@ body > div.modules > div.module > a{
 }
 
 .module-detail .notes .note-elt{
-    background-color: hsl(var(--color), 66%, 41%, 0.5);
-    color: hsl(var(--color), 66%, 41%, 1);
+    background-color: hsl(var(--color), 66%, 41%, 0.8);
+    color: white;
     border-radius: 10px;
     padding: 15px;
 
@@ -134,6 +149,10 @@ body > div.modules > div.module > a{
     align-items: flex-start;
 
     gap: 4px;
+
+    overflow: hidden;
+
+    box-shadow: 0px 0px 15px hsl(var(--color), 66%, 41%, 0.2);
 
 }
 
@@ -145,10 +164,10 @@ body > div.modules > div.module > a{
     display: none;
 }
 
-
 .module-detail .notes .note-elt:hover > p{
     display : block
 }
+
 
 .module-detail .notes .note-elt > div{
     width: 100%;
@@ -160,10 +179,10 @@ body > div.modules > div.module > a{
 }
 
 .note{
-    padding: 6px;
+    padding: .4em;
     background-color: rgba(255, 255, 255, 0.75);
-
-    border-radius: 5px;
+    height: 1.2em;
+    border-radius: .5em;
     color: hsl(var(--color), 66%, 41%, 1);
 }
 
@@ -173,12 +192,8 @@ body > div.modules > div.module > a{
     opacity: .7;
 }
 
-.note-elt .ds-content{
-
-}
-
 .module-detail .moyenne{
-    background-color: hsl(var(--color), 66%, 41%, 0.5);
+    background-color: hsl(var(--color), 66%, 41%, 0.8);
     color: #2f3235;
 
     padding: 0 3%;
@@ -192,7 +207,7 @@ body > div.modules > div.module > a{
 }
 
 .module-detail .moyenne h2{
-    color: hsl(var(--color), 66%, 41%, 1);
+    color: white;
 }
 
 .devoirs .devoir-list{
@@ -207,7 +222,7 @@ body > div.modules > div.module > a{
     border-radius: 1em;
     background-color: rgb(236, 236, 236);
 
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.192);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.158);
 }
 
 .devoirs .devoir-list .devoir-elt > div{

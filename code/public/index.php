@@ -105,4 +105,5 @@ if ($match){
 } else {
     http_response_code(404);
     echo '404'; #A modifier
+    header('Location: '.$router->generate('home'));
 }

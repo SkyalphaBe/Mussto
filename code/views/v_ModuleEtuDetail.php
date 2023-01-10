@@ -60,6 +60,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                                     <h3 class="note"><?=$note['NOTE']?>/20</h3>
                                     <p><?=$note['DATE_ENVOIE']?></p>
                                 </div>
+                                <p class="comment"><?php if ($note['COMMENTAIRE']) { echo "Commentaire : ".$note['COMMENTAIRE'];}?></p>
                                 <p class="coef">Coefficient <?=$note['COEF']?></p>
                                 <p class="ds-content"><?=$note['CONTENUDEVOIR']?></p>
                                 <p class="ds-date">Devoir du <?=$note['DATEDEVOIR']?></p>
