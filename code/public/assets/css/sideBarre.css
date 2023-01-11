@@ -224,6 +224,24 @@ body.hide-side .sideBarre{
     align-items: center;
 }
 
+#dataButton{
+    display: flex;
+    justify-content: space-around;
+    width: 75%;
+    border-radius: 10px;
+    border: None;
+    background-color: #2f3235;
+    color: white;
+    padding:5%;
+    text-decoration: none;
+    transition: 0.3s;
+    margin-bottom: 5px;
+}
+
+#dataButton:hover{
+    background-color: green;
+}
+
 .decoButton{
     display: flex;
     justify-content: space-around;
@@ -236,9 +254,11 @@ body.hide-side .sideBarre{
     text-decoration: none;
     transition: 0.3s;
 }
-.button a:hover{
+.decoButton:hover{
     background-color: #d92525;
 }
+
+
 
 
 @media (orientation: portrait) {

@@ -34,6 +34,9 @@
             </div>
         </div>
         <div class="button">
+            <a id="dataButton">Mes infos</a>
+        </div>
+        <div class="button">
             <a href= <?= $router->generate('disconnect') ?> class="decoButton"><i class="fa-solid fa-right-from-bracket"></i> Deconnexion</a>
         </div>
     </div>
