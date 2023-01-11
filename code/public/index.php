@@ -77,6 +77,7 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("POST", "/api/creerCompteExcel", "creerCompteExcel");
         $router->map("GET", "/api/listeModules", "listeModules");
         $router->map("POST", "/api/createModuleExcel", "createModuleExcel");
+        $router->map("POST", "/api/createGroupExcel", "createGroupExcel");
 
         $router->map("GET|POST", "/api/deleteUser", "deleteUser");
         $router->map("GET|POST", "/api/deleteGroup", "deleteGroup");
@@ -104,4 +105,5 @@ if ($match){
 } else {
     http_response_code(404);
     echo '404'; #A modifier
+    header('Location: '.$router->generate('home'));
 }

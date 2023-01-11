@@ -12,6 +12,7 @@ const radioChoice = document.querySelectorAll('input[type="radio"]');
 const btnCreateAccount = document.getElementById("btnCreer");
 const checkBox = document.getElementsByClassName("check")[0];
 const topBoxAdmin = document.getElementsByClassName("topBoxAdmin")[0];
+const searchBar = document.getElementById("search");
 
 
 window.onload = updateAccount();
@@ -21,6 +22,10 @@ radioChoice.forEach(elem=>{
         updateAccount();
     });
 });
+
+searchBar.onchange = () => {
+    updateAccount();
+}
 
 btnCreateAccount.addEventListener("click",()=>{
     btnCreateAccount.style.display="none";
@@ -63,7 +68,9 @@ function updateAccount(){
     content.innerHTML = "";
     radioChoice.forEach(elem =>{
         if(elem.checked){
-            fetch(elem.value).then(res =>{
+            let search = searchBar.value
+
+            fetch(elem.value + "?query="+search).then(res =>{
                 if (res.ok){
                     return res.json();
                 }else {

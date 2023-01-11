@@ -71,6 +71,18 @@ class EtuDAO extends UserDAO
         return $result;
     }
 
+    public function getDSForModule($ref){
+        $groups = $this->getGroups();
+        $result = [];
+        foreach ($groups as $group){
+            $data = $this->queryAll("SELECT * FROM DEVOIR NATURAL JOIN EVALUER WHERE CURRENT_DATE() < DATEDEVOIR AND REFMODULE = ? AND INTITULEGROUPE = ?", [$ref, $group['intitulegroupe']]);
+            if ($data){
+                $result = array_merge($result, $data);
+            }
+        }
+        return $result;
+    }
+
     /**
      * @return array Liste des sondages concernant l'étudiant. Le tableau est vide si il n'y a pas de sondage pour cet étudiant
      */
@@ -104,9 +116,7 @@ class EtuDAO extends UserDAO
      * @return array|false|null renvoie les notes pour un module
      */
     public function getNotesForModule($module){
-        $result = $this->queryAll("SELECT IDDEVOIR, DATE_FORMAT(DATEDEVOIR, '%d/%m/%Y') as DATEDEVOIR, DATE_FORMAT(DATE_ENVOIE, '%d/%m/%Y') as DATE_ENVOIE, COMMENTAIRE, CONTENUDEVOIR, NOTE, COEF
-        FROM NOTER NATURAL JOIN DEVOIR NATURAL JOIN MODULE
-        WHERE LOGINETU = ? AND REFMODULE = ?" , [$this->_username, $module]);
+        $result = $this->queryAll("SELECT * FROM (SELECT *, RANK() OVER (PARTITION BY IDDEVOIR ORDER BY NOTE DESC) AS RANG FROM `NOTER` NATURAL JOIN DEVOIR NATURAL JOIN MODULE WHERE REFMODULE = ?) t WHERE LOGINETU = ?" , [ $module, $this->_username]);
         return $result;
     }
 

@@ -9,8 +9,13 @@ $module = $dao->getModule($match['params']['ue']);
 
 $enseignants = $dao->getProfsForModule($module['REFMODULE']);
 $notes = $dao->getNotesForModule($module['REFMODULE']);
-$avg = $dao->getAverageForModule($module['REFMODULE']);
+/* 
+echo '<pre>';
+var_dump($notes);
+echo '</pre>'; */
 
+$devoirs = $dao->getDSForModule($module['REFMODULE']);
+$avg = $dao->getAverageForModule($module['REFMODULE']);
 
 if ($module){
     require_once (PATH_VIEWS."ModuleEtuDetail.php");

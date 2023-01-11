@@ -13,6 +13,9 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
 <div class="topBoxAdmin">
     <h1>Utilisateur</h1>
+    <div class="search">
+        <input type="text" id="search" placeholder="Rechercher"/>
+    </div>
     <div class="check">
         <label>Liste Etudiant<input type="radio" name="choix" value="/api/listeEtu" checked></label>
         <label>Liste Professeur<input type="radio" name="choix" value="/api/listeProfesseur"></label>

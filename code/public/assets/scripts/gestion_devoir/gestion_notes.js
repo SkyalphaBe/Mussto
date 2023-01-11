@@ -33,6 +33,7 @@ export default function gestion_notes(root_id, id_devoir){
         }
 
         setNote(note){
+            note = note.toString();
             if (note){  
                 note = note.replace(",", ".");
             }
