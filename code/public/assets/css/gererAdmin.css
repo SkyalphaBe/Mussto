@@ -236,13 +236,13 @@ input::file-selector-button:hover{
     width: 60%;
 }
 
-#module div{
+#assignment div{
     display: flex;
     flex-direction: column;
     width: 60%;
 }
 
-#module button{
+#assignment button{
     height: 35px;
     border-radius: 100%;
     border: none;

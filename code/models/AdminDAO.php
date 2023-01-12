@@ -46,6 +46,12 @@ class AdminDAO extends UserDAO
         return $res;
     }
 
+    public function getStudentGroups($login){
+        $res =  $this->queryAll("SELECT ANNEEGROUPE, INTITULEGROUPE FROM AFFECTER
+                WHERE LOGINETU = ?",[$login]);
+        return $res;
+    }
+
     public function createGroupe($intituleGroupe,$anneGroupe){
         $this->insertRow("insert into GROUPE values (?,?)",[$intituleGroupe,$anneGroupe]);
     }
@@ -61,11 +67,18 @@ class AdminDAO extends UserDAO
     }
 
     public function updateStudent($firstName,$lastName,$login){
-        $this->updateRow("UPDATE ETUDIANT SET PRENOMETU=?,NOMETU=? WHERE LOGINETU=?",[$firstName,$lastName,$login]);
+        $res=$this->updateRow("UPDATE ETUDIANT SET PRENOMETU=?,NOMETU=? WHERE LOGINETU=?",[$firstName,$lastName,$login]);
+        return $res;
     }
 
-    public function updateGroup($login,$newGroup){
-        $this->updateRow("UPDATE AFFECTER SET INTITULEGROUPE=? WHERE LOGINETU=?",[$newGroup,$login]);
+    public function updateGroup($login,$newGroup,$year){
+        $res=$this->updateRow("UPDATE AFFECTER SET INTITULEGROUPE=? WHERE LOGINETU=? AND ANNEEGROUPE=?",[$newGroup,$login,$year]);
+        return $res;
+    }
+
+    public function insertAffectation($login,$newGroup,$yearGroup){
+        $res=$this->updateRow("INSERT INTO AFFECTER VALUES (?,?,?)",[$login,$newGroup,$yearGroup]);
+        return $res;
     }
 
     public function updateTeacher($firstName,$lastName,$login){

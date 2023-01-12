@@ -10,7 +10,16 @@
         else{
             if($_POST['type']=='ETUDIANT'){
                 $dao->updateStudent($_POST['prenom'],$_POST['nom'],$_POST['login']);
-                $dao->updateGroup($_POST['login'],$_POST['groups']);
+                if(isset($_POST['year'])&&isset($_POST['groups'])){
+                    $res= $dao->updateGroup($_POST['login'],$_POST['groups'],$_POST['year']);
+                    $listGroups= $dao->getStudentGroups($_POST['login']);
+                    $newGroup = ['ANNEEGROUPE' => $_POST['year'],
+                    'INTITULEGROUPE' =>$_POST['groups']];
+
+                    if($res->rowCount()==0 && !in_array($newGroup,$listGroups)){
+                        $dao->insertAffectation($_POST['login'],$_POST['groups'],$_POST['year']);
+                    }
+                }
             }
             if($_POST['type']=='PROFESSEUR'){
                 $dao->updateTeacher($_POST['prenom'],$_POST['nom'],$_POST['login']);

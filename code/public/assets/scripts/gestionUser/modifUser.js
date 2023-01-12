@@ -46,23 +46,37 @@ function generateFormGestion(user,typeCompte,assignList,defaultAssign){
     inputLogin.value = user.login;
     inputLogin.hidden = true;
 
+    labelAssign.id ="assignment";
+
     if(typeCompte == "Etudiant"){
         let selectAssign = document.createElement('select');
+        let divGroup = document.createElement('div');
+        let option = document.createElement('option');
 
         labelAssign.textContent = 'Groupe';
         selectAssign.name = 'groups';
+        option.textContent = "choisissez un groupe";
+        selectAssign.appendChild(option);
+
         for(let i = 0; i<assignList.length;i++){
-            let option = document.createElement('option');
+            option = document.createElement('option');
             option.value = assignList[i].INTITULEGROUPE;
             option.textContent = assignList[i].INTITULEGROUPE;
             selectAssign.appendChild(option);
         }
 
-        labelAssign.appendChild(selectAssign);
+        selectAssign.addEventListener('change',(evt)=>{
+            if(divGroup.lastElementChild!=selectAssign){
+                divGroup.lastElementChild.remove()
+            }
+            let selectYear = createSelectYear(evt.target,assignList);
+            divGroup.appendChild(selectYear);
+        });
+        divGroup.appendChild(selectAssign);
+        labelAssign.appendChild(divGroup)
     }
     else{
         labelAssign.textContent = 'Module';
-        labelAssign.id ="module";
 
         for(let i=0;i<defaultAssign[user.login].length;i++){
             divModule.appendChild(createSelectTeacher(assignList,defaultAssign[user.login][i]));
@@ -95,6 +109,24 @@ function generateFormGestion(user,typeCompte,assignList,defaultAssign){
 
     content.appendChild(form);
     content.appendChild(deleteBtn);
+}
+
+function createSelectYear(selectParent,assignList){
+    let selectYear = document.createElement('select');
+    let option = document.createElement('option');
+
+    selectYear.name = 'year';
+    option.textContent = "choisissez une année";
+    selectYear.appendChild(option);
+    for(let i = 0; i<assignList.length;i++){
+        option = document.createElement('option');
+        if(assignList[i].INTITULEGROUPE==selectParent.value){
+            option.value = assignList[i].ANNEEGROUPE;
+            option.textContent = assignList[i].ANNEEGROUPE;
+            selectYear.appendChild(option);
+        }
+    }
+    return selectYear;
 }
 
 function generateAddBtn(assignList,divModule){
