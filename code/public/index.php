@@ -90,6 +90,8 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
 
     ##Route de deconnection
     $router->map("GET", "/disconnect", "disconnect", "disconnect");
+
+    $router->map("GET", "/allyourinfo", "info", "info");
 } else {
     $router->map("GET|POST", "/", "login", "home");
 }
