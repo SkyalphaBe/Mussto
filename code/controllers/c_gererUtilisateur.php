@@ -25,7 +25,7 @@
                 $dao->updateTeacher($_POST['prenom'],$_POST['nom'],$_POST['login']);
                 $dao->deleteAffectation($_POST['login'],$_POST['type']);
                 for($i=1;$i<sizeof($_POST)-3;$i++){
-                    $dao->assignerProf($_POST['login'],$_POST['module'.$i]);
+                    $dao->assignerProf($_POST['login'],$_POST['affect'.$i]);
                 }
             }
         }

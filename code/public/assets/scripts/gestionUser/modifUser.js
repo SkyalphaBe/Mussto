@@ -1,5 +1,5 @@
 const content = document.getElementsByClassName("content")[0];
-var idModule = 0;
+var idSelect = 0;
 
 function generateFormGestion(user,typeCompte,assignList,defaultAssign){
     let form = document.createElement('form');
@@ -79,7 +79,7 @@ function generateFormGestion(user,typeCompte,assignList,defaultAssign){
         labelAssign.textContent = 'Module';
 
         for(let i=0;i<defaultAssign[user.login].length;i++){
-            divModule.appendChild(createSelectTeacher(assignList,defaultAssign[user.login][i]));
+            divModule.appendChild(creerSelectAffectation(assignList,defaultAssign[user.login][i]));
         }
         labelAssign.appendChild(generateAddBtn(assignList,divModule));
         labelAssign.appendChild(generateRemoveBtn(divModule));
@@ -129,57 +129,57 @@ function createSelectYear(selectParent,assignList){
     return selectYear;
 }
 
-function generateAddBtn(assignList,divModule){
+function generateAddBtn(list,div){
     let addBtn = document.createElement('button');
     addBtn.textContent='+';
     addBtn.type='button';
     addBtn.addEventListener('click', (evt)=>{
         if(evt.target.tagName==="BUTTON"){
-            if(divModule.children.length<assignList.length)
-                addSelect(assignList,divModule);
+            if(div.children.length<list.length)
+                addSelect(list,div);
         }
     });
     return addBtn;
 }
 
-function generateRemoveBtn(divModule){
+function generateRemoveBtn(div){
     let rmvBtn = document.createElement('button');
     rmvBtn.textContent='-';
     rmvBtn.type='button';
     rmvBtn.addEventListener('click', (evt)=>{
         if(evt.target.tagName==="BUTTON") {
-            if (divModule.children.length > 1)
-                removeSelect(divModule);
+            if (div.children.length > 1)
+                removeSelect(div);
         }
     });
     return rmvBtn;
 }
 
-function addSelect(assignList,divModule){
-    let newSelect = createSelectTeacher(assignList);
-    divModule.appendChild(newSelect);
+function addSelect(list,div){
+    let newSelect = creerSelectAffectation(list);
+    div.appendChild(newSelect);
 }
 
-function removeSelect(divModule){
-    divModule.removeChild(divModule.lastChild);
-    idModule--;
+function removeSelect(div){
+    div.removeChild(div.lastChild);
+    idSelect--;
 }
 
-function createSelectTeacher(assignList,defaultAssign=null){
-    let selectAssign = document.createElement('select');
-    selectAssign.name = "module"+(++idModule);
-    for(let i = 0; i<assignList.length;i++){
+function creerSelectAffectation(list,defaultAssign=null){
+    let select = document.createElement('select');
+    select.name = "affect"+(++idSelect);
+    for(let i = 0; i<list.length;i++){
         let option = document.createElement('option');
-        option.value = assignList[i].REFMODULE;
+        option.value = list[i].REFMODULE;
         if(defaultAssign!=null){
             if(option.value==defaultAssign.REFMODULE){
                 option.setAttribute('selected','selected');
             }
         }
-        option.textContent = assignList[i].NOMMODULE;
-        selectAssign.appendChild(option);
+        option.textContent = list[i].NOMMODULE;
+        select.appendChild(option);
     }
-    return selectAssign;
+    return select;
 }
 
 async function deleteUser(login,typeCompte){
@@ -209,4 +209,4 @@ async function deleteUser(login,typeCompte){
     }
 }
 
-export {generateFormGestion}
+export {generateFormGestion,addSelect,removeSelect,creerSelectAffectation,idSelect}

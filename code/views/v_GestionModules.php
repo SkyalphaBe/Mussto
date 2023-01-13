@@ -40,6 +40,29 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         </form>
     </div>
 </template>
+<template>
+    <form method="post" class="formAdminManage">
+        <input type="text" name="refmodule" hidden>
+        <div class="formContentAdminManage">
+            <label>Nom du module
+                <input type="text" name="nommodule" required>
+            </label>
+        </div>
+        <div class="formContentAdminManage">
+            <label>Description
+                <input type="text" name="description" required>
+            </label>
+        </div>
+        <div class="formContentAdminManage">
+            <label id="assignment">Groupe(s)
+                <button type="button">+</button>
+                <button type="button">-</button>
+                <div></div>
+            </label>
+        </div>
+        <input type="submit" name="valider" value="valider">
+    </form>
+</template>
 <div class="content"></div>
 <script type="module" src="<?= PATH_SCRIPTS?>gestionAdminModule.js"></script>
 <?php

@@ -206,7 +206,7 @@ input::file-selector-button:hover{
 
 .formContentAdminManage{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     width: 100%;
 }
@@ -222,14 +222,14 @@ input::file-selector-button:hover{
     height: 100%;
 }
 
-.formContentAdminManage label input{
+.formContentAdminManage input{
     border-color:  #4e2f83;
     border-radius: 15px;
     border-style: solid;
     width: 60%;
 }
 
-.formContentAdminManage label select{
+.formContentAdminManage select{
     border-color:  #4e2f83;
     border-radius: 15px;
     border-style: solid;

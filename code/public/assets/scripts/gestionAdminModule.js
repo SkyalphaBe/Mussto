@@ -1,3 +1,5 @@
+import {creerFormGestion} from "./modifModule";
+
 const content = document.getElementsByClassName("content")[0];
 const topBoxAdmin = document.getElementsByClassName("topBoxAdmin")[0];
 const btnCreerModule = document.getElementById("btnCreer");
@@ -10,8 +12,7 @@ js.type = "text/javascript";
 document.body.appendChild(js);
 
 btnCreerModule.addEventListener("click",()=>{
-    btnCreerModule.style.display="none";
-    content.style.flexDirection="row";
+    modifyTopBox()
     createAccountForm();
     createAccountFormExcel();
 
@@ -88,14 +89,14 @@ function updateModule(){
             throw new Error(res.status);
         }
     }).then(json => {
-        json.forEach(line =>{
-            createLineModule(line);
+        json.module.forEach(line =>{
+            createLineModule(line,json);
         });
     }).catch(err =>{
         console.error(err);
     });
 }
-function createLineModule(module){
+function createLineModule(module,listGroupe){
     let newDiv= document.createElement('div');
     let intitule = document.createElement('h3');
     let refModule = document.createElement('h3');
@@ -111,6 +112,12 @@ function createLineModule(module){
 
     newBtn.className='btnManage';
     newBtn.textContent='gérer';
+    newBtn.addEventListener('click',()=>{
+        content.style.alignItems = "center";
+        content.style.justifyContent = "space-evenly";
+        creerFormGestion(listGroupe);
+        modifyTopBox();
+    })
 
     newDiv.appendChild(intitule);
     newDiv.appendChild(refModule);
@@ -121,7 +128,12 @@ function createLineModule(module){
 
 function createAccountForm(){
     let templateForm = document.querySelector("template");
+    content.style.flexDirection="row";
     content.replaceChildren(templateForm.content.cloneNode(true));
+}
+
+function modifyTopBox(){
+    btnCreerModule.style.display="none";
 
     let btnRetour = document.createElement("button");
     btnRetour.textContent="retour";
@@ -130,6 +142,8 @@ function createAccountForm(){
 
     btnRetour.addEventListener("click",()=>{
         btnCreerModule.style.display="block";
+        content.style.alignItems = "normal";
+        content.style.justifyContent = "normal";
         content.style.flexDirection="column";
         topBoxAdmin.removeChild(btnRetour);
         updateModule();
