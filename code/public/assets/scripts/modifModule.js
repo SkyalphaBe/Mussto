@@ -10,7 +10,7 @@ function creerFormGestion(module,listGroupe,listeParticipant){
     let nomModule = form.children[1].firstElementChild.firstElementChild;
     let desc = form.children[2].firstElementChild.firstElementChild;
     let addBtn = form.children[3].firstElementChild.firstElementChild;
-    let delBtn = form.children[3].firstElementChild.children[1];
+    let rmBtn = form.children[3].firstElementChild.children[1];
     let divSelect = form.children[3].firstElementChild.lastElementChild;
 
     refModule.value=module.REFMODULE;
@@ -28,7 +28,7 @@ function creerFormGestion(module,listGroupe,listeParticipant){
         }
     });
 
-    delBtn.addEventListener('click', (evt)=>{
+    rmBtn.addEventListener('click', (evt)=>{
         if(evt.target.tagName==="BUTTON") {
             if (divSelect.children.length > 1)
                 removeSelect(divSelect);
@@ -37,6 +37,10 @@ function creerFormGestion(module,listGroupe,listeParticipant){
 
     deleteBtn.textContent = "supprimer";
     deleteBtn.className = "deleteBtn";
+
+    deleteBtn.addEventListener('click', async ()=>{
+        await deleteUser(module.REFMODULE);
+    });
 
     content.replaceChildren(form);
     content.appendChild(deleteBtn);
@@ -67,6 +71,29 @@ function addSelect(list,div){
 function removeSelect(div){
     div.removeChild(div.lastChild);
     idSelect--;
+}
+
+async function deleteUser(module){
+    let header = {
+        method : 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body : JSON.stringify([module])
+    }
+
+    let request = await fetch("/api/supprimerModule", header);
+    if (request.ok){
+        let json = await request.json();
+        console.log(json);
+
+        if(json["code"] === 200){
+            location.reload()
+        }
+    }
+    else{
+        console.log('marche pas');
+    }
 }
 
 export {creerFormGestion};

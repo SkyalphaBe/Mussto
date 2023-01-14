@@ -23,10 +23,13 @@
             }
             if($_POST['type']=='PROFESSEUR'){
                 $dao->updateTeacher($_POST['prenom'],$_POST['nom'],$_POST['login']);
-                $dao->deleteAffectation($_POST['login'],$_POST['type']);
-                for($i=1;$i<sizeof($_POST)-3;$i++){
-                    $dao->assignerProf($_POST['login'],$_POST['affect'.$i]);
+                if(isset($_POST['affect1'])){
+                    $dao->deleteAffectation($_POST['login'],$_POST['type']);
+                    for($i=1;$i<sizeof($_POST)-3;$i++){
+                        $dao->assignerProf($_POST['login'],$_POST['affect'.$i]);
+                    }
                 }
+
             }
         }
     }

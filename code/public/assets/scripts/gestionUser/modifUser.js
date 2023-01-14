@@ -208,3 +208,5 @@ async function deleteUser(login,typeCompte){
         console.log('marche pas');
     }
 }
+
+export {generateFormGestion}
