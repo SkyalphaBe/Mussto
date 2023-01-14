@@ -3,7 +3,7 @@ require_once (PATH_MODELS.'UserDAO.php');
 class AdminDAO extends UserDAO
 {
     public function getAllModules(){
-        $res = $this->queryAll("SELECT REFMODULE, NOMMODULE FROM MODULE");
+        $res = $this->queryAll("SELECT REFMODULE, NOMMODULE, DESCRIPTIONMODULE FROM MODULE");
         return $res;
     }
 
@@ -27,6 +27,11 @@ class AdminDAO extends UserDAO
 
     public function getModulesProf($loginProf){
         $res = $this->queryAll("SELECT REFMODULE FROM ENSEIGNER WHERE LOGINPROF = ?",[$loginProf]);
+        return $res;
+    }
+
+    public function getParticipationModules($module){
+        $res = $this->queryAll("SELECT INTITULEGROUPE,ANNEEGROUPE FROM PARTICIPER where REFMODULE= ?",[$module] );
         return $res;
     }
 

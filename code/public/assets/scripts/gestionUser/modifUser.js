@@ -79,7 +79,7 @@ function generateFormGestion(user,typeCompte,assignList,defaultAssign){
         labelAssign.textContent = 'Module';
 
         for(let i=0;i<defaultAssign[user.login].length;i++){
-            divModule.appendChild(creerSelectAffectation(assignList,defaultAssign[user.login][i]));
+            divModule.appendChild(creerSelectProf(assignList,defaultAssign[user.login][i]));
         }
         labelAssign.appendChild(generateAddBtn(assignList,divModule));
         labelAssign.appendChild(generateRemoveBtn(divModule));
@@ -156,7 +156,7 @@ function generateRemoveBtn(div){
 }
 
 function addSelect(list,div){
-    let newSelect = creerSelectAffectation(list);
+    let newSelect = creerSelectProf(list);
     div.appendChild(newSelect);
 }
 
@@ -165,7 +165,7 @@ function removeSelect(div){
     idSelect--;
 }
 
-function creerSelectAffectation(list,defaultAssign=null){
+function creerSelectProf(list,defaultAssign=null){
     let select = document.createElement('select');
     select.name = "affect"+(++idSelect);
     for(let i = 0; i<list.length;i++){
@@ -208,5 +208,3 @@ async function deleteUser(login,typeCompte){
         console.log('marche pas');
     }
 }
-
-export {generateFormGestion,addSelect,removeSelect,creerSelectAffectation,idSelect}

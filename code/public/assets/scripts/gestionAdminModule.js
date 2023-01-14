@@ -90,13 +90,13 @@ function updateModule(){
         }
     }).then(json => {
         json.module.forEach(line =>{
-            createLineModule(line,json);
+            createLineModule(line,json.groupe,json.affect);
         });
     }).catch(err =>{
         console.error(err);
     });
 }
-function createLineModule(module,listGroupe){
+function createLineModule(module,listGroupe,listeParticipant){
     let newDiv= document.createElement('div');
     let intitule = document.createElement('h3');
     let refModule = document.createElement('h3');
@@ -115,7 +115,7 @@ function createLineModule(module,listGroupe){
     newBtn.addEventListener('click',()=>{
         content.style.alignItems = "center";
         content.style.justifyContent = "space-evenly";
-        creerFormGestion(listGroupe);
+        creerFormGestion(module,listGroupe,listeParticipant);
         modifyTopBox();
     })
 
