@@ -60,7 +60,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                 <div></div>
             </label>
         </div>
-        <input type="submit" name="valider" value="valider">
+        <input type="submit" name="modif" value="modifier">
     </form>
 </template>
 <div class="content"></div>

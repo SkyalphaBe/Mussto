@@ -35,11 +35,12 @@ function creerFormGestion(module,listGroupe,listeParticipant){
         }
     });
 
-    deleteBtn.textContent = "supprimer";
+    deleteBtn.type="button";
     deleteBtn.className = "deleteBtn";
+    deleteBtn.textContent="supprimer"
 
     deleteBtn.addEventListener('click', async ()=>{
-        await deleteUser(module.REFMODULE);
+        await supprModule(module.REFMODULE);
     });
 
     content.replaceChildren(form);
@@ -73,7 +74,7 @@ function removeSelect(div){
     idSelect--;
 }
 
-async function deleteUser(module){
+async function supprModule(module){
     let header = {
         method : 'POST',
         headers: {
@@ -88,7 +89,7 @@ async function deleteUser(module){
         console.log(json);
 
         if(json["code"] === 200){
-            location.reload()
+            location.reload();
         }
     }
     else{
