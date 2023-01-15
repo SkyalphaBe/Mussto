@@ -3,7 +3,7 @@ require_once (PATH_MODELS.'UserDAO.php');
 class AdminDAO extends UserDAO
 {
     public function getAllModules(){
-        $res = $this->queryAll("SELECT REFMODULE, NOMMODULE FROM MODULE");
+        $res = $this->queryAll("SELECT REFMODULE, NOMMODULE, DESCRIPTIONMODULE FROM MODULE");
         return $res;
     }
 
@@ -27,6 +27,11 @@ class AdminDAO extends UserDAO
 
     public function getModulesProf($loginProf){
         $res = $this->queryAll("SELECT REFMODULE FROM ENSEIGNER WHERE LOGINPROF = ?",[$loginProf]);
+        return $res;
+    }
+
+    public function getParticipationModules($module){
+        $res = $this->queryAll("SELECT INTITULEGROUPE,ANNEEGROUPE FROM PARTICIPER where REFMODULE= ?",[$module] );
         return $res;
     }
 
@@ -76,6 +81,11 @@ class AdminDAO extends UserDAO
         return $res;
     }
 
+    public function updateModule($refModule,$nouveauNom,$desc){
+        $res=$this->updateRow("UPDATE MODULE SET NOMMODULE=?, DESCRIPTIONMODULE = ? WHERE REFMODULE=?",[$nouveauNom,$desc,$refModule]);
+        return $res;
+    }
+
     public function insertAffectation($login,$newGroup,$yearGroup){
         $res=$this->updateRow("INSERT INTO AFFECTER VALUES (?,?,?)",[$login,$newGroup,$yearGroup]);
         return $res;
@@ -96,7 +106,7 @@ class AdminDAO extends UserDAO
         return $res;
     }
 
-    public function deleteAffectation($login,$typeCompte){
+    public function deleteAffectation($login,$typeCompte=null){
         $res = false;
         if($typeCompte == "ETUDIANT")
             $res = $this->updateRow("DELETE from AFFECTER where LOGINETU = ?",[$login]);
@@ -112,6 +122,11 @@ class AdminDAO extends UserDAO
             $res = $this->updateRow("DELETE from NOTER where LOGINETU = ?", [$login]);
         if ($typeCompte == "PROFESSEUR")
             $res = $this->updateRow("DELETE from ORGANISER_DEVOIR where LOGINPROF = ?", [$login]);
+        return $res;
+    }
+
+    public function deleteParticipation($refModule){
+        $res = $this->updateRow("DELETE from PARTICIPER where REFMODULE = ?", [$refModule]);
         return $res;
     }
 }
