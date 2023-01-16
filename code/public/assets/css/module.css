@@ -4,16 +4,19 @@ body{
 }
 
 body > div.modules{
-    display:flex;
+    /* display:flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center; */
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    grid-gap: 25px;
 }
 
 body > div.modules > div.module{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 30%;
+    width: 100%;
     margin: 1.5%;
     background-color: hsl(var(--color), 66%, 41%, 0.8);
     box-shadow: 0px 0px 20px hsl(var(--color), 66%, 41%, 0.5);

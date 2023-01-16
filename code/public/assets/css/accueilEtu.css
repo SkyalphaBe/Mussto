@@ -58,8 +58,8 @@ h2{
     width: calc(100% - 30px);
 
     /* background-color: rgb(174,214,183); */
-    background-color: hsl(var(--color), 66%, 41%, 0.5);
-    box-shadow: 0px 0px 15px hsl(var(--color), 66%, 41%, 0.3);
+    background-color: hsl(var(--color), 66%, 41%, 0.8);
+    box-shadow: 0px 0px 15px hsl(var(--color), 66%, 41%, 0.4);
 
     border-radius: 15px;
     padding: 10px;
@@ -96,7 +96,9 @@ h2{
 #DS .devoir{
     width: calc(100% - 2em);
     padding: 1em;
-    background-color: hsl(var(--color), 66%, 41%, 0.5);;
+    
+    background-color: hsl(var(--color), 66%, 41%, 0.8);
+    box-shadow: 0px 0px 15px hsl(var(--color), 66%, 41%, 0.4);
 
     border-radius: 15px;
 
@@ -145,7 +147,9 @@ h2{
     padding: 1em;
     border-radius: 15px;
     color: white;
-    background-color: hsl(var(--color), 66%, 41%, 0.5);;
+    
+    background-color: hsl(var(--color), 66%, 41%, 0.8);
+    box-shadow: 0px 0px 15px hsl(var(--color), 66%, 41%, 0.4);
 
     
 }

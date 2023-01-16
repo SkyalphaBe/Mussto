@@ -213,8 +213,8 @@ body.hide-side .sideBarre{
     justify-content: center;
     align-items: center;
     background-color: var(--sidebar-color);
-    width: 35px;
-    height: 35px;
+    width: 3em;
+    height: 3em;
     border-radius: 50%;
 }
 
@@ -270,9 +270,10 @@ body.hide-side .sideBarre{
     .sideBarre{
         width: 100%;
         font-size: 250%;
+        transform: translateX(-100%);
     }
 
     body.hide-side .sideBarre{
-        transform: translateX(-100%);
+        transform: translateX(0);
     }
 }
