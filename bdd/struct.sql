@@ -1,0 +1,495 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.10
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : localhost
+-- Généré le : lun. 16 jan. 2023 à 15:04
+-- Version du serveur : 10.5.15-MariaDB-0+deb11u1
+-- Version de PHP : 7.4.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `mussto`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ADMIN`
+--
+
+CREATE TABLE `ADMIN` (
+  `LOGINADMIN` varchar(80) NOT NULL,
+  `PASSWORD_HASH` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `AFFECTER`
+--
+
+CREATE TABLE `AFFECTER` (
+  `LOGINETU` varchar(50) NOT NULL,
+  `INTITULEGROUPE` varchar(15) NOT NULL,
+  `ANNEEGROUPE` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `CONVERSATION_ADMIN`
+--
+
+CREATE TABLE `CONVERSATION_ADMIN` (
+  `IDCONV` int(11) NOT NULL,
+  `LOGINPROF` varchar(50) NOT NULL,
+  `DATEDEBUTCONV` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `DEVOIR`
+--
+
+CREATE TABLE `DEVOIR` (
+  `REFMODULE` varchar(10) NOT NULL,
+  `IDDEVOIR` int(11) NOT NULL,
+  `DESCDEVOIR` text DEFAULT NULL,
+  `CONTENUDEVOIR` varchar(50) DEFAULT '',
+  `COEF` int(11) NOT NULL DEFAULT 1,
+  `DATEDEVOIR` date DEFAULT NULL,
+  `SALLE` varchar(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ENSEIGNER`
+--
+
+CREATE TABLE `ENSEIGNER` (
+  `LOGINPROF` varchar(50) NOT NULL,
+  `REFMODULE` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ETUDIANT`
+--
+
+CREATE TABLE `ETUDIANT` (
+  `LOGINETU` varchar(50) NOT NULL,
+  `PASSWORD_HASH` varchar(100) DEFAULT NULL,
+  `PRENOMETU` varchar(50) DEFAULT NULL,
+  `NOMETU` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `EVALUER`
+--
+
+CREATE TABLE `EVALUER` (
+  `INTITULEGROUPE` varchar(15) NOT NULL,
+  `IDDEVOIR` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `GROUPE`
+--
+
+CREATE TABLE `GROUPE` (
+  `INTITULEGROUPE` varchar(15) NOT NULL,
+  `ANNEEGROUPE` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `MESSAGE_ADMIN`
+--
+
+CREATE TABLE `MESSAGE_ADMIN` (
+  `IDCONV` int(11) NOT NULL,
+  `IDMSGADMIN` int(11) NOT NULL,
+  `LOGINADMIN` varchar(80) DEFAULT NULL,
+  `LOGINPROF` varchar(50) DEFAULT NULL,
+  `ADM_LOGINADMIN` varchar(80) DEFAULT NULL,
+  `PRO_LOGINPROF` varchar(50) DEFAULT NULL,
+  `CONTENUMSGADMIN` varchar(500) DEFAULT NULL,
+  `DATEMSG` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `MODULE`
+--
+
+CREATE TABLE `MODULE` (
+  `REFMODULE` varchar(10) NOT NULL,
+  `NOMMODULE` varchar(50) DEFAULT NULL,
+  `DESCRIPTIONMODULE` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `NOTER`
+--
+
+CREATE TABLE `NOTER` (
+  `LOGINETU` varchar(50) NOT NULL,
+  `IDDEVOIR` int(11) NOT NULL,
+  `NOTE` float NOT NULL DEFAULT 0,
+  `DATE_ENVOIE` date NOT NULL,
+  `COMMENTAIRE` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ORGANISER_DEVOIR`
+--
+
+CREATE TABLE `ORGANISER_DEVOIR` (
+  `loginprof` varchar(11) NOT NULL,
+  `iddevoir` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `PARTICIPER`
+--
+
+CREATE TABLE `PARTICIPER` (
+  `INTITULEGROUPE` varchar(10) NOT NULL,
+  `ANNEEGROUPE` varchar(10) NOT NULL,
+  `REFMODULE` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `PROFESSEUR`
+--
+
+CREATE TABLE `PROFESSEUR` (
+  `LOGINPROF` varchar(50) NOT NULL,
+  `PASSWORD_HASH` varchar(80) DEFAULT NULL,
+  `PRENOMPROF` varchar(50) DEFAULT NULL,
+  `NOMEPROF` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `RECEVOIR`
+--
+
+CREATE TABLE `RECEVOIR` (
+  `IDSONDAGE` int(11) NOT NULL,
+  `INTITULEGROUPE` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `REPONDRE`
+--
+
+CREATE TABLE `REPONDRE` (
+  `LOGINETU` varchar(50) NOT NULL,
+  `IDSONDAGE` int(11) NOT NULL,
+  `CONTENUREPONSE` varchar(500) DEFAULT NULL,
+  `DATEREPONSE` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `SALLE`
+--
+
+CREATE TABLE `SALLE` (
+  `id` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `SONDAGE`
+--
+
+CREATE TABLE `SONDAGE` (
+  `IDSONDAGE` int(11) NOT NULL,
+  `REFMODULE` varchar(10) NOT NULL,
+  `LOGINPROF` varchar(50) NOT NULL,
+  `TITLESONDAGE` text NOT NULL,
+  `CONTENUSONDAGE` varchar(500) DEFAULT NULL,
+  `AFFICHER` tinyint(1) NOT NULL DEFAULT 1,
+  `DATESONDAGE` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `ADMIN`
+--
+ALTER TABLE `ADMIN`
+  ADD PRIMARY KEY (`LOGINADMIN`);
+
+--
+-- Index pour la table `AFFECTER`
+--
+ALTER TABLE `AFFECTER`
+  ADD PRIMARY KEY (`LOGINETU`,`INTITULEGROUPE`,`ANNEEGROUPE`),
+  ADD KEY `AFFECTER_FK` (`LOGINETU`),
+  ADD KEY `AFFECTER2_FK` (`INTITULEGROUPE`,`ANNEEGROUPE`);
+
+--
+-- Index pour la table `CONVERSATION_ADMIN`
+--
+ALTER TABLE `CONVERSATION_ADMIN`
+  ADD PRIMARY KEY (`IDCONV`),
+  ADD KEY `RELIER_FK` (`LOGINPROF`);
+
+--
+-- Index pour la table `DEVOIR`
+--
+ALTER TABLE `DEVOIR`
+  ADD PRIMARY KEY (`IDDEVOIR`) USING BTREE,
+  ADD KEY `EVALUER_MODULE_FK` (`REFMODULE`),
+  ADD KEY `fk_salle` (`SALLE`);
+
+--
+-- Index pour la table `ENSEIGNER`
+--
+ALTER TABLE `ENSEIGNER`
+  ADD PRIMARY KEY (`LOGINPROF`,`REFMODULE`),
+  ADD KEY `ENSEIGNER_FK` (`LOGINPROF`),
+  ADD KEY `ENSEIGNER2_FK` (`REFMODULE`);
+
+--
+-- Index pour la table `ETUDIANT`
+--
+ALTER TABLE `ETUDIANT`
+  ADD PRIMARY KEY (`LOGINETU`);
+
+--
+-- Index pour la table `EVALUER`
+--
+ALTER TABLE `EVALUER`
+  ADD PRIMARY KEY (`INTITULEGROUPE`,`IDDEVOIR`) USING BTREE,
+  ADD KEY `fk_iddevoir` (`IDDEVOIR`);
+
+--
+-- Index pour la table `GROUPE`
+--
+ALTER TABLE `GROUPE`
+  ADD PRIMARY KEY (`INTITULEGROUPE`,`ANNEEGROUPE`);
+
+--
+-- Index pour la table `MESSAGE_ADMIN`
+--
+ALTER TABLE `MESSAGE_ADMIN`
+  ADD PRIMARY KEY (`IDCONV`,`IDMSGADMIN`),
+  ADD KEY `CORRESPONDRE_FK` (`IDCONV`),
+  ADD KEY `ENVOYER_MESSAGE_PROF_FK` (`ADM_LOGINADMIN`),
+  ADD KEY `RECEVOIR_MESSAGE_ADMIN_FK` (`LOGINADMIN`),
+  ADD KEY `RECEVOIR_MESSAGE_PROF_FK` (`LOGINPROF`),
+  ADD KEY `ENVOYER_MESSAGE_ADMIN_FK` (`PRO_LOGINPROF`);
+
+--
+-- Index pour la table `MODULE`
+--
+ALTER TABLE `MODULE`
+  ADD PRIMARY KEY (`REFMODULE`);
+
+--
+-- Index pour la table `NOTER`
+--
+ALTER TABLE `NOTER`
+  ADD PRIMARY KEY (`LOGINETU`,`IDDEVOIR`),
+  ADD KEY `NOTER_FK` (`LOGINETU`),
+  ADD KEY `NOTER2_FK` (`IDDEVOIR`);
+
+--
+-- Index pour la table `ORGANISER_DEVOIR`
+--
+ALTER TABLE `ORGANISER_DEVOIR`
+  ADD PRIMARY KEY (`loginprof`,`iddevoir`),
+  ADD KEY `fk_devoir` (`iddevoir`);
+
+--
+-- Index pour la table `PARTICIPER`
+--
+ALTER TABLE `PARTICIPER`
+  ADD PRIMARY KEY (`INTITULEGROUPE`,`ANNEEGROUPE`,`REFMODULE`),
+  ADD KEY `PARTICIPER_FK` (`INTITULEGROUPE`,`ANNEEGROUPE`),
+  ADD KEY `PARTICIPER2_FK` (`REFMODULE`);
+
+--
+-- Index pour la table `PROFESSEUR`
+--
+ALTER TABLE `PROFESSEUR`
+  ADD PRIMARY KEY (`LOGINPROF`);
+
+--
+-- Index pour la table `RECEVOIR`
+--
+ALTER TABLE `RECEVOIR`
+  ADD PRIMARY KEY (`IDSONDAGE`,`INTITULEGROUPE`) USING BTREE,
+  ADD KEY `RECEVOIR_FK` (`IDSONDAGE`) USING BTREE,
+  ADD KEY `RECEVOIR2_FK` (`INTITULEGROUPE`) USING BTREE;
+
+--
+-- Index pour la table `REPONDRE`
+--
+ALTER TABLE `REPONDRE`
+  ADD PRIMARY KEY (`LOGINETU`,`IDSONDAGE`),
+  ADD KEY `REPONDRE_FK` (`LOGINETU`),
+  ADD KEY `fk_sond` (`IDSONDAGE`);
+
+--
+-- Index pour la table `SALLE`
+--
+ALTER TABLE `SALLE`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `SONDAGE`
+--
+ALTER TABLE `SONDAGE`
+  ADD PRIMARY KEY (`IDSONDAGE`),
+  ADD KEY `ENVOYER_SONDAGE_FK` (`LOGINPROF`),
+  ADD KEY `RELATIF_A_SONDAGE_FK` (`REFMODULE`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `DEVOIR`
+--
+ALTER TABLE `DEVOIR`
+  MODIFY `IDDEVOIR` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `SONDAGE`
+--
+ALTER TABLE `SONDAGE`
+  MODIFY `IDSONDAGE` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `AFFECTER`
+--
+ALTER TABLE `AFFECTER`
+  ADD CONSTRAINT `FK_AFFECTER` FOREIGN KEY (`LOGINETU`) REFERENCES `ETUDIANT` (`LOGINETU`),
+  ADD CONSTRAINT `FK_AFFECTER2` FOREIGN KEY (`INTITULEGROUPE`,`ANNEEGROUPE`) REFERENCES `GROUPE` (`INTITULEGROUPE`, `ANNEEGROUPE`);
+
+--
+-- Contraintes pour la table `CONVERSATION_ADMIN`
+--
+ALTER TABLE `CONVERSATION_ADMIN`
+  ADD CONSTRAINT `FK_RELIER` FOREIGN KEY (`LOGINPROF`) REFERENCES `PROFESSEUR` (`LOGINPROF`);
+
+--
+-- Contraintes pour la table `DEVOIR`
+--
+ALTER TABLE `DEVOIR`
+  ADD CONSTRAINT `FK_EVALUER_MODULE` FOREIGN KEY (`REFMODULE`) REFERENCES `MODULE` (`REFMODULE`),
+  ADD CONSTRAINT `fk_salle` FOREIGN KEY (`SALLE`) REFERENCES `SALLE` (`id`);
+
+--
+-- Contraintes pour la table `ENSEIGNER`
+--
+ALTER TABLE `ENSEIGNER`
+  ADD CONSTRAINT `FK_ENSEIGNER` FOREIGN KEY (`LOGINPROF`) REFERENCES `PROFESSEUR` (`LOGINPROF`),
+  ADD CONSTRAINT `FK_ENSEIGNER2` FOREIGN KEY (`REFMODULE`) REFERENCES `MODULE` (`REFMODULE`);
+
+--
+-- Contraintes pour la table `EVALUER`
+--
+ALTER TABLE `EVALUER`
+  ADD CONSTRAINT `fk_groupe` FOREIGN KEY (`INTITULEGROUPE`) REFERENCES `GROUPE` (`INTITULEGROUPE`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_iddevoir` FOREIGN KEY (`IDDEVOIR`) REFERENCES `DEVOIR` (`IDDEVOIR`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `MESSAGE_ADMIN`
+--
+ALTER TABLE `MESSAGE_ADMIN`
+  ADD CONSTRAINT `FK_CORRESPONDRE` FOREIGN KEY (`IDCONV`) REFERENCES `CONVERSATION_ADMIN` (`IDCONV`),
+  ADD CONSTRAINT `FK_ENVOYER_MESSAGE_ADMIN` FOREIGN KEY (`PRO_LOGINPROF`) REFERENCES `PROFESSEUR` (`LOGINPROF`),
+  ADD CONSTRAINT `FK_ENVOYER_MESSAGE_PROF` FOREIGN KEY (`ADM_LOGINADMIN`) REFERENCES `ADMIN` (`LOGINADMIN`),
+  ADD CONSTRAINT `FK_RECEVOIR_MESSAGE_ADMIN` FOREIGN KEY (`LOGINADMIN`) REFERENCES `ADMIN` (`LOGINADMIN`),
+  ADD CONSTRAINT `FK_RECEVOIR_MESSAGE_PROF` FOREIGN KEY (`LOGINPROF`) REFERENCES `PROFESSEUR` (`LOGINPROF`);
+
+--
+-- Contraintes pour la table `NOTER`
+--
+ALTER TABLE `NOTER`
+  ADD CONSTRAINT `FK_NOTER` FOREIGN KEY (`LOGINETU`) REFERENCES `ETUDIANT` (`LOGINETU`);
+
+--
+-- Contraintes pour la table `ORGANISER_DEVOIR`
+--
+ALTER TABLE `ORGANISER_DEVOIR`
+  ADD CONSTRAINT `fk_devoir` FOREIGN KEY (`iddevoir`) REFERENCES `DEVOIR` (`IDDEVOIR`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_prof` FOREIGN KEY (`loginprof`) REFERENCES `PROFESSEUR` (`LOGINPROF`);
+
+--
+-- Contraintes pour la table `PARTICIPER`
+--
+ALTER TABLE `PARTICIPER`
+  ADD CONSTRAINT `FK_PARTICIPER` FOREIGN KEY (`INTITULEGROUPE`,`ANNEEGROUPE`) REFERENCES `GROUPE` (`INTITULEGROUPE`, `ANNEEGROUPE`),
+  ADD CONSTRAINT `FK_PARTICIPER2` FOREIGN KEY (`REFMODULE`) REFERENCES `MODULE` (`REFMODULE`);
+
+--
+-- Contraintes pour la table `RECEVOIR`
+--
+ALTER TABLE `RECEVOIR`
+  ADD CONSTRAINT `FK_RECEVOIR` FOREIGN KEY (`IDSONDAGE`) REFERENCES `SONDAGE` (`IDSONDAGE`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_RECEVOIR2` FOREIGN KEY (`INTITULEGROUPE`) REFERENCES `GROUPE` (`INTITULEGROUPE`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `REPONDRE`
+--
+ALTER TABLE `REPONDRE`
+  ADD CONSTRAINT `FK_REPONDRE` FOREIGN KEY (`LOGINETU`) REFERENCES `ETUDIANT` (`LOGINETU`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_sond` FOREIGN KEY (`IDSONDAGE`) REFERENCES `SONDAGE` (`IDSONDAGE`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `SONDAGE`
+--
+ALTER TABLE `SONDAGE`
+  ADD CONSTRAINT `FK_ENVOYER_SONDAGE` FOREIGN KEY (`LOGINPROF`) REFERENCES `PROFESSEUR` (`LOGINPROF`),
+  ADD CONSTRAINT `FK_RELATIF_A_SONDAGE` FOREIGN KEY (`REFMODULE`) REFERENCES `MODULE` (`REFMODULE`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
