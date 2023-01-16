@@ -38,7 +38,7 @@
         <div class="sondage-div section">
             <div class="topBoxProf">
                 <h2>Sondages</h2>
-                <a class="button" href="<?=$router->generate("CreerSondage", ['ue' => $devoirs[0]['REFMODULE']])?>">Créer un sondage</a>
+                <a class="button" href="<?=$router->generate("CreerSondage", ['ue' => $module['REFMODULE']])?>">Créer un sondage</a>
             </div>
             <div class="sondage-list list">
                 <?php if (isset($sondages)&& $sondages){?>
