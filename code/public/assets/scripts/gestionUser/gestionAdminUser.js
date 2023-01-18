@@ -28,6 +28,7 @@ searchBar.onchange = () => {
 }
 
 btnCreateAccount.addEventListener("click",()=>{
+    searchBar.style.display="None";
     btnCreateAccount.style.display="none";
     checkBox.style.display="none";
     content.style.flexDirection="row";
@@ -163,6 +164,7 @@ function createLineUser(user,typeAccount,assignList,defaultAssign=null){
 }
 
 function modifyTopBox(typeAccount){
+    searchBar.style.display="None";
     let btnRetour = document.createElement('button');
 
     btnRetour.textContent='Retour';
@@ -170,6 +172,7 @@ function modifyTopBox(typeAccount){
         content.style.alignItems = "normal";
         content.style.justifyContent = "normal";
         btnCreateAccount.style.display = 'Block';
+        searchBar.style.display="block";
         radioChoice.forEach(elem =>{
             elem.parentElement.style.display = 'flex';
         })
@@ -198,6 +201,7 @@ function createAccountForm(){
     topBoxAdmin.appendChild(btnRetour);
 
     btnRetour.addEventListener("click",()=>{
+        searchBar.style.display="Block";
         btnCreateAccount.style.display="block";
         checkBox.style.display="flex";
         content.style.flexDirection="column";
