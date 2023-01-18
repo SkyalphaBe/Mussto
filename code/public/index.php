@@ -20,11 +20,11 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
 
 
         ##Routes pour les étudiants
-        $router->map("GET", "/", "homeEtu", "home");
-        $router->map("GET", "/modules", "moduleEtu", "module");
-        $router->map("GET", "/modules/detail-[:ue]", "moduleEtuDetail", "moduleDetail");
+        $router->map("GET", "/", "AccueilEtu", "accueil");
+        $router->map("GET", "/modules", "ModuleEtu", "module");
+        $router->map("GET", "/modules/detail-[:ue]", "ModuleEtuDetail", "moduleDetail");
 
-        $router->map("GET", "/sondage-[:id]", "repSondageEtu", "repSondageEtu");
+        $router->map("GET", "/sondage-[:id]", "RepSondageEtu", "repSondageEtu");
 
         $router->map("POST", "/api/modif-rep-sondage-[:id]", "modificationReponsesSondage");
         $router->map("GET", "/api/obtenir-rep-sondage-[:id]", "obtenirReponsesSondage");
@@ -35,14 +35,14 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         ];
     } else if ($_SESSION['logged'] === 'prof'){
         ##Routes pour les professeurs
-        $router->map("GET", "/", "homeProf", "home");
+        $router->map("GET", "/", "AccueilProf", "accueil");
 
         $router->map("GET", "/modules-[:ue]", "ListeDS", "listeDsUe");
-        $router->map("GET", "/modules-[:ue]/nouveau-devoir", "CreerDS", "CreerDSProf");
-        $router->map("GET", "/modules-[:ue]/nouveau-sondage", "CreerSondage", "CreerSondage");
+        $router->map("GET", "/modules-[:ue]/nouveau-devoir", "CreerDS", "creerDSProf");
+        $router->map("GET", "/modules-[:ue]/nouveau-sondage", "CreerSondage", "creerSondage");
 
-        $router->map("GET", "/devoir-[:id]", "AjouterNote", "AjouterNote");
-        $router->map("GET", "/sondage-[:id]", "sondage", "sondage");
+        $router->map("GET", "/devoir-[:id]", "AjouterNote", "ajouterNote");
+        $router->map("GET", "/sondage-[:id]", "Sondage", "sondage");
 
         $router->map("PUT", "/api/devoir/creer-ds", "creerDS");
         $router->map("GET", "/api/devoir/obtenir-infos-ds-[:id]", "obtenirInfoDS");
@@ -68,7 +68,7 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         ];
     } else if ($_SESSION['logged'] === 'admin'){
         ##Routes pour les admins
-        $router->map("GET", "/", "homeAdmin", "home");
+        $router->map("GET", "/", "AccueilAdmin", "accueil");
         $router->map("GET", "/api/listeEtu", "listeEtu");
         $router->map("GET", "/api/listeProfesseur", "listeProfesseur");
         $router->map("GET", "/api/listeGroupes/Annee1", "listeGroupesAnnee1");
@@ -83,18 +83,18 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("GET|POST", "/api/suppressionGroupe", "suppressionGroupe");
         $router->map("GET|POST", "/api/suppressionModule", "suppressionModule");
 
-        $router->map("GET|POST", "/gererUtilisateur", "gererUtilisateur","gererUtilisateurAdmin");
-        $router->map("GET|POST", "/gererGroupes", "GestionGroupes","GestionGroupes");
-        $router->map("GET|POST", "/gererModules", "gererModules","GestionModules");
+        $router->map("GET|POST", "/gererUtilisateur", "GererUtilisateur","gererUtilisateurs");
+        $router->map("GET|POST", "/gererGroupes", "GestionGroupes","gestionGroupes");
+        $router->map("GET|POST", "/gererModules", "GererModules","gestionModules");
     }
-    ##Route test home (temporaire)
+    ##Route test Accueil (temporaire)
 
     ##Route de deconnection
-    $router->map("GET", "/disconnect", "disconnect", "disconnect");
+    $router->map("GET", "/deconnexion", "Deconnexion", "deconnexion");
 
-    $router->map("GET", "/allyourinfo", "info", "info");
+    $router->map("GET", "/allyourinfo", "Information", "info");
 } else {
-    $router->map("GET|POST", "/", "login", "home");
+    $router->map("GET|POST", "/", "Connexion", "accueil");
 }
 
 $match = $router->match();
@@ -108,5 +108,5 @@ if ($match){
 } else {
     http_response_code(404);
     echo '404'; #A modifier
-    header('Location: '.$router->generate('home'));
+    header('Location: '.$router->generate('accueil'));
 }

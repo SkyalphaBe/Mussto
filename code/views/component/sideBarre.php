@@ -10,7 +10,7 @@
         <div class="ligneSep"></div>
         <div class="menu">
             <h3>Menu</h3>
-            <a href="<?=$router->generate("home")?>" class="<?php if ($router->generate("home") == $_SERVER['REQUEST_URI']) echo 'active'; ?>"><i class="fa-solid fa-house"></i>Accueil</a>
+            <a href="<?=$router->generate("accueil")?>" class="<?php if ($router->generate("accueil") == $_SERVER['REQUEST_URI']) echo 'active'; ?>"><i class="fa-solid fa-house"></i>Accueil</a>
             <?php
                 if (isset($menu)){
                     foreach ($menu as $line){ ?>
@@ -37,7 +37,7 @@
             <a href= <?= $router->generate('info') ?> id="dataButton">Mes infos</a>
         </div>
         <div class="button">
-            <a href= <?= $router->generate('disconnect') ?> class="decoButton"><i class="fa-solid fa-right-from-bracket"></i> Deconnexion</a>
+            <a href= <?= $router->generate('deconnexion') ?> class="decoButton"><i class="fa-solid fa-right-from-bracket"></i> Deconnexion</a>
         </div>
     </div>
 </div>

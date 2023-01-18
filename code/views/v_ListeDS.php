@@ -13,12 +13,12 @@
     <div style="--color: <?=DegreeColorByName($module['REFMODULE'])?>" class="devoirModuleProf">
         <div class="topBoxProf">
             <h1 class="moduleProfTitle"><?=$module['NOMMODULE']?></h1>
-            <a class="button" href="<?=$router->generate("home")?>">Retour</a>
+            <a class="button" href="<?=$router->generate("accueil")?>">Retour</a>
         </div>
         <div class="devoir-div section">
             <div class="topBoxProf">
                 <h2>Devoirs</h2>
-                <a class="button" href="<?=$router->generate("CreerDSProf", ['ue' => $module['REFMODULE']])?>">Créer un DS</a>
+                <a class="button" href="<?=$router->generate("creerDSProf", ['ue' => $module['REFMODULE']])?>">Créer un DS</a>
             </div>
             <div class="devoir-list list">
                 <?php if (isset($devoirs)&& $devoirs){?>
@@ -27,7 +27,7 @@
                                 <p class="devoirProf-titre"><?=$devoir['CONTENUDEVOIR']?></p>
                                 <p class="devoirProf-group">Groupe : <?php foreach($devoir['GROUPES'] as $grp){ echo $grp." "; }?></p>
                                 <p class="devoirProf-date">Date : <?=$devoir['DATEDEVOIR']?></p>
-                                <a class="button" href="<?=$router->generate("AjouterNote", ['id' => $devoir['IDDEVOIR']])?>">Gérer</a>
+                                <a class="button" href="<?=$router->generate("ajouterNote", ['id' => $devoir['IDDEVOIR']])?>">Gérer</a>
                             </div>
                     <?php } } else { ?>
                     <p>Aucun devoir pour le moment</p>
@@ -38,7 +38,7 @@
         <div class="sondage-div section">
             <div class="topBoxProf">
                 <h2>Sondages</h2>
-                <a class="button" href="<?=$router->generate("CreerSondage", ['ue' => $module['REFMODULE']])?>">Créer un sondage</a>
+                <a class="button" href="<?=$router->generate("creerSondage", ['ue' => $module['REFMODULE']])?>">Créer un sondage</a>
             </div>
             <div class="sondage-list list">
                 <?php if (isset($sondages)&& $sondages){?>

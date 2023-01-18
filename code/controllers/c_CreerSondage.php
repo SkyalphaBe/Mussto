@@ -9,7 +9,7 @@
     } else {
         http_response_code(404);
         if (isset($router)){
-            header('Location: '.$router->generate('home'));
+            header('Location: '.$router->generate('accueil'));
         } else {
             header('Location: ./');
         }

@@ -6,7 +6,7 @@ if ($data){
     try {
         $res = DevoirDAO::insertDS($data, $_SESSION['login']);
         if ($res) {
-            echo $router->generate("AjouterNote", ['id' => $res]);
+            echo $router->generate("ajouterNote", ['id' => $res]);
         } else {
             http_response_code(500);
         }
