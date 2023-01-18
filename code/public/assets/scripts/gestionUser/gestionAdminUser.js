@@ -1,6 +1,6 @@
 import {Etudiant} from "./Etudiant.js";
 import {Professeur} from "./Professeur.js";
-import {generateFormGestion} from "./modifUser.js";
+import {generateFormGestion} from "./modifUtilisateur.js";
 
 let js = document.createElement("script");
 js.src = "https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js";
