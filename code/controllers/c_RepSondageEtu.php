@@ -6,7 +6,7 @@ if (isset($match) && array_key_exists("id", $match['params'])){
     if ($sondage){
         $data = $sondage->getData();
 
-        require_once(PATH_VIEWS.'repSondageEtu.php');
+        require_once(PATH_VIEWS.'RepSondageEtu.php');
         
     } else {
          if (isset($router)){

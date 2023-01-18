@@ -80,8 +80,8 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("GET|POST", "/api/suppressionModule", "suppressionModule");
 
         $router->map("GET|POST", "/gererUtilisateur", "GererUtilisateur","gererUtilisateurs");
-        $router->map("GET|POST", "/gererGroupes", "GestionGroupes","gestionGroupes");
-        $router->map("GET|POST", "/gererModules", "GererModules","gestionModules");
+        $router->map("GET|POST", "/gererGroupes", "GererGroupes","gererGroupes");
+        $router->map("GET|POST", "/gererModules", "GererModules","gererModules");
     }
     ##Route test Accueil (temporaire)
 
