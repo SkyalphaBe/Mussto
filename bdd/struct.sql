@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `mussto`
 --
+CREATE DATABASE mussto;
+USE mussto;
 
 -- --------------------------------------------------------
 
@@ -219,7 +221,7 @@ CREATE TABLE `REPONDRE` (
   `LOGINETU` varchar(50) NOT NULL,
   `IDSONDAGE` int(11) NOT NULL,
   `CONTENUREPONSE` varchar(500) DEFAULT NULL,
-  `DATEREPONSE` date NOT NULL DEFAULT current_timestamp()
+  `DATEREPONSE` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -245,8 +247,10 @@ CREATE TABLE `SONDAGE` (
   `TITLESONDAGE` text NOT NULL,
   `CONTENUSONDAGE` varchar(500) DEFAULT NULL,
   `AFFICHER` tinyint(1) NOT NULL DEFAULT 1,
-  `DATESONDAGE` date NOT NULL DEFAULT current_timestamp()
+  `DATESONDAGE` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO ADMIN VALUES ('admin', '$2y$10$ogfveh/v2G22/pKTSkKTVesEZqXE6lBFUgqFsDdeSnJCn5ZEYy0Ri');
 
 --
 -- Index pour les tables déchargées
