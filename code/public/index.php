@@ -62,10 +62,6 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
 
         $router->map("GET", "/api/salles", "obtenirSalles");
 
-        //Définition du contenu de la sideBar
-        $menu = [
-            [ 'href' => "", 'name' => "Contact" ]
-        ];
     } else if ($_SESSION['logged'] === 'admin'){
         ##Routes pour les admins
         $router->map("GET", "/", "AccueilAdmin", "accueil");
