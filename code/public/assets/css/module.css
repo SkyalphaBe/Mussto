@@ -17,7 +17,6 @@ body > div.modules > div.module{
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    margin: 1.5%;
     background-color: hsl(var(--color), 66%, 41%, 0.8);
     box-shadow: 0px 0px 20px hsl(var(--color), 66%, 41%, 0.5);
     border-radius: 20px;
@@ -143,6 +142,8 @@ body > div.modules > div.module > a{
 
 .module-detail .notes .note-elt{
     background-color: hsl(var(--color), 66%, 41%, 0.8);
+    
+    box-shadow: 0px 0px 15px hsl(var(--color), 66%, 41%, 0.2);
     color: white;
     border-radius: 10px;
     padding: 15px;
@@ -155,7 +156,6 @@ body > div.modules > div.module > a{
 
     overflow: hidden;
 
-    box-shadow: 0px 0px 15px hsl(var(--color), 66%, 41%, 0.2);
 
 }
 
@@ -241,6 +241,7 @@ body > div.modules > div.module > a{
 
 
 .devoirs .coef{
+    display: none;
     font-size: 75%;
 }
 
@@ -250,6 +251,6 @@ body > div.modules > div.module > a{
     overflow: hidden;
 }
 
-.devoirs .devoir-elt:hover .desc{
+.devoirs .devoir-elt:hover .desc, .devoirs .devoir-elt:hover .coef{
     display: block;
 }

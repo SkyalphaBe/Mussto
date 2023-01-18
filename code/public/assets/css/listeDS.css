@@ -6,7 +6,9 @@
     padding: 1em;
     gap: 1em;
 
-    background-color: hsl(var(--color), 66%, 41%, 0.5);
+    background-color: hsl(var(--color), 66%, 41%, 0.8);
+    box-shadow: 0px 0px 15px hsl(var(--color), 66%, 41%, 0.4);
+
     position: relative;
 }
 
@@ -33,18 +35,44 @@
     justify-content: space-between;
     align-items: center;
     padding: .4em 1.2em;
-    background-color: #FFFFFF;
+    background-color: white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
     border-radius: 15px;
 
     color: black;
 }
 
 .devoirProf .button{
-    background-color: hsl(var(--color), 66%, 41%, 0.5);
+    background-color: hsl(var(--color), 66%, 41%, 0.8);
+}
+
+
+.devoirProf .button:hover{
+    background-color: hsl(var(--color), 66%, 41%, 0.6);
 }
 
 .devoirProf a{
     color: #FFFFFF;
+}
+
+.section{
+    background-color: #e2e1e1;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    border-radius: 1.4em;
+    
+}
+
+.section > .topBoxProf{
+    padding: 0 1em;
+    border-radius: 0.7em;
+    background-color: hsl(var(--color), 66%, 41%, 0.8);
+    box-shadow: 0px 0px 15px hsl(var(--color), 66%, 41%, 0.4);
+    margin-bottom: 1em;
+}
+
+.section > .topBoxProf h2{
+    margin-left: 1em;
 }
 
 .list{
