@@ -27,7 +27,7 @@ if (id){
             body : JSON.stringify(data)
         }
 
-        fetch("/api/update-rep-sondage-"+id, header).then(res => {
+        fetch("/api/modif-rep-sondage-"+id, header).then(res => {
             loader.hide();
             if (res.ok){
                 mess.showMessage("Votre réponse a bien été enregitré");

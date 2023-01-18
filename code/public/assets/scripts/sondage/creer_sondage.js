@@ -92,7 +92,7 @@ var select_section = () => {
 
 
 if (id){
-    fetch('/api/modules-' + id + '/groups').then(res => {
+    fetch('/api/modules-' + id + '/groupes').then(res => {
         if (res.ok){
             return res.json();
         } else {
@@ -224,7 +224,7 @@ if (id){
                         body : JSON.stringify(data)
                     }
     
-                    fetch("/api/sondage/create-sondage", header).then(res => {
+                    fetch("/api/sondage/creer-sondage", header).then(res => {
                         if (res.ok){
                             return res.text();
                         } else {

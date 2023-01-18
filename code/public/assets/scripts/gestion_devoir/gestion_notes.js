@@ -105,7 +105,7 @@ export default function gestion_notes(root_id, id_devoir){
             body : JSON.stringify(Object.values(data).map(elt => elt.getData()))
         }
 
-        fetch("/api/devoir/update-notes-ds-"+id_devoir, header).then(res => {
+        fetch("/api/devoir/modif-notes-ds-"+id_devoir, header).then(res => {
             if (res.ok){
                
                 message.showMessage("Les modifications ont bien été enregistré");   
@@ -194,7 +194,7 @@ export default function gestion_notes(root_id, id_devoir){
         var errorMessage = document.createElement("p");
 
 
-        fetch("/api/devoir/get-notes-ds-"+id_devoir).then(res => {
+        fetch("/api/devoir/obtenir-notes-ds-"+id_devoir).then(res => {
             if (res.ok){
                 return res.json();
             } else {

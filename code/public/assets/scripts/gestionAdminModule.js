@@ -56,7 +56,7 @@ async function createModule(donnees){
         },
         body : JSON.stringify(donnees,undefined,4)
     }
-    let request = await fetch("/api/createModuleExcel", header);
+    let request = await fetch("/api/creerModuleExcel", header);
     if (request.ok){
         let json = await request.json();
         console.log(json);

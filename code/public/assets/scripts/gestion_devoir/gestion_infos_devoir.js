@@ -2,8 +2,8 @@ import formulaire_infos_devoir from "/assets/scripts/component/formulaire_infos_
 
 export default function gestion_infos_devoir(root_id, data){
     Promise.all([
-        fetch('/api/modules-' + data.REFMODULE + '/groups'),
-        fetch('/api/modules-' + data.REFMODULE + '/teachers'),
+        fetch('/api/modules-' + data.REFMODULE + '/groupes'),
+        fetch('/api/modules-' + data.REFMODULE + '/profs'),
         fetch('/api/salles')
     ]).then((responses) => {
         return Promise.all(responses.map((response) => {
@@ -31,7 +31,7 @@ export default function gestion_infos_devoir(root_id, data){
             
             form.setEnable(false);
             form.showLoader(true);
-            fetch("/api/devoir/update-infos-ds-"+data.IDDEVOIR, header).then(res => {
+            fetch("/api/devoir/modif-infos-ds-"+data.IDDEVOIR, header).then(res => {
                 if (res.status === 200){
                     location.reload();
                 } else {
@@ -47,7 +47,7 @@ export default function gestion_infos_devoir(root_id, data){
                 var header = {
                     method : 'DELETE'
                 }
-                fetch("/api/devoir/delete-"+data.IDDEVOIR, header).then(res => {
+                fetch("/api/devoir/suppression-"+data.IDDEVOIR, header).then(res => {
                     if (res.ok){
                         return res.text();
                     } else {
