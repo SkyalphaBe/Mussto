@@ -1,4 +1,4 @@
-import {creerFormGestion} from "./modifModule";
+import {creerFormGestion} from "./modifModule.js";
 
 const content = document.getElementsByClassName("content")[0];
 const topBoxAdmin = document.getElementsByClassName("topBoxAdmin")[0];
