@@ -17,7 +17,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <label>Année 2<input type="radio" name="year" value="/api/listeGroupes/Annee2" ></label>
         <label>Année 3<input type="radio" name="year" value="/api/listeGroupes/Annee3" ></label>
     </div>
-    <button id="btnCreer">Créer un Groupe</button>
+    <button id="btnCreer">Créer un groupe</button>
 </div>
 <template>
     <form method="post" class="formAdmin">

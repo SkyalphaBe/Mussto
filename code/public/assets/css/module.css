@@ -4,11 +4,8 @@ body{
 }
 
 body > div.modules{
-    /* display:flex;
-    flex-wrap: wrap;
-    justify-content: center; */
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    grid-template-columns: repeat(auto-fill,minmax(400px,1fr));
     grid-gap: 25px;
 }
 
@@ -27,6 +24,7 @@ body > div.modules > div.module{
 
 body > div.modules > div.module > h1{
     font-size: 1.6em;
+    text-align: center;
 }
 
 body > div.modules > div.module > p{

@@ -191,12 +191,13 @@ async function deleteUser(login,typeCompte){
         body : JSON.stringify([login,typeCompte])
     }
 
-    let request = await fetch("/api/deleteUser", header);
+    let request = await fetch("/api/suppressionUtilisateur", header);
     if (request.ok){
         let json = await request.json();
         console.log(json);
 
         if(json["code"] === 200){
+            content.textContent="";
             let validation = document.createElement("p");
             validation.textContent="Suppression du compte réussi";
             validation.style.color="green";

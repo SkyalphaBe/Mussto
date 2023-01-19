@@ -129,5 +129,10 @@ class AdminDAO extends UserDAO
         $res = $this->updateRow("DELETE from PARTICIPER where REFMODULE = ?", [$refModule]);
         return $res;
     }
+
+    public function deleteSondage($login){
+        $res = $this->updateRow("DELETE from SONDAGE where LOGINPROF = ?", [$login]);
+        return $res;
+    }
 }
 ?>

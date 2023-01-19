@@ -8,11 +8,11 @@ if (id){
 
     delete_button.onclick = () => {
         delete_loader.show();
-        if (window.confirm("Etes vous sur de vouloir supprimer ce sondage?")){
+        if (window.confirm("Etes-vous sûr de vouloir supprimer ce sondage?")){
             var header = {
                 method : "DELETE"
             }
-            fetch("/api/sondage/delete-"+id, header).then(res => {
+            fetch("/api/sondage/suppression-"+id, header).then(res => {
                 if (res.ok){
                     return res.text();
                 } else {
@@ -36,7 +36,7 @@ if (id){
 
     show_button.onclick = () => {
         show_loader.show();
-        ////api/sondage/change-visibility-[:id]
+
         var header = {
             method : 'POST', 
             headers: {
@@ -44,7 +44,7 @@ if (id){
             },
             body : JSON.stringify({show : show_button.value})
         }
-        fetch("/api/sondage/change-visibility-"+id, header).then(res => {
+        fetch("/api/sondage/modif-visibilite-"+id, header).then(res => {
             if (res.ok){
                 location.reload();
             } else {

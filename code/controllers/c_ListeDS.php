@@ -11,7 +11,7 @@
         require_once (PATH_VIEWS."ListeDS.php");
     }  else {
         if (isset($router)){
-            header('Location: '.$router->generate('home'));
+            header('Location: '.$router->generate('accueil'));
         } else {
             header('Location: ./');
         }

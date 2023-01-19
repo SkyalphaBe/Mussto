@@ -11,9 +11,9 @@ require_once(PATH_VIEW_COMPONENT.'header.php');
 require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 ?>
 <div class="gestionAdmin">
-    <a href="<?=$router->generate('GestionModules')?>">Gérer les modules</a>
-    <a href="<?=$router->generate('gererUtilisateurAdmin')?>">Gérer les utilisateurs</a>
-    <a href="<?=$router->generate('GestionGroupes')?>">Gérer les groupes</a>
+    <a href="<?=$router->generate('gererModules')?>">Gérer les modules</a>
+    <a href="<?=$router->generate('gererUtilisateurs')?>">Gérer les utilisateurs</a>
+    <a href="<?=$router->generate('gererGroupes')?>">Gérer les groupes</a>
 </div>
 
 <?php

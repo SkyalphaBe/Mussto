@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && array_key_exists('login', $_POST) &
         $_SESSION = array_merge($_SESSION, $log);
 
         if (isset($router)){
-            header('Location: '.$router->generate('home'));
+            header('Location: '.$router->generate('accueil'));
         } else {
             header('Location: ./');
         }

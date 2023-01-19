@@ -2,7 +2,10 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    gap: 3%;
 }
+
+
 
 .welcome{
     display: flex;
@@ -117,6 +120,11 @@ h2{
     align-self: flex-end;
 }
 
+#lastMark{
+    overflow-y: inherit;
+    overflow-x: inherit;
+}
+
 #lastMark .last{
     display: flex;
     flex-direction: column;
@@ -125,7 +133,7 @@ h2{
 }
 
 #lastMark .last-note{
-    font-size: 1.75em;
+    font-size: 2.25em;
     font-weight: bold;
 }
 
@@ -134,7 +142,7 @@ h2{
 }
 
 #lastMark .last h3{
-    font-size: 1.75em;
+    font-size: 2.25em;
 }
 
 #sondage{
@@ -166,3 +174,10 @@ h2{
 #sondage .sondage a.button{
     padding: 0.2em;
 }
+
+@media (max-width: 1050px) {
+    body{
+        gap : 0;
+    }
+}
+

@@ -34,4 +34,4 @@
         }
     }
 
-require_once (PATH_VIEWS.'gererUtilisateur.php');
+require_once (PATH_VIEWS.'GererUtilisateur.php');

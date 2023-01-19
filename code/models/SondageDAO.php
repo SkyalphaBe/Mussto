@@ -11,9 +11,12 @@ class SondageDAO extends DAO
         if(!$data){
             throw new Exception("Pas de sondage");
         } else {
-            $data['CONTENUSONDAGE'] = json_decode($data['CONTENUSONDAGE'], true);
-            $data['CONTENUREPONSE'] = json_decode($data['CONTENUREPONSE'], true);
-
+            if($data['CONTENUSONDAGE']){
+                $data['CONTENUSONDAGE'] = json_decode($data['CONTENUSONDAGE'], true);
+            }
+            if($data['CONTENUREPONSE']) {
+                $data['CONTENUREPONSE'] = json_decode($data['CONTENUREPONSE'], true);
+            }
             $this->id = $id;
             $this->login = $username;
             $this->data = $data;

@@ -93,7 +93,7 @@ body.hide-side .sideBarre{
 }
 
 .sideBarre.etu .titleBox h2:after{
-    content: "Etudiant";
+    content: "Étudiant";
 }
 
 .sideBarre.prof .titleBox h2:after{
@@ -101,7 +101,7 @@ body.hide-side .sideBarre{
 }
 
 .sideBarre.admin .titleBox h2:after{
-    content: "Admin";
+    content: "Administrateur";
 }
 
 .titre{

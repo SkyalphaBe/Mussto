@@ -3,8 +3,8 @@ import Message from "/assets/scripts/component/message.js";
 
 if (id){
     Promise.all([
-        fetch('/api/modules-' + id + '/groups'),
-        fetch('/api/modules-' + id + '/teachers'),
+        fetch('/api/modules-' + id + '/groupes'),
+        fetch('/api/modules-' + id + '/profs'),
         fetch('/api/salles')
     ]).then((responses) => {
         return Promise.all(responses.map((response) => {
@@ -35,7 +35,7 @@ if (id){
             }
 
             form.showLoader(true);
-            fetch("/api/devoir/create-ds", header).then(res => {
+            fetch("/api/devoir/creer-ds", header).then(res => {
                 if (res.ok){
                     return res.text();
                 } else {

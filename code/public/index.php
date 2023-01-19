@@ -20,14 +20,14 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
 
 
         ##Routes pour les étudiants
-        $router->map("GET", "/", "homeEtu", "home");
-        $router->map("GET", "/modules", "moduleEtu", "module");
-        $router->map("GET", "/modules/detail-[:ue]", "moduleEtuDetail", "moduleDetail");
+        $router->map("GET", "/", "AccueilEtu", "accueil");
+        $router->map("GET", "/modules", "ModuleEtu", "module");
+        $router->map("GET", "/modules/detail-[:ue]", "ModuleEtuDetail", "moduleDetail");
 
-        $router->map("GET", "/sondage-[:id]", "repSondageEtu", "repSondageEtu");
+        $router->map("GET", "/sondage-[:id]", "RepSondageEtu", "repSondageEtu");
 
-        $router->map("POST", "/api/update-rep-sondage-[:id]", "updateReponsesSondage");
-        $router->map("GET", "/api/get-rep-sondage-[:id]", "getReponsesSondage");
+        $router->map("POST", "/api/modif-rep-sondage-[:id]", "modificationReponsesSondage");
+        $router->map("GET", "/api/obtenir-rep-sondage-[:id]", "obtenirReponsesSondage");
 
         ##Définition des élements dans le menu
         $menu = [
@@ -35,40 +35,36 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         ];
     } else if ($_SESSION['logged'] === 'prof'){
         ##Routes pour les professeurs
-        $router->map("GET", "/", "homeProf", "home");
+        $router->map("GET", "/", "AccueilProf", "accueil");
 
         $router->map("GET", "/modules-[:ue]", "ListeDS", "listeDsUe");
-        $router->map("GET", "/modules-[:ue]/new-devoir", "CreerDS", "CreerDSProf");
-        $router->map("GET", "/modules-[:ue]/new-sondage", "CreerSondage", "CreerSondage");
+        $router->map("GET", "/modules-[:ue]/nouveau-devoir", "CreerDS", "creerDSProf");
+        $router->map("GET", "/modules-[:ue]/nouveau-sondage", "CreerSondage", "creerSondage");
 
-        $router->map("GET", "/devoir-[:id]", "AjouterNote", "AjouterNote");
-        $router->map("GET", "/sondage-[:id]", "sondage", "sondage");
+        $router->map("GET", "/devoir-[:id]", "AjouterNote", "ajouterNote");
+        $router->map("GET", "/sondage-[:id]", "Sondage", "sondage");
 
-        $router->map("PUT", "/api/devoir/create-ds", "createDS");
-        $router->map("GET", "/api/devoir/get-infos-ds-[:id]", "getInfoDS");
-        $router->map("GET", "/api/devoir/get-notes-ds-[:id]", "getNotesDS");
-        $router->map("POST", "/api/devoir/update-notes-ds-[:id]", "updateNotesDS");
-        $router->map("POST", "/api/devoir/update-infos-ds-[:id]", "updateInfoDS");
-        $router->map("DELETE", "/api/devoir/delete-[:id]", "deleteDS");
+        $router->map("PUT", "/api/devoir/creer-ds", "creerDS");
+        $router->map("GET", "/api/devoir/obtenir-infos-ds-[:id]", "obtenirInfoDS");
+        $router->map("GET", "/api/devoir/obtenir-notes-ds-[:id]", "obtenirNotesDS");
+        $router->map("POST", "/api/devoir/modif-notes-ds-[:id]", "modificationNotesDS");
+        $router->map("POST", "/api/devoir/modif-infos-ds-[:id]", "modificationInfoDS");
+        $router->map("DELETE", "/api/devoir/suppression-[:id]", "suppressionDS");
 
-        $router->map("PUT", "/api/sondage/create-sondage", "createSondage");
-        $router->map("DELETE", "/api/sondage/delete-[:id]", "deleteSondage", "deleteSondage");
-        $router->map("POST", "/api/sondage/change-visibility-[:id]", "updateVisibilitySondage", "updateVisibilitySondage");
+        $router->map("PUT", "/api/sondage/creer-sondage", "creerSondage");
+        $router->map("DELETE", "/api/sondage/suppression-[:id]", "suppressionSondage", "suppressionSondage");
+        $router->map("POST", "/api/sondage/modif-visibilite-[:id]", "modificationVisibiliteSondage", "modificationVisibiliteSondage");
 
-        $router->map("GET", "/api/modules-[:ue]", "getInfosModule");
-        $router->map("GET", "/api/modules-[:ue]/alletu", "getAllEtuForModule");
-        $router->map("GET", "/api/modules-[:ue]/groups", "getGroupsForModule");
-        $router->map("GET", "/api/modules-[:ue]/teachers", "getProfForModule");
+        $router->map("GET", "/api/modules-[:ue]", "obtenirInfosModule");
+        $router->map("GET", "/api/modules-[:ue]/etu", "obtenirEtudiantParModule");
+        $router->map("GET", "/api/modules-[:ue]/groupes", "obtenirGroupesParModule");
+        $router->map("GET", "/api/modules-[:ue]/profs", "obtenirProfParModule");
 
-        $router->map("GET", "/api/salles", "getAllSalle");
+        $router->map("GET", "/api/salles", "obtenirSalles");
 
-        //Définition du contenu de la sideBar
-        $menu = [
-            [ 'href' => "", 'name' => "Contact" ]
-        ];
     } else if ($_SESSION['logged'] === 'admin'){
         ##Routes pour les admins
-        $router->map("GET", "/", "homeAdmin", "home");
+        $router->map("GET", "/", "AccueilAdmin", "accueil");
         $router->map("GET", "/api/listeEtu", "listeEtu");
         $router->map("GET", "/api/listeProfesseur", "listeProfesseur");
         $router->map("GET", "/api/listeGroupes/Annee1", "listeGroupesAnnee1");
@@ -76,25 +72,25 @@ if (array_key_exists('logged', $_SESSION) && $_SESSION['logged']){
         $router->map("GET", "/api/listeGroupes/Annee3", "listeGroupesAnnee3");
         $router->map("POST", "/api/creerCompteExcel", "creerCompteExcel");
         $router->map("GET", "/api/listeModules", "listeModules");
-        $router->map("POST", "/api/createModuleExcel", "createModuleExcel");
-        $router->map("POST", "/api/createGroupExcel", "createGroupExcel");
+        $router->map("POST", "/api/creerModuleExcel", "creerModuleExcel");
+        $router->map("POST", "/api/creerGroupeExcel", "creerGroupeExcel");
 
-        $router->map("GET|POST", "/api/deleteUser", "deleteUser");
-        $router->map("GET|POST", "/api/deleteGroup", "deleteGroup");
-        $router->map("GET|POST", "/api/supprimerModule", "supprimerModule");
+        $router->map("GET|POST", "/api/suppressionUtilisateur", "suppressionUtilisateur");
+        $router->map("GET|POST", "/api/suppressionGroupe", "suppressionGroupe");
+        $router->map("GET|POST", "/api/suppressionModule", "suppressionModule");
 
-        $router->map("GET|POST", "/gererUtilisateur", "gererUtilisateur","gererUtilisateurAdmin");
-        $router->map("GET|POST", "/gererGroupes", "GestionGroupes","GestionGroupes");
-        $router->map("GET|POST", "/gererModules", "gererModules","GestionModules");
+        $router->map("GET|POST", "/gererUtilisateur", "GererUtilisateur","gererUtilisateurs");
+        $router->map("GET|POST", "/gererGroupes", "GererGroupes","gererGroupes");
+        $router->map("GET|POST", "/gererModules", "GererModules","gererModules");
     }
-    ##Route test home (temporaire)
+    ##Route test Accueil (temporaire)
 
     ##Route de deconnection
-    $router->map("GET", "/disconnect", "disconnect", "disconnect");
+    $router->map("GET", "/deconnexion", "Deconnexion", "deconnexion");
 
-    $router->map("GET", "/allyourinfo", "info", "info");
+    $router->map("GET", "/allyourinfo", "Information", "info");
 } else {
-    $router->map("GET|POST", "/", "login", "home");
+    $router->map("GET|POST", "/", "Connexion", "accueil");
 }
 
 $match = $router->match();
@@ -108,5 +104,5 @@ if ($match){
 } else {
     http_response_code(404);
     echo '404'; #A modifier
-    header('Location: '.$router->generate('home'));
+    header('Location: '.$router->generate('accueil'));
 }

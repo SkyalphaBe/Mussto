@@ -17,7 +17,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
         <input type="text" id="search" placeholder="Rechercher"/>
     </div>
     <div class="check">
-        <label>Liste Etudiant<input type="radio" name="choix" value="/api/listeEtu" checked></label>
+        <label>Liste Étudiant<input type="radio" name="choix" value="/api/listeEtu" checked></label>
         <label>Liste Professeur<input type="radio" name="choix" value="/api/listeProfesseur"></label>
     </div>
     <button id="btnCreer">Créer un compte</button>
@@ -33,7 +33,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
             <input type="text" name="mdp" required>
         </div>
         <div class="formContentAdmin">
-            <label>Prenom</label>
+            <label>Prénom</label>
             <input type="text" name="prenom" required>
         </div>
         <div class="formContentAdmin">

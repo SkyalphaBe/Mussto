@@ -92,7 +92,7 @@ var select_section = () => {
 
 
 if (id){
-    fetch('/api/modules-' + id + '/groups').then(res => {
+    fetch('/api/modules-' + id + '/groupes').then(res => {
         if (res.ok){
             return res.json();
         } else {
@@ -148,7 +148,7 @@ if (id){
                     sectionsDiv.appendChild(item);
                 });
             } else {
-                sectionsDiv.innerHTML = "Auncune question ajoutée";
+                sectionsDiv.innerHTML = "Aucune question ajoutée";
             }
         }
         loadSections();
@@ -185,7 +185,7 @@ if (id){
 
         var parentSectionDiv = document.createElement("div");
         parentSectionDiv.className = "question-list";
-        parentSectionDiv.innerHTML = "<h2>Liste des question : </h2>";
+        parentSectionDiv.innerHTML = "<h2>Liste des questions : </h2>";
         parentSectionDiv.appendChild(sectionsDiv);
 
         root.appendChild(parentSectionDiv);
@@ -224,7 +224,7 @@ if (id){
                         body : JSON.stringify(data)
                     }
     
-                    fetch("/api/sondage/create-sondage", header).then(res => {
+                    fetch("/api/sondage/creer-sondage", header).then(res => {
                         if (res.ok){
                             return res.text();
                         } else {

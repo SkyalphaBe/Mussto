@@ -6,6 +6,8 @@
     $dao = new AdminDAO(true, $_SESSION['login']);
     $res = $dao ->deleteAffectation($data[0],$data[1]);
     if($res){
+        if($data[1]=="PROFESSEUR")
+            $res = $dao ->deleteSondage($data[0]);
         $res = $dao ->deleteDevoirNote($data[0],$data[1]);
         if($res)
             $res = $dao ->deleteAccount($data[0],$data[1]);
