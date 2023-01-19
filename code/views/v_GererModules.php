@@ -21,7 +21,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
             <input type="text" name="refmodule" required>
         </div>
         <div class="formContentAdmin">
-            <label>nom du module</label>
+            <label>N    om du module</label>
             <input type="text" name="nommodule" required>
         </div>
         <div class="formContentAdmin">
