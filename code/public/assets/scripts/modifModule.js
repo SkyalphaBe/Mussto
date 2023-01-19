@@ -83,13 +83,18 @@ async function supprModule(module){
         body : JSON.stringify([module])
     }
 
-    let request = await fetch("/api/supprimerModule", header);
+    let request = await fetch("/api/suppressionModule", header);
     if (request.ok){
         let json = await request.json();
         console.log(json);
 
         if(json["code"] === 200){
-            location.reload();
+            content.textContent="";
+            let validation = document.createElement("p");
+            validation.textContent="Suppression du compte réussi";
+            validation.style.color="green";
+            validation.id="validation";
+            content.appendChild(validation);
         }
     }
     else{

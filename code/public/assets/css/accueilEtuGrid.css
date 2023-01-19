@@ -35,3 +35,22 @@
     grid-row-start: 1;
     grid-row-end: 4;
 }
+
+@media (orientation: portrait) {
+    body{
+        height: auto;
+    }
+
+    .informationEleve{
+        display: flex;
+        flex-direction: column;
+        
+        height: 100%;
+        margin-top: 1vh;
+    }
+
+    .welcome, .informationEleve{
+        font-size: 180%;
+    }
+
+}

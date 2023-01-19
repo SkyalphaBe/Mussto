@@ -70,3 +70,9 @@ form input:is([type="text"],[type="password"]){
 #okButton:hover{
     background-color: rgb(37, 203, 79);
 }
+
+@media (orientation: portrait) {
+    .connexionBox{
+        width: 70%;
+    }
+}

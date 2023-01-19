@@ -30,7 +30,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                     <p>Reçu le <?=$last_devoir['DATE_ENVOIE_FORM']?></p>
                 </div>
         <?php } else { ?>
-            <p>Aucune notes pour le moment</p>
+            <p>Aucune note pour le moment</p>
         <?php } ?>
     </div>
     <div id="sondage" class="info">
@@ -43,7 +43,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                         <p class="sondage-prof"><?=$sondage['TITLESONDAGE']?></p>
                         <p class="sondage-date"><?=$sondage['DATESONDAGE']?></p>
                     </div>
-                    <a class="button" href="<?=$router->generate("repSondageEtu", ['id' => $sondage['IDSONDAGE']])?>">Repondre</a>
+                    <a class="button" href="<?=$router->generate("repSondageEtu", ['id' => $sondage['IDSONDAGE']])?>">Répondre</a>
                 </div>
         <?php } } else { ?>
             <p>Aucun sondage pour le moment</p>
@@ -61,7 +61,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                         <p class="note-number">Note : <?=$notes['NOTE']?>/20</p>
                     </a>
                 <?php } } else { ?>
-                <p>Aucune notes pour le moment</p>
+                <p>Aucune note pour le moment</p>
             <?php } ?>
         </div>
     <div id="DS" class="info">

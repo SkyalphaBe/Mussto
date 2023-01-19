@@ -105,7 +105,7 @@ export default function gestion_notes(root_id, id_devoir){
             body : JSON.stringify(Object.values(data).map(elt => elt.getData()))
         }
 
-        fetch("/api/devoir/update-notes-ds-"+id_devoir, header).then(res => {
+        fetch("/api/devoir/modif-notes-ds-"+id_devoir, header).then(res => {
             if (res.ok){
                
                 message.showMessage("Les modifications ont bien été enregistré");   
@@ -167,7 +167,7 @@ export default function gestion_notes(root_id, id_devoir){
         data = {};
 
         var table = document.createElement("table");
-        table.innerHTML = "<thead><th>Nom</th><th>Prenom</th><th>Date Envoie</th><th>Commentaires</th><th>Notes</th></thead>";
+        table.innerHTML = "<thead><th>Nom</th><th>Prenom</th><th>Date d'envoi</th><th>Commentaires</th><th>Note</th></thead>";
         var tbody = document.createElement("tbody");
         table.appendChild(tbody);
 
@@ -194,7 +194,7 @@ export default function gestion_notes(root_id, id_devoir){
         var errorMessage = document.createElement("p");
 
 
-        fetch("/api/devoir/get-notes-ds-"+id_devoir).then(res => {
+        fetch("/api/devoir/obtenir-notes-ds-"+id_devoir).then(res => {
             if (res.ok){
                 return res.json();
             } else {

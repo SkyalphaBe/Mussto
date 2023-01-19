@@ -18,7 +18,7 @@ require_once(PATH_MODELS.'EtuDAO.php');
 <div id="rep-sondage" style="--color: <?=DegreeColorByName($data['NOMMODULE'])?>">
     <div class="header">
         <h1>Repondre au sondage</h1>
-        <a class="button" href="<?=$router->generate("home")?>">Retour</a>
+        <a class="button" href="<?=$router->generate("accueil")?>">Retour</a>
     </div>
     <div class="info">
         <h2>Objet du sondage : <?=$data['TITLESONDAGE']?></h2>
@@ -29,7 +29,10 @@ require_once(PATH_MODELS.'EtuDAO.php');
             $i = 0; 
             foreach($data['CONTENUSONDAGE'] as $quest){
                 if ($quest['type'] == "free" && $quest['question']){
-                    $res = htmlspecialchars($data['CONTENUREPONSE'][$quest['question']]);
+                    if($data['CONTENUREPONSE'])
+                        $res = htmlspecialchars($data['CONTENUREPONSE'][$quest['question']]);
+                    else
+                        $res = "";
                     $label = htmlspecialchars($quest['question']);
                     echo <<<HTML
                         <div class="question">
@@ -41,8 +44,10 @@ require_once(PATH_MODELS.'EtuDAO.php');
                     $res = "";
                     foreach($quest['choices'] as $choice){
                         $sel = "";
-                        if ($data['CONTENUREPONSE'][$quest['question']] == $choice){
-                            $sel = "selected";
+                        if($data['CONTENUREPONSE']){
+                            if ($data['CONTENUREPONSE'][$quest['question']] == $choice){
+                                $sel = "selected";
+                            }
                         }
                         $choice = htmlspecialchars($choice);
                         $res.="<option value='{$choice}' {$sel}>{$choice}</option>";

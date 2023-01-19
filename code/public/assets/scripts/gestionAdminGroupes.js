@@ -58,14 +58,14 @@ async function createGroup(donnees){
         },
         body : JSON.stringify(donnees,undefined,4)
     }
-    let request = await fetch("/api/createGroupExcel", header);
+    let request = await fetch("/api/creerGroupeExcel", header);
     if (request.ok){
         let json = await request.json();
         console.log(json);
 
         if(json["code"] === 200){
             let validation = document.createElement("p");
-            validation.textContent="Création des modules réussi";
+            validation.textContent="Création des groupes réussi";
             validation.style.color="green";
             validation.id="validation";
             divExcel.appendChild(validation);
@@ -142,7 +142,7 @@ async function deleteGroup(name,year){
         body : JSON.stringify([name,year])
     }
 
-    let request = await fetch("/api/deleteGroup", header);
+    let request = await fetch("/api/suppressionGroupe", header);
     if (request.ok){
         let json = await request.json();
         console.log(json);

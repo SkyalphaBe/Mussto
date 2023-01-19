@@ -7,4 +7,4 @@
             $dao->createGroupe($_POST["intitule"], $_POST["annee"]);
         }
     }
-    require_once (PATH_VIEWS.'GestionGroupes.php');
+    require_once (PATH_VIEWS.'GererGroupes.php');
