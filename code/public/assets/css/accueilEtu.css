@@ -5,6 +5,8 @@ body{
     gap: 3%;
 }
 
+
+
 .welcome{
     display: flex;
     align-items: center;
@@ -178,3 +180,4 @@ h2{
         gap : 0;
     }
 }
+
