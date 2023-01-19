@@ -167,7 +167,7 @@ export default function gestion_notes(root_id, id_devoir){
         data = {};
 
         var table = document.createElement("table");
-        table.innerHTML = "<thead><th>Nom</th><th>Prenom</th><th>Date Envoie</th><th>Commentaires</th><th>Notes</th></thead>";
+        table.innerHTML = "<thead><th>Nom</th><th>Prenom</th><th>Date d'envoi</th><th>Commentaires</th><th>Note</th></thead>";
         var tbody = document.createElement("tbody");
         table.appendChild(tbody);
 

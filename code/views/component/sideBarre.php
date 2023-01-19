@@ -34,10 +34,10 @@
             </div>
         </div>
         <div class="button">
-            <a href= <?= $router->generate('info') ?> id="dataButton">Mes infos</a>
+            <a href= <?= $router->generate('info') ?> id="dataButton">Mes informations</a>
         </div>
         <div class="button">
-            <a href= <?= $router->generate('deconnexion') ?> class="decoButton"><i class="fa-solid fa-right-from-bracket"></i> Deconnexion</a>
+            <a href= <?= $router->generate('deconnexion') ?> class="decoButton"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</a>
         </div>
     </div>
 </div>

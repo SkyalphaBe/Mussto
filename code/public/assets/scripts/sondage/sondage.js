@@ -8,7 +8,7 @@ if (id){
 
     delete_button.onclick = () => {
         delete_loader.show();
-        if (window.confirm("Etes vous sur de vouloir supprimer ce sondage?")){
+        if (window.confirm("Etes-vous sûr de vouloir supprimer ce sondage?")){
             var header = {
                 method : "DELETE"
             }

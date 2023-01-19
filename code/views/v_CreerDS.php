@@ -17,7 +17,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
 
 <div style="background-color: <?=CSScolorByName($module['REFMODULE'])?>" id="creer-devoir">
     <div class="header">
-        <h1><?=$module['NOMMODULE']?> : Creation devoir</h1>
+        <h1><?=$module['NOMMODULE']?> : Création d'un devoir</h1>
         <a class="button" href="<?=$router->generate("listeDsUe", ['ue' => $module['REFMODULE']])?>">Retour</a>
     </div>
 </div>
