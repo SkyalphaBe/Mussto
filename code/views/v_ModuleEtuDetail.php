@@ -68,7 +68,7 @@ require_once(PATH_VIEW_COMPONENT.'sideBarre.php');
                             <?php
                         }
                     } else {
-                        echo "Aucune notes";
+                        echo "Aucune note";
                     }
                     ?>
                 </div>
